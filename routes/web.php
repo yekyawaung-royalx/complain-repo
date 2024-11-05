@@ -74,8 +74,7 @@ Route::get('/complaints/all-json/{status}',[App\Http\Controllers\ComplaintContro
 // Route::get('/dashboard', function () {
    
 // })->middleware(['auth', 'verified'])->name('dashboard');
- Route::get('/dashboard', [App\Http\Controllers\ComplaintController::class,'dashboard']);
- Route::post('/dashboard', [App\Http\Controllers\ComplaintController::class,'searchdashboard']);
+ 
 Route::get('/user-dashboard', function () {
     $complaint_count = DB::table('complaints')->count();
     $service_complaints=DB::table('complaints')->whereIn('case_type_name',['Service Complain','Delivery Man Complain','Staff Complain','Double Charges','Extra Charges','Delay Time','Wrong Transfer City','Parcel Wrong','CX Complain','Not Collect Pick Up Complain'])->count();
@@ -120,6 +119,10 @@ Route::delete('delete-cx/{id}', [App\Http\Controllers\ComplaintController::class
 Route::get('/profile',[App\Http\Controllers\ProfileController::class,'profile']);
 Route::get('/rating-list/{name}',[App\Http\Controllers\ProfileController::class,'rating_list']);
 
+//dashboard //
+Route::get('/dashboard', [App\Http\Controllers\ComplaintController::class,'dashboard']);
+ Route::post('/dashboard', [App\Http\Controllers\ComplaintController::class,'searchdashboard']);
+
 });
-Route::get('/cx-team',[App\Http\Controllers\ComplaintController::class,'cx_team']);
-Route::post('/cx-team/store',[App\Http\Controllers\ComplaintController::class,'cx_store']);
+// Route::get('/cx-team',[App\Http\Controllers\ComplaintController::class,'cx_team']);
+// Route::post('/cx-team/store',[App\Http\Controllers\ComplaintController::class,'cx_store']);
