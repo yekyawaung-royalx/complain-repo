@@ -440,7 +440,11 @@
                     success: (response) => {
                         Swal.fire({
                             title: 'Success!',
-                            text: 'Operation apply has been updated successfully',
+                            text: 'You Rating has been successfully.',
+                        }).then((result) => {
+                            if (result.isConfirmed == true) {
+                                location.reload();
+                            }
                         })
                     },
                     error: (response) => {

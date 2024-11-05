@@ -632,7 +632,7 @@
                     error: (response) => {
                         Swal.fire({
                             title: 'Error!',
-                            text: 'You Complaint has been updated successfully.',
+                            text: 'Something Error.',
                         })
                     }
                 });
