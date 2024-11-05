@@ -83,7 +83,7 @@ class ComplaintController extends Controller
             $message_by = $request->handled_by . ' cx-reply complaint to ' . $request->operation_person . '.';
             $department = 'CX-Team';
         } elseif ($request->case_status == 'refund') {
-            $message_by = $request->operation_person . ' cx-reply complaint to ' . $request->handled_by . '.';
+            $message_by = $request->operation_person . ' refund complaint to ' . $request->handled_by . '.';
             $department = $request->operation_person;
             
         } elseif ($request->case_status == 'done') {
