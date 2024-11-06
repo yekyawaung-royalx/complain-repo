@@ -116,7 +116,7 @@
 
                             </div>
                             <div class="mb-3">
-                                <div class="g-recaptcha" data-sitekey="6LfLgnYqAAAAABbjSDHdYP9eUCD84AHkjSAjGqdk">
+                                <div class="g-recaptcha" data-sitekey="6LcilHYqAAAAAChr8rQAwokcMdjaKnUfqYj1Z9ap">
                                 </div>
                             </div>
                             <p><strong>* is required</strong></p>
