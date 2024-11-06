@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/customer/style.css') }}">
     <link href="{{ asset('assets/css/select2.css') }}" rel="stylesheet" />
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"> --}}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FJ1XQ719X"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <title>Customer</title>
 </head>
 
