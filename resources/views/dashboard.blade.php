@@ -1,5 +1,11 @@
 @extends('layouts.app1')
 @section('content')
+    <style>
+        .float-right {
+            display: flex;
+            float: right;
+        }
+    </style>
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-title">
@@ -20,7 +26,7 @@
         </div>
         <!-- Container-fluid starts-->
         <div class="container-fluid default-dash">
-            <div class="row">
+            {{-- <div class="row">
                 <form action="{{ url('/dashboard') }}" method="POST" enctype="multipart/form-data" id="form-submit">
                     @csrf
                     <div class="col-md-3 mb-3">
@@ -29,9 +35,61 @@
                             value="{{ $year }}" min="2024" name="year">
                     </div>
                 </form>
+            </div> --}}
+            <div class="row">
+                <div class="col-sm-6 col-xl-4 col-lg-6">
+                    <div class="card o-hidden">
+                        <div class="card" style="width:100%;">
+                            <div class="card-header">
+                                <h4>Service Complain</h4>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-4 col-lg-6">
+                    <div class="card o-hidden">
+                        <div class="card" style="width:100%;">
+                            <div class="card-header">
+                                <h4>Loss & Damage Types</h4>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Cras justo odio<strong class="float-right">0</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-4 col-lg-6">
+                    <div class="card o-hidden">
+                        <div class="card" style="width:100%;">
+                            <div class="card-header">
+                                <h4>Featured</h4>
+                            </div>
+                            <div>
+                                <canvas id="myPie"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-xl-3 col-lg-6">
+                {{-- <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card o-hidden">
                         <div class="card-body">
                             <div class="media static-widget">
@@ -157,7 +215,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-xl-4 col-md-4 dash-35 dash-xl-50">
                     <div class="card">
                         <div class="card-header pb-0">
@@ -190,12 +248,32 @@
 <script>
     $(document).ready(function() {
         const ctx = document.getElementById('myChart').getContext('2d');
+
         const myChart = new Chart(ctx, {
             // chart config
             type: 'bar',
             data: {
                 labels: {!! json_encode($labels) !!},
                 datasets: {!! json_encode($datasets) !!}
+            }
+        });
+        var cty = document.getElementById("myPie").getContext('2d');
+        var myPie = new Chart(cty, {
+            type: 'pie',
+            data: {
+                labels: ["M", "T", "W", "T", "F"],
+                datasets: [{
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#e74c3c",
+                        "#34495e"
+                    ],
+                    data: [12, 19, 3, 17, 28]
+                }]
             }
         });
 
