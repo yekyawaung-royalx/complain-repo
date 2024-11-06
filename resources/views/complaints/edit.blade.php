@@ -632,7 +632,7 @@
                     error: (response) => {
                         Swal.fire({
                             title: 'Error!',
-                            text: 'Something Error.',
+                            text: 'Somethings Error not updated successfully',
                         })
                     }
                 });

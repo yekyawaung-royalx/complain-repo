@@ -41,6 +41,8 @@ class CustomerController extends Controller
 
     public function CustomerSubmit(Request $request)
     {
+        $input=$request->all();
+        //dd($input);
         $status = DB::table('statuses')->where('id', 1)->first();
         //dd($complaint->name);
         $number = uuid();
