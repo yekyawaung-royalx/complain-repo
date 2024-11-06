@@ -173,7 +173,7 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                {{-- <canvas id="myChart"></canvas> --}}
+                                <canvas id="myChart"></canvas>
 
                             </div>
                         </div>
