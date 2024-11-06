@@ -199,8 +199,13 @@
                                     <input class="form-control form-control-lg" id="image" type="file"
                                         name="image">
                                 </div>
-                                <p><strong>* is required</strong></p>
+
                             </div>
+                            <div class="mb-3">
+                                <div class="g-recaptcha" data-sitekey="6LfLgnYqAAAAABbjSDHdYP9eUCD84AHkjSAjGqdk">
+                                </div>
+                            </div>
+                            <p><strong>* is required</strong></p>
                             <div class="col-lg-3 re-hide">
                                 <div class="form-group p-1">
                                     <button class="btn btn-danger" type="submit"
