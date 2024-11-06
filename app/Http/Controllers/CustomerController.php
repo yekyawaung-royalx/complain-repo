@@ -41,50 +41,56 @@ class CustomerController extends Controller
 
     public function CustomerSubmit(Request $request)
     {
-        $input=$request->all();
-        //dd($input);
-        $status = DB::table('statuses')->where('id', 1)->first();
-        //dd($complaint->name);
-        $number = uuid();
-        $customer_name = $request->complainant_name;
-        $customer_phone = $request->complainant_phone;
-        $waybill_no = $request->waybill_no;
-        $complainant_date = $request->complainant_date;
-        // $main_category=$request->main_category;
-        $case_type = $request->case_type;
-        $detail_complainant = $request->detail_complainant;
-        $complainant_reco = $request->complainant_reco;
-        $validator = \Validator::make($request->all(), [
-            'image' => 'nullable|image'
-        ], [
-            'image.image' => 'Product file must be an image',
-        ]);
-
-        if (!$validator->passes()) {
-            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
-        } else {
-            $file_name = "none";
-            if ($request->file('image')) {
-                $file_name = $request->file('image')->getClientOriginalName();
-                $request->file('image')->move(public_path('files'), $file_name);
-            }
-//dd($request->file('image'));
-            DB::table('complaints')->insert([
-                'customer_name' => $customer_name,
-                'complaint_uuid' => $number,
-                'customer_mobile' => $customer_phone,
-                'waybill_no' => $waybill_no,
-                'issue_date' => $complainant_date,
-                'case_type_name' => $case_type,
-                'customer_message' => $detail_complainant,
-                'customer_recommendation' => $complainant_reco,
-                'image' => $file_name,
-                'source_platform' => 'web',
-                'status_name' => $status->name,
-                'created_at'    => date('Y-m-d H:i:s'),
-                'updated_at'    => date('Y-m-d H:i:s'),
+        $input = $request->all();
+        $recaptcha_secret = '6Lf9de0pAAAAAHyajdlU48W-ru6BPwvG6svPIBkS'; 
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$recaptcha_secret."&response=".$input['g-recaptcha-response']);
+        $response = json_decode($response,true);
+        if ($response["success"] === true){
+            $status = DB::table('statuses')->where('id', 1)->first();
+            //dd($complaint->name);
+            $number = uuid();
+            $customer_name = $request->complainant_name;
+            $customer_phone = $request->complainant_phone;
+            $waybill_no = $request->waybill_no;
+            $complainant_date = $request->complainant_date;
+            // $main_category=$request->main_category;
+            $case_type = $request->case_type;
+            $detail_complainant = $request->detail_complainant;
+            $complainant_reco = $request->complainant_reco;
+            $validator = \Validator::make($request->all(), [
+                'image' => 'nullable|image'
+            ], [
+                'image.image' => 'Product file must be an image',
             ]);
-            return response()->json(['code' => 1, 'msg' => 'Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်', 'uuid' => $number]);
+    
+            if (!$validator->passes()) {
+                return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+            } else {
+                $file_name = "none";
+                if ($request->file('image')) {
+                    $file_name = $request->file('image')->getClientOriginalName();
+                    $request->file('image')->move(public_path('files'), $file_name);
+                }
+    //dd($request->file('image'));
+                DB::table('complaints')->insert([
+                    'customer_name' => $customer_name,
+                    'complaint_uuid' => $number,
+                    'customer_mobile' => $customer_phone,
+                    'waybill_no' => $waybill_no,
+                    'issue_date' => $complainant_date,
+                    'case_type_name' => $case_type,
+                    'customer_message' => $detail_complainant,
+                    'customer_recommendation' => $complainant_reco,
+                    'image' => $file_name,
+                    'source_platform' => 'web',
+                    'status_name' => $status->name,
+                    'created_at'    => date('Y-m-d H:i:s'),
+                    'updated_at'    => date('Y-m-d H:i:s'),
+                ]);
+                return response()->json(['code' => 1, 'msg' => 'Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်', 'uuid' => $number]);
+            }
+        }else{
+            return response()->json(['code' => 0, 'msg' => 'pass to captcha','uuid'=>'Not  Pass']);
         }
     }
 

@@ -162,6 +162,12 @@ $('[name=nav]').each(function(i,d){
                 $.each(data.error, function(prefix,val){
                     $(form).find('span.'+prefix+'_error').text(val[0]);
                 });
+                $(".spii").hide();
+                $("#exampleModal1").modal("show");
+                 $("#uid").empty()
+                 $("#msg").empty()
+                $("#uid").append('<label>Complaint ID '+data.uuid+'</label>');
+                $("#msg").append('<strong>'+data.msg+'</strong>');
             }else{
                 $(form)[0].reset();
                 $(".spii").hide();
