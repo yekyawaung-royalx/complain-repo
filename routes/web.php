@@ -21,12 +21,12 @@ Route::get('/', function () {
 });
 Route::get('/complaints/{id}', function () {
     return view('complaints.view');
-});
+})->middleware('auth');
 Route::get('/test', function () {
    $compensate=DB::table('pricing')->sum('negotiable_price');
    return $compensate;
    
-});
+})->middleware('auth');
 
 
 
@@ -55,9 +55,9 @@ Route::get('complaints-form/{uuid}', function ($uuid) {
 
 })->name('complaints-form');
 
-Route::get('/complaints/{id}/edit',[App\Http\Controllers\ComplaintController::class,'edit']);
-Route::get('/complaints/{id}/view',[App\Http\Controllers\ComplaintController::class,'view']);
-Route::post('/complaints/{id}/update',[App\Http\Controllers\ComplaintController::class,'update']);
+// Route::get('/complaints/{id}/edit',[App\Http\Controllers\ComplaintController::class,'edit']);
+// Route::get('/complaints/{id}/view',[App\Http\Controllers\ComplaintController::class,'view']);
+// Route::post('/complaints/{id}/update',[App\Http\Controllers\ComplaintController::class,'update']);
 
 
 Route::get('/complaints/status/{status}', function () {
@@ -67,8 +67,8 @@ Route::get('/complaints/all-status/{status}', function () {
     return view('complaints.complaint');
 })->middleware(['auth', 'verified'])->name('dashboard');
 // Route::get('/complaints/status/{status}',[App\Http\Controllers\ComplaintController::class,'status']);
-Route::get('/complaints/json/{status}',[App\Http\Controllers\ComplaintController::class,'json_status']);
-Route::get('/complaints/all-json/{status}',[App\Http\Controllers\ComplaintController::class,'json_complaints']);
+Route::get('/complaints/json/{status}',[App\Http\Controllers\ComplaintController::class,'json_status'])->middleware('auth');
+Route::get('/complaints/all-json/{status}',[App\Http\Controllers\ComplaintController::class,'json_complaints'])->middleware('auth');
 
 
 // Route::get('/dashboard', function () {
