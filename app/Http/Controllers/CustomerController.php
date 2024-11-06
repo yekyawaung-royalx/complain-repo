@@ -42,7 +42,7 @@ class CustomerController extends Controller
     public function CustomerSubmit(Request $request)
     {
         $input = $request->all();
-        $recaptcha_secret = '6Lf9de0pAAAAAHyajdlU48W-ru6BPwvG6svPIBkS'; 
+        $recaptcha_secret = '6LcilHYqAAAAAGGx4ZUFgAdjnwO8nTau5QC3bfmX'; 
         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$recaptcha_secret."&response=".$input['g-recaptcha-response']);
         $response = json_decode($response,true);
         if ($response["success"] === true){
