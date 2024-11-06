@@ -23,9 +23,25 @@ Route::get('/complaints/{id}', function () {
     return view('complaints.view');
 })->middleware('auth');
 Route::get('/test', function () {
-   $compensate=DB::table('pricing')->sum('negotiable_price');
-   return $compensate;
-   
+    $today = date('Y-m');
+    $complaints = DB::table('complaints')
+    ->select(
+        'case_type_name',
+        DB::raw("
+            CASE 
+                WHEN case_type_name IN ('Service Complain','Delivery Man Complain','Staff Complain','Double Charges','Extra Charges','Delay Time','Wrong Transfer City','Parcel Wrong','CX Complain','Not Collect Pick Up Complain') THEN 'Service Complaint Types'
+                WHEN case_type_name IN ('Damage','Loss','Reduce','Pest Control','Force Majeure','Illegal  Restricted Material') THEN 'Loss & Damage Types'
+                ELSE 'Other'
+            END as main_group
+        "),
+        DB::raw('count(*) as num'),
+        DB::raw('GROUP_CONCAT(customer_message SEPARATOR "; ") as messages')
+    )
+    ->whereYear('created_at', $today)
+    ->groupBy('main_group', 'case_type_name')
+    ->get();
+
+   return view('test',compact('complaints'));
 })->middleware('auth');
 
 
