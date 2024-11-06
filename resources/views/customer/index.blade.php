@@ -115,6 +115,10 @@
                                 </div>
                                 <p><strong>* is required</strong></p>
                             </div>
+                            <div class="mb-3">
+                                <div class="g-recaptcha" data-sitekey="6LfLgnYqAAAAABbjSDHdYP9eUCD84AHkjSAjGqdk">
+                                </div>
+                            </div>
                             <div class="col-lg-3">
                                 <div class="form-group p-1">
                                     <button class="btn btn-danger" id="customer-submit"
@@ -211,10 +215,6 @@
                                         name="image">
                                 </div>
 
-                            </div>
-                            <div class="mb-3">
-                                <div class="g-recaptcha" data-sitekey="6LfLgnYqAAAAABbjSDHdYP9eUCD84AHkjSAjGqdk">
-                                </div>
                             </div>
                             <p><strong>* is required</strong></p>
                             <div class="col-lg-3 re-hide">
