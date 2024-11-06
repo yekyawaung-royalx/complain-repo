@@ -292,7 +292,7 @@
     <script src="{{ asset('assets/js/customer/main.js') }}"></script>
     <script src="{{ asset('assets/js/customer/select2.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+    <script src="{{ asset('assets/js/customer/api.js') }}"></script>
     <script type="text/javascript">
         var onloadCallback = function() {
             // alert("grecaptcha is ready!");
