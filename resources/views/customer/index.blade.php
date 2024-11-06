@@ -115,7 +115,7 @@
                                 </div>
 
                             </div>
-                            <div class="mb-3 col-lg-6">
+                            <div class="mb-3 col-lg-6 p-3">
                                 <div class="g-recaptcha" data-sitekey="6LcilHYqAAAAAChr8rQAwokcMdjaKnUfqYj1Z9ap">
                                 </div>
                             </div>
