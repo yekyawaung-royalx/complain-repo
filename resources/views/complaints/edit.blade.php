@@ -510,7 +510,7 @@
         var current_status_u = $(".case-status-u").val();
         var current_status = $(".case-status").val();
         var connection = $("#connection").val();
-
+        //alert(connection)
         $('#form-data').on('submit', (e) => {
             e.preventDefault();
             var formData = new FormData();
@@ -605,7 +605,7 @@
                 // return true;
                 //alert('not status')
                 var status = 'true';
-                alert(status + 'not status');
+                //alert(status + 'not status');
             }
             //same status connection end//
             //start submit ajax//

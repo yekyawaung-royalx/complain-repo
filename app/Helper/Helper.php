@@ -106,9 +106,9 @@ function getDifferentData()
 
 function permission() {
     $user = Auth::user();
-    if($user->name=='Thaw Zin'){$rolestatus='Developer';}
-    elseif($user->name=='EiThandarLin'){$rolestatus='Admin';}
-    elseif($user->name=='ThuzarWin'){$rolestatus='Admin';}
+    if($user->role=='2'){$rolestatus='Developer';}
+    elseif($user->role=='1'){$rolestatus='Admin';}
+    elseif($user->role=='1'){$rolestatus='Admin';}
     else{$rolestatus='user';}
     return $rolestatus;
 }
