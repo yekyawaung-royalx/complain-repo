@@ -123,6 +123,11 @@ Route::get('/rating-list/{name}',[App\Http\Controllers\ProfileController::class,
 Route::get('/dashboard', [App\Http\Controllers\ComplaintController::class,'dashboard']);
  Route::post('/dashboard', [App\Http\Controllers\ComplaintController::class,'searchdashboard']);
 
+ //internal assigned route//
+ Route::get('/complaints/{id}/edit',[App\Http\Controllers\ComplaintController::class,'edit']);
+Route::get('/complaints/{id}/view',[App\Http\Controllers\ComplaintController::class,'view']);
+Route::post('/complaints/{id}/update',[App\Http\Controllers\ComplaintController::class,'update']);
+
 });
 // Route::get('/cx-team',[App\Http\Controllers\ComplaintController::class,'cx_team']);
 // Route::post('/cx-team/store',[App\Http\Controllers\ComplaintController::class,'cx_store']);
