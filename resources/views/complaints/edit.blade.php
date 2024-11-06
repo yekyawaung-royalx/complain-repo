@@ -671,6 +671,8 @@
                 if (ygn_branch == 'No Branch') {
                     $('#save').prop('disabled', true);
                     //alert(ygn_branch);
+                } else {
+                    $('#save').prop('disabled', false);
                 }
             }
             if (ropAmount) {
@@ -678,6 +680,8 @@
                 if (ygn_branch == 'No Branch') {
                     $('#save').prop('disabled', true);
                     //alert(ygn_branch);
+                } else {
+                    $('#save').prop('disabled', false);
                 }
             }
             if (otherAmount) {
@@ -685,6 +689,8 @@
                 if (ygn_branch == 'No Branch') {
                     $('#save').prop('disabled', true);
                     //alert(ygn_branch);
+                } else {
+                    $('#save').prop('disabled', false);
                 }
             }
             if (!ygnAmount) {
@@ -693,10 +699,12 @@
             }
             if (!ropAmount) {
                 ropAmount = 0;
+
                 var total = parseFloat(ygnAmount) + parseFloat(ropAmount) + parseFloat(otherAmount);
             }
             if (!otherAmount) {
                 otherAmount = 0;
+
                 var total = parseFloat(ygnAmount) + parseFloat(ropAmount) + parseFloat(otherAmount);
 
             } else {
@@ -706,11 +714,42 @@
             //alert(keyup)
         })
         $('.ygn_branch,.rop_branch,.other_branch').on('change', function() {
+            var ygnAmount = $(".ygn_amount").val();
+            var ropAmount = $(".rop_amount").val();
+            var otherAmount = $(".other_amount").val();
             var ygn_branch = $('.ygn_branch :selected').text();
+            var rop_branch = $('.rop_branch :selected').text();
+            var other_branch = $('.other_branch :selected').text();
             if (ygn_branch == 'No Branch') {
                 $('#save').prop('disabled', true);
-            } else {
-                $('#save').prop('disabled', false);
+            }
+            if (ygn_branch !== 'No Branch') {
+                //alert(ygnAmount)
+                if (ygnAmount == '0' || ygnAmount == '') {
+                    $('#save').prop('disabled', true);
+                } else {
+                    $('#save').prop('disabled', false);
+                }
+            }
+            if (rop_branch == 'No Branch') {
+                $('#save').prop('disabled', true);
+            }
+            if (rop_branch !== 'No Branch') {
+                if (ropAmount == '0' || ropAmount == '') {
+                    $('#save').prop('disabled', true);
+                } else {
+                    $('#save').prop('disabled', false);
+                }
+            }
+            if (other_branch == 'No Branch') {
+                $('#save').prop('disabled', true);
+            }
+            if (other_branch !== 'No Branch') {
+                if (otherAmount == '0' || otherAmount == '') {
+                    $('#save').prop('disabled', true);
+                } else {
+                    $('#save').prop('disabled', false);
+                }
             }
         })
 
