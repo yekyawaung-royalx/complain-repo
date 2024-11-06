@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/customer/style.css') }}">
     <link href="{{ asset('assets/css/select2.css') }}" rel="stylesheet" />
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"> --}}
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FJ1XQ719X"></script>
     <title>Customer</title>
 </head>
 
@@ -293,11 +293,6 @@
     <script src="{{ asset('assets/js/customer/select2.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ asset('assets/js/customer/api.js') }}"></script>
-    <script type="text/javascript">
-        var onloadCallback = function() {
-            // alert("grecaptcha is ready!");
-        };
-    </script>
 </body>
 
 </html>
