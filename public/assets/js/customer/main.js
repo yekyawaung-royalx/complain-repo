@@ -256,6 +256,8 @@ $('.employee-submit').on('submit', function(e){
               $("#mgs").append('<strong>'+data.msg+'</strong>');
               $("#uid").hide();
               $("#msg").hide();
+              $('#diu').empty();
+              $('#mgs').empty();
               //console.log(data.msg)
               // alert(data.msg);
               // fetchAllProducts();
