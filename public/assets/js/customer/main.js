@@ -174,8 +174,11 @@ $('[name=nav]').each(function(i,d){
                 $("#exampleModal1").modal("show");
                  $("#uid").empty()
                  $("#msg").empty()
-                $("#uid").append('<label>Complaint ID '+data.uuid+'</label>');
-                $("#msg").append('<strong>'+data.msg+'</strong>');
+                $("#uid").append('<label id="i">Complaint ID '+data.uuid+'</label>');
+                $("#msg").append('<strong id="g">'+data.msg+'</strong>');
+               
+              $('#i').empty();
+              $('#g').empty();
                // toastr.success(data.msg);
                 //console.log(data.msg)
                 // alert(data.msg);
@@ -252,12 +255,12 @@ $('.employee-submit').on('submit', function(e){
               $(form)[0].reset();
               $(".spii").hide();
               $("#exampleModal1").modal("show");
-              $("#diu").append('<label>Complaint ID '+data.uuid+'</label>');
-              $("#mgs").append('<strong>'+data.msg+'</strong>');
+              $("#diu").append('<label id="i">Complaint ID '+data.uuid+'</label>');
+              $("#mgs").append('<strong id="g">'+data.msg+'</strong>');
               $("#uid").hide();
               $("#msg").hide();
-              $('#diu').empty();
-              $('#mgs').empty();
+              $('#i').empty();
+              $('#g').empty();
               //console.log(data.msg)
               // alert(data.msg);
               // fetchAllProducts();
