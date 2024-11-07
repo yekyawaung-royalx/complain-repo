@@ -339,7 +339,6 @@ class ComplaintController extends Controller
     }
 
     public function dashboard(){
-        $today = date('Y-m');
         $complaints = DB::table('complaints')
             ->select(
                 'case_type_name',
@@ -353,13 +352,13 @@ class ComplaintController extends Controller
                 DB::raw('count(*) as num'),
                 DB::raw('GROUP_CONCAT(customer_message SEPARATOR "; ") as messages')
             )
-            ->whereYear('created_at', $today)
+           // ->whereBetween('created_at', [$date_from, $date_to])
             ->groupBy('main_group', 'case_type_name')
             ->get();
-        
+     // dd($date_from);
         $label = [];
         $datas = [];
-        $colors = ['#ff6384','#36A2EB','#FFCE56','#8BC34A','#FF5722','#009688','#795548','#9C27B0','#2196F3','#FF9800','#CDDC39','#607D8B'];
+        $colors = ['#ff6384','#36A2EB','#FFCE56','#8BC34A','#FF5722','#009688','#795548','#9C27B0','#2196F3','#FF9800','#CDDC39','#607D8B','#10539c','#00e8ff','#00ffd4','#ff0000'];
         $total = 0;
         
         // Initialize an array to accumulate totals by main_group
@@ -396,57 +395,176 @@ class ComplaintController extends Controller
         ];
         
         //dd($complaints);
-       
-        return view('dashboard',compact('datasets','labels','today','complaints','datasetsIn','label'));
+        //princing//
+        $pricings = DB::table('pricing')
+        ->select(
+            'ygn_branch',
+            'rop_branch',
+            'other_branch',
+            DB::raw('SUM(rop_refund) as total_rop_amount'),    // Total refund amount for the group
+            DB::raw('SUM(ygn_refund) as ygn_branch_total'),    // Total for ygn_branch
+            DB::raw('SUM(other_refund) as other_branch_total'), // Total for other_branch
+            DB::raw('COUNT(*) as count')                       // Count of records in the group
+        )
+        //->whereMonth('created_at', $today)
+        ->groupBy('ygn_branch', 'rop_branch', 'other_branch')
+        ->get();
+
+// Calculate overall totals for total_rop_amount, ygn_branch_total, and other_branch_total
+$RopTotal = $pricings->sum('total_rop_amount');
+$ygnBranchTotal = $pricings->sum('ygn_branch_total');
+$otherBranchTotal = $pricings->sum('other_branch_total');
+
+// Chart result example
+$chartData = [
+    'labels' => ['YGN Branch', 'Other Branch', 'Rop Branch'],  // Chart labels
+    'datasets' => [
+        [
+            'data' => [
+                $ygnBranchTotal,      // YGN branch total (9000)
+                $otherBranchTotal,    // Other branch total (3500)
+                $RopTotal             // Grand total (6200)
+            ],
+            'backgroundColor' => [
+                '#FF6384',            // Color for YGN Branch Total
+                '#36A2EB',            // Color for Other Branch Total
+                '#FFCE56'             // Color for Grand Total
+            ],
+            'hoverBackgroundColor' => [
+                '#FF6384',            // Hover color for YGN Branch Total
+                '#36A2EB',            // Hover color for Other Branch Total
+                '#FFCE56'             // Hover color for Grand Total
+            ],
+            'label'=>[
+                'Pricing',
+            ],
+            'borderWidth'=>[
+                '1',
+            ]
+        ]
+            ]
+];
+       // dd($result);
+     return view('dashboard',compact('complaints','datasetsIn','label','chartData'));
     }
 
     public function searchdashboard(Request $request){
-        $complaint_count = DB::table('complaints')->count();
-        $service_complaints=DB::table('complaints')->whereIn('case_type_name',['Service Complain','Delivery Man Complain','Staff Complain','Double Charges','Extra Charges','Delay Time','Wrong Transfer City','Parcel Wrong','CX Complain','Not Collect Pick Up Complain'])->count();
-        $loss_complaints=DB::table('complaints')->whereIn('case_type_name',['Damage','Losss','Reduce','Pest Control','Force Majeure','Illegal  Restricted Material'])->count();
-        $complaint_review = DB::table('complaints')->groupBy('stars_rated')->count();
-        $compensate=DB::table('pricing')->sum('negotiable_price');
-        $yestday_count=getYesterday();
-        $today_count=getToDay();
-        $compensate=DB::table('pricing')->sum('negotiable_price');
-        $year=$request->input('year');
-        $totalNegotiablePrice = DB::table('pricing')
-        ->whereYear('created_at', $year)
-        ->sum('negotiable_price');
-        //end date filter
-        $pricing = DB::table('pricing')
-        ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count, SUM(negotiable_price) as total_price')
-         ->whereYear('created_at', $year) // Filter by year if needed
-        ->groupBy('year', 'month')
-        ->orderBy('year')
-         ->orderBy('month')
-         ->paginate(5);
-//dd($pricing);
-        $labels=[];
-        $data=[];
-        $colors=['#ff6384','#36A2EB','#FFCE56','#8BC34A','#FF5722','#009688','#795548','#9C27B0','#2196F3','#FF9800','#CDDC39','#607D8B'];
-        for($i=1;$i<12;$i++){
-            $month=date('F',mktime(0,0,0,$i,1));
-            $total_price=0;
-            foreach($pricing as $price){
-                if($price->month==$i){
-                    $total_price=$price->total_price;
-                    break;
-                    }
-                    }
-                    array_push($labels,$month);
-                    array_push($data,$total_price);
+        $start_date = $request->input('date_from');
+        $end_date = $request->input('date_to');
+        if ($start_date && $end_date) {
+            $start_date = \Carbon\Carbon::parse($start_date)->format('Y-m-d');
+            $end_date = \Carbon\Carbon::parse($end_date)->format('Y-m-d');
+        $complaints = DB::table('complaints')
+            ->select(
+                'case_type_name',
+                DB::raw("
+                    CASE 
+                        WHEN case_type_name IN ('Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain') THEN 'Service Complaint Types'
+                        WHEN case_type_name IN ('Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material') THEN 'Loss & Damage Types'
+                        ELSE 'Other'
+                    END as main_group
+                "),
+                DB::raw('count(*) as num'),
+                DB::raw('GROUP_CONCAT(customer_message SEPARATOR "; ") as messages')
+            )
+            ->whereBetween('created_at', [$start_date, $end_date]) // Add date range filter
+            ->groupBy('main_group', 'case_type_name')
+            ->get();
+        
+        $label = [];
+        $datas = [];
+        $colors = ['#ff6384','#36A2EB','#FFCE56','#8BC34A','#FF5722','#009688','#795548','#9C27B0','#2196F3','#FF9800','#CDDC39','#607D8B','#10539c','#00e8ff','#00ffd4','#ff0000'];
+        $total = 0;
+        
+        // Initialize an array to accumulate totals by main_group
+        $mainGroupData = [];
+        
+        // Iterate through the complaints and organize them by main_group
+        foreach ($complaints as $complaint) {
+            // If the main_group does not exist in the array, initialize it
+            if (!isset($mainGroupData[$complaint->case_type_name])) {
+                $mainGroupData[$complaint->case_type_name] = [
+                    'label' => $complaint->case_type_name,
+                    'data' => [],
+                    'total' => 0,
+                ];
+            }
+        
+            // Add data for the specific case type under this main_group
+            $mainGroupData[$complaint->case_type_name]['data'][] = $complaint->num;
+            $mainGroupData[$complaint->case_type_name]['total'] += $complaint->num;  // Accumulate total
         }
-        $datasets=[
+        
+        // Prepare the dataset
+        foreach ($mainGroupData as $group) {
+            array_push($label, $group['label']);
+            array_push($datas, $group['total']);
+        }
+        
+        $datasetsIn = [
             [
-                'label'=>'Pricings',
-                'data'=>$data,
-                'backgroundColor'=>$colors,
+                'label' => 'Complaints',
+                'data' => $datas,
+                'backgroundColor' => $colors,
             ]
-            ];
-        return view('dashboard',compact('complaint_count','service_complaints','loss_complaints','complaint_review','yestday_count','compensate','datasets','labels','compensate','year','totalNegotiablePrice'));
+        ];
+        
+        //dd($complaints);
+        //princing//
+        $pricings = DB::table('pricing')
+        ->select(
+            'ygn_branch',
+            'rop_branch',
+            'other_branch',
+            DB::raw('SUM(rop_refund) as total_rop_amount'),    // Total refund amount for the group
+            DB::raw('SUM(ygn_refund) as ygn_branch_total'),    // Total for ygn_branch
+            DB::raw('SUM(other_refund) as other_branch_total'), // Total for other_branch
+            DB::raw('COUNT(*) as count')                       // Count of records in the group
+        )
+        ->whereBetween('created_at', [$start_date, $end_date]) // Add date range filter
+        ->groupBy('ygn_branch', 'rop_branch', 'other_branch')
+        ->get();
 
+// Calculate overall totals for total_rop_amount, ygn_branch_total, and other_branch_total
+$RopTotal = $pricings->sum('total_rop_amount');
+$ygnBranchTotal = $pricings->sum('ygn_branch_total');
+$otherBranchTotal = $pricings->sum('other_branch_total');
+
+// Chart result example
+$chartData = [
+    'labels' => ['YGN Branch', 'Other Branch', 'Rop Branch'],  // Chart labels
+    'datasets' => [
+        [
+            'data' => [
+                $ygnBranchTotal,      // YGN branch total (9000)
+                $otherBranchTotal,    // Other branch total (3500)
+                $RopTotal             // Grand total (6200)
+            ],
+            'backgroundColor' => [
+                '#FF6384',            // Color for YGN Branch Total
+                '#36A2EB',            // Color for Other Branch Total
+                '#FFCE56'             // Color for Grand Total
+            ],
+            'hoverBackgroundColor' => [
+                '#FF6384',            // Hover color for YGN Branch Total
+                '#36A2EB',            // Hover color for Other Branch Total
+                '#FFCE56'             // Hover color for Grand Total
+            ],
+            'label'=>[
+                'Pricing',
+            ],
+            'borderWidth'=>[
+                '1',
+            ]
+        ]
+            ]
+];
+            return view('dashboard',compact('complaints','datasetsIn','label','chartData'));
+
+    }else{
+        return response()->json(['error' => 'Please provide both start and end dates.'], 400);
     }
+}
        
 }
 
