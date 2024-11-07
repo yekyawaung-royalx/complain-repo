@@ -176,9 +176,6 @@ $('[name=nav]').each(function(i,d){
                  $("#msg").empty()
                 $("#uid").append('<label id="i">Complaint ID '+data.uuid+'</label>');
                 $("#msg").append('<strong id="g">'+data.msg+'</strong>');
-               
-              $('#i').empty();
-              $('#g').empty();
                // toastr.success(data.msg);
                 //console.log(data.msg)
                 // alert(data.msg);
@@ -259,8 +256,6 @@ $('.employee-submit').on('submit', function(e){
               $("#mgs").append('<strong id="g">'+data.msg+'</strong>');
               $("#mgs").show();
               $("#diu").show();
-              $('#i').empty();
-              $('#g').empty();
               //console.log(data.msg)
               // alert(data.msg);
               // fetchAllProducts();
