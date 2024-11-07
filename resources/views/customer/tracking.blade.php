@@ -153,11 +153,11 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label text-muted">အမျိုးအစား</label>
-                                            <select class="js-example-basic-single col-sm-12" disabled>
+                                            <select class="js-example-basic-single col-sm-12 case_type_name" disabled>
                                                 @foreach ($categories as $category)
                                                     <optgroup label="{{ $category->main_category }}">
                                                         @foreach (DB::table('case_types')->select('id', 'case_name')->where('main_category', $category->main_category)->get() as $case)
-                                                            <option value="{{ $case->id }}"
+                                                            <option value="{{ $case->case_name }}"
                                                                 {{ $case->case_name == $complaint->case_type_name ? 'selected' : '' }}>
                                                                 {{ $case->case_name }}</option>
                                                         @endforeach
@@ -416,6 +416,7 @@
                 var form = this;
                 var _token = $("#_token").val();
                 var feedback_message = $(".feedback-message").val();
+                var case_type_name = $(".case_type_name").val();
                 //let _token = $('meta[name="csrf-token"]').attr('content');
                 formData.append('case_status', name);
                 formData.append('handled_by', handled_by);
@@ -423,6 +424,7 @@
                 formData.append('feedback_message', feedback_message);
                 formData.append('rating', rating);
                 formData.append('_token', _token);
+                formData.append('case_type_name', case_type_name);
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
