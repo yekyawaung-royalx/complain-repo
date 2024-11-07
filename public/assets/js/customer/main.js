@@ -257,8 +257,8 @@ $('.employee-submit').on('submit', function(e){
               $("#exampleModal1").modal("show");
               $("#diu").append('<label id="i">Complaint ID '+data.uuid+'</label>');
               $("#mgs").append('<strong id="g">'+data.msg+'</strong>');
-              $("#uid").hide();
-              $("#msg").hide();
+              $("#mgs").show();
+              $("#diu").show();
               $('#i').empty();
               $('#g').empty();
               //console.log(data.msg)
