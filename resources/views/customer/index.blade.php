@@ -174,12 +174,12 @@
                                 <label for="">တိုင်ကြား /
                                     အကြံပြုသူအမည်<strong>*</strong></label>
                                 <input type="text" class="form-control mb-3" placeholder="Mg Mg"
-                                    id="e_complainant_name" name="e_complainant_name">
+                                    id="e_complainant_name" name="e_complainant_name" required>
                             </div>
                             <div class="col-lg-6 input_field re-hide">
                                 <label for="">ဆက်သွယ်ရန်ဖုန်းနံပါတ်<strong>*</strong></label>
                                 <input type="text" class="form-control mb-3" placeholder="09xxxxxxxxx"
-                                    id="e_complainant_phone" name="e_complainant_phone">
+                                    id="e_complainant_phone" name="e_complainant_phone" required>
                             </div>
                             <div class="col-lg-6 input_field re-hide">
                                 <label for="">ဘောင်ချာနံပါတ်(Waybill) </label>
