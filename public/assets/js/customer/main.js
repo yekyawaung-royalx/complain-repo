@@ -137,54 +137,54 @@ $('[name=nav]').each(function(i,d){
 
   //customer submit form
 
-  $('.customer-submit').on('submit', function(e){
-    e.preventDefault();
-   //alert('hello');
-      var validate=validateForm_1();
-    if(validate==false){
-      return false;
-    }else{
-      $(".spii").show();
-    var form = this;
-    console.log(form);
-    $.ajax({
-        url:$(form).attr('action'),
-        method:$(form).attr('method'),
-        data:new FormData(form),
-        processData:false,
-        dataType:'json',
-        contentType:false,
-        beforeSend:function(){
-            $(form).find('span.error-text').text('');
-        },
-        success:function(data){
-            if(data.code == 0){
-                $.each(data.error, function(prefix,val){
-                    $(form).find('span.'+prefix+'_error').text(val[0]);
-                });
-                $(".spii").hide();
-                $("#exampleModal1").modal("show");
-                 $("#uid").empty()
-                 $("#msg").empty()
-                $("#uid").append('<label>Complaint ID '+data.uuid+'</label>');
-                $("#msg").append('<strong>'+data.msg+'</strong>');
-            }else{
-                $(form)[0].reset();
-                $(".spii").hide();
-                $("#exampleModal1").modal("show");
-                 $("#uid").empty()
-                 $("#msg").empty()
-                $("#uid").append('<label id="i">Complaint ID '+data.uuid+'</label>');
-                $("#msg").append('<strong id="g">'+data.msg+'</strong>');
-               // toastr.success(data.msg);
-                //console.log(data.msg)
-                // alert(data.msg);
-                // fetchAllProducts();
-            }
-        }
-    });
-  }
-});
+//   $('.customer-submit').on('submit', function(e){
+//     e.preventDefault();
+//    //alert('hello');
+//       var validate=validateForm_1();
+//     if(validate==false){
+//       return false;
+//     }else{
+//       $(".spii").show();
+//     var form = this;
+//     console.log(form);
+//     $.ajax({
+//         url:$(form).attr('action'),
+//         method:$(form).attr('method'),
+//         data:new FormData(form),
+//         processData:false,
+//         dataType:'json',
+//         contentType:false,
+//         beforeSend:function(){
+//             $(form).find('span.error-text').text('');
+//         },
+//         success:function(data){
+//             if(data.code == 0){
+//                 $.each(data.error, function(prefix,val){
+//                     $(form).find('span.'+prefix+'_error').text(val[0]);
+//                 });
+//                 $(".spii").hide();
+//                 $("#exampleModal1").modal("show");
+//                  $("#uid").empty()
+//                  $("#msg").empty()
+//                 $("#uid").append('<label>Complaint ID '+data.uuid+'</label>');
+//                 $("#msg").append('<strong>'+data.msg+'</strong>');
+//             }else{
+//                 $(form)[0].reset();
+//                 $(".spii").hide();
+//                 $("#exampleModal1").modal("show");
+//                  $("#uid").empty()
+//                  $("#msg").empty()
+//                 $("#uid").append('<label id="i">Complaint ID '+data.uuid+'</label>');
+//                 $("#msg").append('<strong id="g">'+data.msg+'</strong>');
+//                // toastr.success(data.msg);
+//                 //console.log(data.msg)
+//                 // alert(data.msg);
+//                 // fetchAllProducts();
+//             }
+//         }
+//     });
+//   }
+// });
 
   //end customer form 1
   //start customer validateForm 1
@@ -224,46 +224,46 @@ $('#complainant_phone').keyup(function(event) {
 
 //employee submit form 
 
-$('.employee-submit').on('submit', function(e){
-  e.preventDefault();
- //alert('hello');
-    var validate=validateForm_2();
-  if(validate==false){
-    return false;
-  }else{
-    $(".spii").show();
-  var form = this;
-  $.ajax({
-      url:$(form).attr('action'),
-      method:$(form).attr('method'),
-      data:new FormData(form),
-      processData:false,
-      dataType:'json',
-      contentType:false,
-      beforeSend:function(){
-          $(form).find('span.error-text').text('');
-      },
-      success:function(data){
-          if(data.code == 0){
-              $.each(data.error, function(prefix,val){
-                  $(form).find('span.'+prefix+'_error').text(val[0]);
-              });
-          }else{
-              $(form)[0].reset();
-              $(".spii").hide();
-              $("#exampleModal1").modal("show");
-              $("#diu").append('<label id="i">Complaint ID '+data.uuid+'</label>');
-              $("#mgs").append('<strong id="g">'+data.msg+'</strong>');
-              $("#mgs").show();
-              $("#diu").show();
-              //console.log(data.msg)
-              // alert(data.msg);
-              // fetchAllProducts();
-          }
-      }
-  });
-}
-});
+// $('.employee-submit').on('submit', function(e){
+//   e.preventDefault();
+//  //alert('hello');
+//     var validate=validateForm_2();
+//   if(validate==false){
+//     return false;
+//   }else{
+//    $(".spii").show();
+//   var form = this;
+//   $.ajax({
+//       url:$(form).attr('action'),
+//       method:$(form).attr('method'),
+//       data:new FormData(form),
+//       processData:false,
+//       dataType:'json',
+//       contentType:false,
+//       beforeSend:function(){
+//           $(form).find('span.error-text').text('');
+//       },
+//       success:function(data){
+//           if(data.code == 0){
+//               $.each(data.error, function(prefix,val){
+//                   $(form).find('span.'+prefix+'_error').text(val[0]);
+//               });
+//           }else{
+//               $(form)[0].reset();
+//               $(".spii").hide();
+//               $("#exampleModal1").modal("show");
+//               $("#diu").append('<label id="i">Complaint ID '+data.uuid+'</label>');
+//               $("#mgs").append('<strong id="g">'+data.msg+'</strong>');
+//               $("#uid").hide();
+//               $("#msg").hide();
+//               //console.log(data.msg)
+//               // alert(data.msg);
+//               // fetchAllProducts();
+//           }
+//       }
+//   });
+// }
+// });
 
 //end employee submit form
 

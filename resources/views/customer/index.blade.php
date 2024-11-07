@@ -45,6 +45,16 @@
             <div class="col-lg-6 wrappere">
                 {{-- <img src="{{ asset('assets/images/bg-breadcrumb.jpeg') }}" alt="header-image" class="cld-responsive"> --}}
                 <div class="wrappers">
+                    @if (Session::has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
+                    @if (Session::has('danger'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ Session::get('danger') }}
+                        </div>
+                    @endif
                     <div class="sidHead">
                         <div class="side">
                             <input type="radio" name="nav" id="one" checked="checked">
@@ -63,13 +73,13 @@
                                 <label for="">တိုင်ကြား /
                                     အကြံပြုသူအမည်<strong>*</strong></label>
                                 <input type="text" class="form-control mb-3" placeholder="Mg Mg"
-                                    name="complainant_name" id="complainant_name">
+                                    name="complainant_name" id="complainant_name" required>
                                 <p id="name-validate"></p>
                             </div>
                             <div class="col-lg-6 input_field">
                                 <label for="">ဆက်သွယ်ရန်ဖုန်းနံပါတ်<strong>*</strong></label>
                                 <input type="text" class="form-control mb-3" placeholder="09xxxxxxxxx"
-                                    name="complainant_phone" id="complainant_phone">
+                                    name="complainant_phone" id="complainant_phone" required>
                             </div>
                             <div class="col-lg-6 input_field">
                                 <label for="">ဘောင်ချာနံပါတ်(Waybill) </label>

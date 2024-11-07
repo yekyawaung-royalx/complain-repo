@@ -87,10 +87,11 @@ class CustomerController extends Controller
                     'created_at'    => date('Y-m-d H:i:s'),
                     'updated_at'    => date('Y-m-d H:i:s'),
                 ]);
-                return response()->json(['code' => 1, 'msg' => 'Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်', 'uuid' => $number]);
+                //return response()->json(['code' => 1, 'msg' => 'Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်', 'uuid' => $number]);
+                return back()->with('success','Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်'.$number);
             }
         }else{
-            return response()->json(['code' => 0, 'msg' => 'pass to captcha','uuid'=>'Not  Pass']);
+            return back()->with('danger','Invalid reCAPTCHA!');
         }
     }
 
@@ -142,7 +143,7 @@ class CustomerController extends Controller
                 'created_at'    => date('Y-m-d H:i:s'),
                 'updated_at'    => date('Y-m-d H:i:s'),
             ]);
-            return response()->json(['code' => 1, 'msg' => 'Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်', 'uuid' => $number]);
+            return back()->with('success','Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်'.$number);
         }
     }
 
