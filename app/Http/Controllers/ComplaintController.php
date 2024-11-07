@@ -339,6 +339,8 @@ class ComplaintController extends Controller
     }
 
     public function dashboard(){
+        $end_date = date('Y-m-d'); // Today's date
+        $start_date = date('Y-m-d', strtotime('-1 month')); // One month before today
         $complaints = DB::table('complaints')
             ->select(
                 'case_type_name',
@@ -352,10 +354,11 @@ class ComplaintController extends Controller
                 DB::raw('count(*) as num'),
                 DB::raw('GROUP_CONCAT(customer_message SEPARATOR "; ") as messages')
             )
-           // ->whereBetween('created_at', [$date_from, $date_to])
+           ->whereDate('created_at','>=',$start_date)
+           ->whereDate('created_at','<=',$end_date)
             ->groupBy('main_group', 'case_type_name')
             ->get();
-     // dd($date_from);
+      //dd($complaints);
         $label = [];
         $datas = [];
         $colors = ['#ff6384','#36A2EB','#FFCE56','#8BC34A','#FF5722','#009688','#795548','#9C27B0','#2196F3','#FF9800','#CDDC39','#607D8B','#10539c','#00e8ff','#00ffd4','#ff0000'];
@@ -406,7 +409,8 @@ class ComplaintController extends Controller
             DB::raw('SUM(other_refund) as other_branch_total'), // Total for other_branch
             DB::raw('COUNT(*) as count')                       // Count of records in the group
         )
-        //->whereMonth('created_at', $today)
+        ->whereDate('created_at','>=',$start_date)
+        ->whereDate('created_at','<=',$end_date)
         ->groupBy('ygn_branch', 'rop_branch', 'other_branch')
         ->get();
 
@@ -445,15 +449,12 @@ $chartData = [
             ]
 ];
        // dd($result);
-     return view('dashboard',compact('complaints','datasetsIn','label','chartData'));
+     return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date'));
     }
 
     public function searchdashboard(Request $request){
         $start_date = $request->input('date_from');
         $end_date = $request->input('date_to');
-        if ($start_date && $end_date) {
-            $start_date = \Carbon\Carbon::parse($start_date)->format('Y-m-d');
-            $end_date = \Carbon\Carbon::parse($end_date)->format('Y-m-d');
         $complaints = DB::table('complaints')
             ->select(
                 'case_type_name',
@@ -467,7 +468,8 @@ $chartData = [
                 DB::raw('count(*) as num'),
                 DB::raw('GROUP_CONCAT(customer_message SEPARATOR "; ") as messages')
             )
-            ->whereBetween('created_at', [$start_date, $end_date]) // Add date range filter
+            ->whereDate('created_at','>=',$start_date)
+            ->whereDate('created_at','<=',$end_date)
             ->groupBy('main_group', 'case_type_name')
             ->get();
         
@@ -521,7 +523,8 @@ $chartData = [
             DB::raw('SUM(other_refund) as other_branch_total'), // Total for other_branch
             DB::raw('COUNT(*) as count')                       // Count of records in the group
         )
-        ->whereBetween('created_at', [$start_date, $end_date]) // Add date range filter
+        ->whereDate('created_at','>=',$start_date)
+        ->whereDate('created_at','<=',$end_date)
         ->groupBy('ygn_branch', 'rop_branch', 'other_branch')
         ->get();
 
@@ -559,11 +562,7 @@ $chartData = [
         ]
             ]
 ];
-            return view('dashboard',compact('complaints','datasetsIn','label','chartData'));
-
-    }else{
-        return response()->json(['error' => 'Please provide both start and end dates.'], 400);
-    }
+            return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date'));
 }
        
 }

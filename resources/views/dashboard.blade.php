@@ -33,36 +33,76 @@
                     <div class="col-md-3 mb-3">
                         <label class="form-label text-muted">Start Date</label>
                         <input class="form-control year-filter" type="date" data-language="en" min="2024"
-                            name="date_from">
+                            name="date_from" value="{{ $start_date }}" id="date_from">
                     </div>
                     <div class="col-md-3 mb-3">
                         <label class="form-label text-muted">End Date</label>
                         <input class="form-control year-filter" type="date" data-language="en" min="2024"
-                            name="date_to">
-                    </div>
-                    <div class="col-md-3 mb-3 p-4">
-                        <button class="btn btn-primary">Filter</button>
+                            name="date_to" value="{{ $end_date }}" id="date_to">
                     </div>
             </form>
         </div>
         <div class="row">
-            @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
+            @if ($complaints->isNotEmpty())
+                @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
+                    <div class="col-sm-4 col-xl-4 col-lg-4">
+                        <div class="card o-hidden">
+                            <div class="card" style="width:100%;">
+                                <div class="card-header">
+                                    <h4>{{ $mainGroup }}</h4>
+                                </div>
+                                @foreach ($groupComplaints as $index => $complaint)
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">{{ $complaint->case_type_name }}<strong
+                                                class="float-right">{{ $complaint->num }}</strong></li>
+                                    </ul>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @else
                 <div class="col-sm-4 col-xl-4 col-lg-4">
                     <div class="card o-hidden">
                         <div class="card" style="width:100%;">
                             <div class="card-header">
-                                <h4>{{ $mainGroup }}</h4>
+                                <h4>Loss & Damage Types</h4>
                             </div>
-                            @foreach ($groupComplaints as $index => $complaint)
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">{{ $complaint->case_type_name }}<strong
-                                            class="float-right">{{ $complaint->num }}</strong></li>
-                                </ul>
-                            @endforeach
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Damage<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Loss<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Reduce<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Pest Control<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Force Majeure<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Illegal Restricted Material<strong
+                                        class="float-right">0</strong></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            @endforeach
+                <div class="col-sm-4 col-xl-4 col-lg-4">
+                    <div class="card o-hidden">
+                        <div class="card" style="width:100%;">
+                            <div class="card-header">
+                                <h4>Service Complaint Types</h4>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Service Complain<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Delivery Man Complain<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Staff Complain<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Double Charges<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Extra Charges<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Delay Time<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Wrong Transfer City<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Parcel Wrong<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">CX Complain<strong class="float-right">0</strong></li>
+                                <li class="list-group-item">Not Collect Pick Up Complain<strong
+                                        class="float-right">0</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="col-sm-4 col-xl-4 col-lg-4">
                 <div class="card o-hidden">
                     <div class="card" style="width:100%;">
@@ -163,9 +203,10 @@
             },
         });
 
-        // $(".year-filter").on('change', function() {
-        //     const search_form = $('#form-submit');
-        //     search_form.submit();
-        // })
+        $('.year-filter').on('change', function() {
+            const search_form = $('#form-submit');
+            search_form.submit();
+            //alert(year)
+        })
     });
 </script>
