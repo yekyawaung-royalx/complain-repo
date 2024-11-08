@@ -26,21 +26,26 @@
         </div>
         <!-- Container-fluid starts-->
         <div class="container-fluid default-dash">
-            <form action="{{ url('/dashboard') }}" method="POST" enctype="multipart/form-data" id="form-submit">
-                @csrf
-                <div class="row">
+            <div class="container">
+                <form action="{{ url('/dashboard') }}" method="POST" enctype="multipart/form-data" id="form-submit">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label text-muted">Start Date</label>
+                            <input class="form-control year-filter" type="date" data-language="en" min="2024"
+                                name="date_from" value="{{ $start_date }}" id="date_from">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label text-muted">End Date</label>
+                            <input class="form-control year-filter" type="date" data-language="en" min="2024"
+                                name="date_to" value="{{ $end_date }}" id="date_to">
+                        </div>
+                </form>
+                <div class="col-md-6 p-4">
+                    <button type="button" class="btn btn-primary float-right">Export</button>
+                </div>
+            </div>
 
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label text-muted">Start Date</label>
-                        <input class="form-control year-filter" type="date" data-language="en" min="2024"
-                            name="date_from" value="{{ $start_date }}" id="date_from">
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label text-muted">End Date</label>
-                        <input class="form-control year-filter" type="date" data-language="en" min="2024"
-                            name="date_to" value="{{ $end_date }}" id="date_to">
-                    </div>
-            </form>
         </div>
         <div class="row">
             <div class="col-lg-4">
