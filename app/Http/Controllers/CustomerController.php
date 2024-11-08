@@ -98,6 +98,11 @@ class CustomerController extends Controller
 
     public function employee(Request $request)
     {
+        $input = $request->all();
+        $recaptcha_secret = '6LcilHYqAAAAAGGx4ZUFgAdjnwO8nTau5QC3bfmX'; 
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$recaptcha_secret."&response=".$input['g-recaptcha-response']);
+        $response = json_decode($response,true);
+        if ($response["success"] === true){
         $status = DB::table('statuses')->where('id', 1)->first();
         $number = uuid();
         $branches = $request->branches;
@@ -145,6 +150,9 @@ class CustomerController extends Controller
             ]);
             return back()->with('success','Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်၊၊ Complaint ID'.$number);
         }
+    }else{
+        return back()->with('danger','Invalid reCAPTCHA!');
+    }
     }
 
 

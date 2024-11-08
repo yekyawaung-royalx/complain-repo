@@ -225,9 +225,15 @@
                                     <input class="form-control form-control-lg" id="image" type="file"
                                         name="image">
                                 </div>
+
+                            </div>
+                            <div class="mb-3 col-lg-6 p-3 re-hide">
+                                <div class="g-recaptcha" data-sitekey="6LcilHYqAAAAAChr8rQAwokcMdjaKnUfqYj1Z9ap">
+                                </div>
+                            </div>
+                            <div class="re-hide">
                                 <p><strong>* is required</strong></p>
                             </div>
-
                             <div class="col-lg-3 re-hide">
                                 <div class="form-group p-1">
                                     <button class="btn btn-danger" type="submit"
