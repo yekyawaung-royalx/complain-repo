@@ -275,7 +275,7 @@
         });
         var cty = document.getElementById("myPie").getContext('2d');
         var myPie = new Chart(cty, {
-            type: 'doughnut',
+            type: 'pie',
             data: {!! json_encode($chartData) !!},
             options: {
                 responsive: true,

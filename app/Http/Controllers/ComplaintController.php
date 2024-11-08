@@ -359,6 +359,9 @@ class ComplaintController extends Controller
             ->groupBy('main_group', 'case_type_name')
             ->get();
       //dd($complaints);
+      $serviceComplaintTotal = $complaints->where('main_group', 'Service Complaint Types')->sum('num');
+      $lossDamageTotal = $complaints->where('main_group', 'Loss & Damage Types')->sum('num');
+//dd($lossDamageTotal);
         $label = [];
         $datas = [];
         $colors = ['#ff6384','#36A2EB','#FFCE56','#8BC34A','#FF5722','#009688','#795548','#9C27B0','#2196F3','#FF9800','#CDDC39','#607D8B','#10539c','#00e8ff','#00ffd4','#ff0000'];
@@ -449,7 +452,7 @@ $chartData = [
             ]
 ];
        // dd($result);
-     return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal'));
+     return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal','serviceComplaintTotal','lossDamageTotal'));
     }
 
     public function searchdashboard(Request $request){
@@ -472,7 +475,8 @@ $chartData = [
             ->whereDate('created_at','<=',$end_date)
             ->groupBy('main_group', 'case_type_name')
             ->get();
-        
+            $serviceComplaintTotal = $complaints->where('main_group', 'Service Complaint Types')->sum('num');
+            $lossDamageTotal = $complaints->where('main_group', 'Loss & Damage Types')->sum('num');
         $label = [];
         $datas = [];
         $colors = ['#ff6384','#36A2EB','#FFCE56','#8BC34A','#FF5722','#009688','#795548','#9C27B0','#2196F3','#FF9800','#CDDC39','#607D8B','#10539c','#00e8ff','#00ffd4','#ff0000'];
@@ -562,7 +566,7 @@ $chartData = [
         ]
             ]
 ];
-            return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal'));
+            return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal','serviceComplaintTotal','lossDamageTotal'));
 }
        
 }

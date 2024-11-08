@@ -26,8 +26,8 @@
                         <div class="card-body">
                             <div class="media static-widget">
                                 <div class="media-body">
-                                    <h6 class="font-roboto">Complaints</h6>
-                                    <h4 class="mb-0 counter">1</h4>
+                                    <h6 class="font-roboto">Completed</h6>
+                                    <h4 class="mb-0 counter">{{ $completed }}/{{ $complaint_count }}</h4>
                                 </div>
                                 <svg class="fill-secondary" width="48" height="48" viewBox="0 0 48 48" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -60,8 +60,8 @@
                         <div class="card-body">
                             <div class="media static-widget">
                                 <div class="media-body">
-                                    <h6 class="font-roboto">Service Complaint</h6>
-                                    <h4 class="mb-0 counter">1</h4>
+                                    <h6 class="font-roboto">Follow Up</h6>
+                                    <h4 class="mb-0 counter">{{ $follow }}/{{ $complaint_count }}</h4>
                                 </div>
                                 <svg class="fill-success" width="45" height="39" viewBox="0 0 45 39" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -97,8 +97,8 @@
                         <div class="card-body">
                             <div class="media static-widget">
                                 <div class="media-body">
-                                    <h6 class="font-roboto">Loss & Damage</h6>
-                                    <h4 class="mb-0 counter">1</h4>
+                                    <h6 class="font-roboto">Assigned</h6>
+                                    <h4 class="mb-0 counter">{{ $assigned }}/{{ $complaint_count }}</h4>
                                 </div>
                                 <svg class="fill-primary" width="44" height="46" viewBox="0 0 44 46"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -125,8 +125,8 @@
                         <div class="card-body">
                             <div class="media static-widget">
                                 <div class="media-body">
-                                    <h6 class="font-roboto">Customer's Reviews</h6>
-                                    <h4 class="mb-0 counter">1</h4>
+                                    <h6 class="font-roboto">Progress</h6>
+                                    <h4 class="mb-0 counter">{{ $progress }}/{{ $complaint_count }}</h4>
                                 </div>
                                 <svg class="fill-danger" width="41" height="46" viewBox="0 0 41 46"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -151,7 +151,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 xl-100 box-col-12">
+                {{-- <div class="col-xl-6 xl-100 box-col-12">
                     <div class="widget-joins card widget-arrow">
                         <div class="card-header pb-0">
                             <div class="media">
@@ -239,7 +239,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <!-- Container-fluid Ends-->

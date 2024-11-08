@@ -92,13 +92,23 @@ Route::get('/complaints/all-json/{status}',[App\Http\Controllers\ComplaintContro
 // })->middleware(['auth', 'verified'])->name('dashboard');
  
 Route::get('/user-dashboard', function () {
-    $complaint_count = DB::table('complaints')->count();
-    $service_complaints=DB::table('complaints')->whereIn('case_type_name',['Service Complain','Delivery Man Complain','Staff Complain','Double Charges','Extra Charges','Delay Time','Wrong Transfer City','Parcel Wrong','CX Complain','Not Collect Pick Up Complain'])->count();
-    $loss_complaints=DB::table('complaints')->whereIn('case_type_name',['Damage','Losss','Reduce','Pest Control','Force Majeure','Illegal  Restricted Material'])->count();
+    $complaint_count = DB::table('complaints')
+    ->Where('handle_by',Auth::user()->name)
+    ->count();
+    $completed=DB::table('complaints')->whereIn('status_name',['completed'])
+    ->Where('handle_by',Auth::user()->name)
+    ->count();
+    $follow=DB::table('complaints')->whereIn('status_name', ['handled'])
+    ->Where('handle_by',Auth::user()->name)
+    ->count();
+    $assigned=DB::table('complaints')->whereIn('status_name',['assigned'])
+    ->Where('handle_by',Auth::user()->name)
+    ->count();
+    $progress=DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
+    ->Where('handle_by',Auth::user()->name)
+    ->count();
     $complaint_review = DB::table('complaints')->groupBy('stars_rated')->count();
-    $yestday_count=getYesterday();
-    $today_count=getToDay();
-    return view('dashboard2',compact('complaint_count','service_complaints','loss_complaints','complaint_review','yestday_count','today_count'));
+    return view('dashboard2',compact('complaint_count','completed','follow','assigned','progress','complaint_review'));
 })->middleware(['auth', 'verified'])->name('dashboard2');
 
 
