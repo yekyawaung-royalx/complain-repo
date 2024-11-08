@@ -151,97 +151,217 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-xl-6 xl-100 box-col-12">
-                    <div class="widget-joins card widget-arrow">
-                        <div class="card-header pb-0">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5>Sale details</h5>
-                                </div>
-                                <div class="icon-box onhover-dropdown"><svg xmlns="http://www.w3.org/2000/svg"
-                                        width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-more-horizontal">
-                                        <circle cx="12" cy="12" r="1"></circle>
-                                        <circle cx="19" cy="12" r="1"></circle>
-                                        <circle cx="5" cy="12" r="1"></circle>
-                                    </svg>
-                                    <div class="icon-box-show onhover-show-div">
-                                        <ul>
-                                            <li> <a data-bs-original-title="" title="">
-                                                    Done</a></li>
-                                            <li> <a data-bs-original-title="" title="">
-                                                    Pending</a></li>
-                                            <li> <a data-bs-original-title="" title="">
-                                                    Rejected</a></li>
-                                            <li> <a data-bs-original-title="" title="">In Progress</a>
-                                            </li>
-                                        </ul>
+                <div class="col-xl-6 xl-100 box-col-12">
+                    <div class="row gutters-sm">
+                        <div class="col-sm-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="d-flex align-items-center mb-3"><i
+                                            class="material-icons text-info mr-2">assignment</i>Complaint Status</h6>
+                                    <div class="progressSection">
+                                        <div class='holder'>
+                                            <div>
+                                                <div class="progress-label-left">
+                                                    <b>5</b> <i class="fa fa-star mr-1 text-warning"></i>
+                                                </div>
+                                                <div class="progress-label-right">
+                                                    <span id="total_five_star_review"> 0 </span> Reviews
+                                                </div>
+
+                                            </div>
+
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" id='five_star_progress'>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='holder'>
+                                            <div>
+                                                <div class="progress-label-left">
+                                                    <b>4</b> <i class="fa fa-star mr-1 text-warning"></i>
+                                                </div>
+                                                <div class="progress-label-right">
+                                                    <span id="total_four_star_review"> 0 </span> Reviews
+                                                </div>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" id='four_star_progress'>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='holder'>
+                                            <div>
+                                                <div class="progress-label-left">
+                                                    <b>3</b> <i class="fa fa-star mr-1 text-warning"></i>
+                                                </div>
+                                                <div class="progress-label-right">
+                                                    <span id="total_three_star_review"> 0 </span> Reviews
+                                                </div>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" id='three_star_progress'>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='holder'>
+                                            <div>
+                                                <div class="progress-label-left">
+                                                    <b>2</b> <i class="fa fa-star mr-1 text-warning"></i>
+                                                </div>
+                                                <div class="progress-label-right">
+                                                    <span id="total_two_star_review"> 0 </span> Reviews
+                                                </div>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" id='two_star_progress'>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='holder'>
+                                            <div>
+                                                <div class="progress-label-left">
+                                                    <b>1</b> <i class="fa fa-star mr-1 text-warning"></i>
+                                                </div>
+                                                <div class="progress-label-right">
+                                                    <span id="total_one_star_review"> 0 </span> Reviews
+                                                </div>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" id='one_star_progress'>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="row gy-4">
-                                <div class="col-sm-6">
-                                    <div class="widget-card">
-                                        <div class="media align-self-center">
-                                            <div class="widget-icon bg-light-danger"><i
-                                                    class="icofont icofont-arrow-down font-danger"></i></div>
-                                            <div class="media-body">
-                                                <h6>Today</h6>
-                                                <h5>$10<span class="counter"></span><span
-                                                        class="font-danger">-$10($2658)</span></h5><span
-                                                    class="font-roboto"> Than yesterday</span>
-                                            </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="d-flex align-items-center mb-3"><i
+                                            class="material-icons text-info mr-2">assignment</i>Complaint Status</h6>
+                                    <div class="text-center m-auto">
+                                        <h1><span id="avg_rating">0.0</span>/5.0</h1>
+                                        <div>
+                                            <i class="fa fa-star star-light main_star mr-1"></i>
+                                            <i class="fa fa-star star-light main_star mr-1"></i>
+                                            <i class="fa fa-star star-light main_star mr-1"></i>
+                                            <i class="fa fa-star star-light main_star mr-1"></i>
+                                            <i class="fa fa-star star-light main_star mr-1"></i>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="widget-card">
-                                        <div class="media align-self-center">
-                                            <div class="widget-icon bg-light-danger"><i
-                                                    class="icofont icofont-arrow-down font-danger"></i></div>
-                                            <div class="media-body">
-                                                <h6>Month</h6>
-                                                <h5>$<span class="counter">6954</span><span class="font-danger">-15%($369)
-                                                    </span></h5><span class="font-roboto"> Than last month</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="widget-card">
-                                        <div class="media align-self-center">
-                                            <div class="widget-icon bg-light-success"><i
-                                                    class="icofont icofont-arrow-up font-success"></i></div>
-                                            <div class="media-body">
-                                                <h6>Week</h6>
-                                                <h5>$63147<span class="font-success">+65%($69)</span></h5><span
-                                                    class="font-roboto"> Than yesterday</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="widget-card">
-                                        <div class="media align-self-center">
-                                            <div class="widget-icon bg-light-success"><i
-                                                    class="icofont icofont-arrow-up font-success"></i></div>
-                                            <div class="media-body">
-                                                <h6>Year</h6>
-                                                <h5>$963198<span class="font-success">+90%($3654)</span></h5>
-                                                <span class="font-roboto">Than yesterday </span>
-                                            </div>
-                                        </div>
+                                        <span id="total_review">0</span> Reviews
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </div>
         <!-- Container-fluid Ends-->
     </div>
 @endsection
+<input type="hidden" id="loginUser" value={{ Auth::user()->name }}>
+<script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        loadData();
+
+        function loadData() {
+            var username = $("#loginUser").val();
+            // alert(username)
+            $.ajax({
+                url: 'rating-list/' + username,
+                method: "GET",
+                data: {},
+
+                success: function(data) {
+                    // var parsedData = JSON.parse(data);
+                    //console.log(data)
+                    $('#avg_rating').text(data.avgUserRatings)
+                    $('#total_review').text(data.totalReviews)
+                    $('#total_five_star_review').text(data.totalRatings5)
+                    $('#total_four_star_review').text(data.totalRatings4)
+                    $('#total_three_star_review').text(data.totalRatings3)
+                    $('#total_two_star_review').text(data.totalRatings2)
+                    $('#total_one_star_review').text(data.totalRatings1)
+
+
+                    $('#five_star_progress').css('width', (data.totalRatings5 / data
+                        .totalReviews) * 100)
+                    $('#four_star_progress').css('width', (data.totalRatings4 / data
+                        .totalReviews) * 100)
+                    $('#three_star_progress').css('width', (data.totalRatings3 / data
+                        .totalReviews) * 100)
+                    $('#two_star_progress').css('width', (data.totalRatings2 / data
+                        .totalReviews) * 100)
+                    $('#one_star_progress').css('width', (data.totalRatings1 / data
+                        .totalReviews) * 100)
+
+
+                    var countStar = 0;
+                    $('.main_star').each(function() {
+
+                        countStar++
+                        console.log(Math.ceil(data.avgUserRatings))
+                        if (Math.ceil(data.avgUserRatings) >= countStar) {
+                            $(this).addClass('text-warning')
+                            $(this).removeClass('star-light')
+                        }
+                    })
+
+
+                    if (data.ratingsList.length > 0) {
+                        var html = '';
+                        for (var count = 0; count < data.ratingsList.length; count++) {
+                            console.log(count)
+
+                            html += `<div class='row mt-2'>`;
+                            html += `<div class='col-1'>`;
+                            html +=
+                                `<h1><div class='bg-danger rounded-circle text-center text-white text-uppercase pt-2 pb-2'>${data.ratingsList[count].name.charAt(0)}</div></h1>`;
+                            html += `</div>`;
+                            html += `<div class='col-11'>`;
+                            html += `<div class='card'>`;
+                            html += `<div class='card-header'>`;
+                            html += `${data.ratingsList[count].name}`;
+
+                            html += `</div>`;
+                            html += `<div class='card-body'>`;
+                            for (var star = 0; star < 5; star++) {
+                                if (data.ratingsList[count].rating >= star) {
+                                    className = 'text-warning'
+                                } else {
+                                    className = 'star-light'
+                                }
+
+                                html += `<i class="fa fa-star mr-1 ${className}" ></i>`;
+                            }
+                            html += `<br>${data.ratingsList[count].message}`;
+
+                            html += `</div>`;
+                            html += `<div class='card-footer'>`;
+                            html += `${data.ratingsList[count].datetime}`;
+
+                            html += `</div>`;
+                            html += `</div>`;
+                            html += `</div>`;
+                            html += `</div>`;
+
+
+                        }
+
+                    }
+
+                    $('#display_review').html(html)
+
+                } // success
+            })
+        }
+    })
+</script>
