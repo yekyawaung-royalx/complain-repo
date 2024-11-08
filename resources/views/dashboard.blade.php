@@ -43,96 +43,192 @@
             </form>
         </div>
         <div class="row">
-            @if ($complaints->isNotEmpty())
-                @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
-                    <div class="col-sm-4 col-xl-4 col-lg-4">
-                        <div class="card o-hidden">
-                            <div class="card" style="width:100%;">
-                                <div class="card-header">
-                                    <h4>{{ $mainGroup }}</h4>
-                                </div>
-                                @foreach ($groupComplaints as $index => $complaint)
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">{{ $complaint->case_type_name }}<strong
-                                                class="float-right">{{ $complaint->num }}</strong></li>
-                                    </ul>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <div class="col-sm-4 col-xl-4 col-lg-4">
-                    <div class="card o-hidden">
-                        <div class="card" style="width:100%;">
-                            <div class="card-header">
-                                <h4>Loss & Damage Types</h4>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Damage<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Loss<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Reduce<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Pest Control<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Force Majeure<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Illegal Restricted Material<strong
-                                        class="float-right">0</strong></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-xl-4 col-lg-4">
-                    <div class="card o-hidden">
-                        <div class="card" style="width:100%;">
-                            <div class="card-header">
-                                <h4>Service Complaint Types</h4>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Service Complain<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Delivery Man Complain<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Staff Complain<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Double Charges<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Extra Charges<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Delay Time<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Wrong Transfer City<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Parcel Wrong<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">CX Complain<strong class="float-right">0</strong></li>
-                                <li class="list-group-item">Not Collect Pick Up Complain<strong
-                                        class="float-right">0</strong></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            @endif
-            <div class="col-sm-4 col-xl-4 col-lg-4">
+            <div class="col-lg-4">
                 <div class="card o-hidden">
-                    <div class="card" style="width:100%;">
-                        <div class="card-header">
-                            <h4>Featured</h4>
+                    <div class="card-body">
+                        <div class="media static-widget">
+                            @if ($complaints->isNotEmpty())
+                                @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
+                                    @if ($mainGroup == 'Loss & Damage Types')
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">{{ $mainGroup }}</th>
+                                                    <th scope="col">Qty</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($groupComplaints as $index => $complaint)
+                                                    <tr>
+                                                        <td>{{ $complaint->case_type_name }}</td>
+                                                        <td>{{ $complaint->num }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    @else
+                                        @if ($mainGroup !== 'Service Complaint Types')
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Other</th>
+                                                        <th scope="col">Qty</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>No data available</td>
+                                                        <td>0</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        @endif
+                                    @endif
+                                @endforeach
+                            @else
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Loss & Damage Types</th>
+                                            <th scope="col">Qty</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>No data available</td>
+                                            <td>0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            @endif
                         </div>
-                        <div class="" style="width:300px;margin:auto">
-                            <canvas id="myPie"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card o-hidden">
+                    <div class="card-body">
+                        <div class="media static-widget">
+                            @if ($complaints->isNotEmpty())
+                                @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
+                                    @if ($mainGroup == 'Service Complaint Types')
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">{{ $mainGroup }}</th>
+                                                    <th scope="col">Qty</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($groupComplaints as $index => $complaint)
+                                                    <tr>
+                                                        <td>{{ $complaint->case_type_name }}</td>
+                                                        <td>{{ $complaint->num }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    @else
+                                        @if ($mainGroup !== 'Loss & Damage Types')
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Other</th>
+                                                        <th scope="col">Qty</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>No data available</td>
+                                                        <td>0</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        @endif
+                                    @endif
+                                @endforeach
+                            @else
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Service Complaint Types</th>
+                                            <th scope="col">Qty</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>No data available</td>
+                                            <td>0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card o-hidden">
+                    <div class="card-body">
+                        <div class="media static-widget">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Branch</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>YGN Branch</td>
+                                        <td>{{ $ygnBranchTotal }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ROP Branch</td>
+                                        <td>{{ $RopTotal }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Other Branch</td>
+                                        <td>{{ $otherBranchTotal }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container">
-            <div class="col-xl-12 col-md-12 dash-35 dash-xl-60">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h4 class="card-title mb-0">Complaint
-                            <span class="badge badge-secondary inline-block pull-right" cursorshover="true">
-                                <span cursorshover="true"></span>
-                            </span>
-                        </h4>
-                        <div class="card-options"><a class="card-options-collapse" href="#"
-                                data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
-                                class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
-                                    class="fe fe-x"></i></a></div>
+            <div class="row">
+                <div class="col-xl-8 col-md-8 dash-35 dash-xl-60">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title mb-0">Complaint
+                                <span class="badge badge-secondary inline-block pull-right" cursorshover="true">
+                                    <span cursorshover="true"></span>
+                                </span>
+                            </h4>
+                            <div class="card-options"><a class="card-options-collapse" href="#"
+                                    data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
+                                    class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
+                                        class="fe fe-x"></i></a></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3" style="width:100%;margin:auto">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="mb-3" style="width:100%;margin:auto">
-                            <canvas id="myChart"></canvas>
+                </div>
+                <div class="col-sm-4 col-xl-4 col-lg-4">
+                    <div class="card o-hidden">
+                        <div class="card" style="width:100%;">
+                            <div class="card-header">
+                                <h4>Featured</h4>
+                            </div>
+                            <div class="" style="width:300px;margin:auto">
+                                <canvas id="myPie"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>

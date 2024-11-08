@@ -449,7 +449,7 @@ $chartData = [
             ]
 ];
        // dd($result);
-     return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date'));
+     return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal'));
     }
 
     public function searchdashboard(Request $request){
@@ -562,7 +562,7 @@ $chartData = [
         ]
             ]
 ];
-            return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date'));
+            return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal'));
 }
        
 }
