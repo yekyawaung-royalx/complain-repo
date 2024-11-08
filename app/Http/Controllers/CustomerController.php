@@ -41,11 +41,11 @@ class CustomerController extends Controller
 
     public function CustomerSubmit(Request $request)
     {
-        $input = $request->all();
-        $recaptcha_secret = '6LcilHYqAAAAAGGx4ZUFgAdjnwO8nTau5QC3bfmX'; 
-        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$recaptcha_secret."&response=".$input['g-recaptcha-response']);
-        $response = json_decode($response,true);
-        if ($response["success"] === true){
+        // $input = $request->all();
+        // $recaptcha_secret = '6LcilHYqAAAAAGGx4ZUFgAdjnwO8nTau5QC3bfmX'; 
+        // $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$recaptcha_secret."&response=".$input['g-recaptcha-response']);
+        // $response = json_decode($response,true);
+        // if ($response["success"] === true){
             $status = DB::table('statuses')->where('id', 1)->first();
             //dd($complaint->name);
             $number = uuid();
@@ -82,7 +82,7 @@ class CustomerController extends Controller
                     'customer_message' => $detail_complainant,
                     'customer_recommendation' => $complainant_reco,
                     'image' => $file_name,
-                    'source_platform' => 'web',
+                    'source_platform' => 'Walk In',
                     'status_name' => $status->name,
                     'created_at'    => date('Y-m-d H:i:s'),
                     'updated_at'    => date('Y-m-d H:i:s'),
@@ -90,19 +90,19 @@ class CustomerController extends Controller
                 //return response()->json(['code' => 1, 'msg' => 'Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်', 'uuid' => $number]);
                 return back()->with('success','Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်၊၊ Complaint ID'.$number);
             }
-        }else{
-            return back()->with('danger','Invalid reCAPTCHA!');
-        }
+        // }else{
+        //     return back()->with('danger','Invalid reCAPTCHA!');
+        // }
     }
 
 
     public function employee(Request $request)
     {
-        $input = $request->all();
-        $recaptcha_secret = '6LcilHYqAAAAAGGx4ZUFgAdjnwO8nTau5QC3bfmX'; 
-        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$recaptcha_secret."&response=".$input['g-recaptcha-response']);
-        $response = json_decode($response,true);
-        if ($response["success"] === true){
+        // $input = $request->all();
+        // $recaptcha_secret = '6LcilHYqAAAAAGGx4ZUFgAdjnwO8nTau5QC3bfmX'; 
+        // $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$recaptcha_secret."&response=".$input['g-recaptcha-response']);
+        // $response = json_decode($response,true);
+        // if ($response["success"] === true){
         $status = DB::table('statuses')->where('id', 1)->first();
         $number = uuid();
         $branches = $request->branches;
@@ -150,9 +150,9 @@ class CustomerController extends Controller
             ]);
             return back()->with('success','Complaint Form ကိုဖြည့်သွင်းလိုက်ပါပြီးComplaint ID ဖြင့်tracking လိုက်လို့ရပါသည်၊၊ Complaint ID'.$number);
         }
-    }else{
-        return back()->with('danger','Invalid reCAPTCHA!');
-    }
+    // }else{
+    //     return back()->with('danger','Invalid reCAPTCHA!');
+    // }
     }
 
 

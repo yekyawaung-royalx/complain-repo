@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Exports\ComplaintExport;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 
 class ComplaintController extends Controller
@@ -568,6 +570,17 @@ $chartData = [
 ];
             return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal','serviceComplaintTotal','lossDamageTotal'));
 }
+
+//export controller//
+public function exportComplaints(Request $request)
+    {
+        // Validate startDate and endDate parameters
+
+        $startDate = $request->input('date_from');
+        $endDate = $request->input('date_to');
+       //dd($request->all());
+        return Excel::download(new ComplaintExport($startDate, $endDate), 'complaints.xlsx');
+    }
        
 }
 

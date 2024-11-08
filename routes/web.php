@@ -154,6 +154,10 @@ Route::get('/dashboard', [App\Http\Controllers\ComplaintController::class,'dashb
 Route::get('/complaints/{id}/view',[App\Http\Controllers\ComplaintController::class,'view']);
 Route::post('/complaints/{id}/update',[App\Http\Controllers\ComplaintController::class,'update']);
 
+//export route//
+Route::get('/export-complaints', [ComplaintController::class, 'exportComplaints']);
+
+
 });
 // Route::get('/cx-team',[App\Http\Controllers\ComplaintController::class,'cx_team']);
 // Route::post('/cx-team/store',[App\Http\Controllers\ComplaintController::class,'cx_store']);

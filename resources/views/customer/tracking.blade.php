@@ -355,6 +355,15 @@
                     <input type="hidden" name="" id="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="" id="source" class="source"
                         value="{{ $complaint->source_platform }}">
+                    <input type="hidden" name="" id="branch" class="branch"
+                        value="{{ $complaint->branch_name }}">
+                    <input type="hidden" name="" id="operation-person" class="operation-person"
+                        value="{{ $complaint->employee_name }}">
+                    <input type="hidden" name="" id="amount" class="amount"
+                        value="{{ $complaint->refund_amount }}">
+                    <input type="hidden" name="" id="internal-message" class="internal-message"
+                        value="{{ $complaint->company_remark }}">
+
                     <p class="mb-0">Copyright 2022 © Zeta theme by pixelstrap </p>
                 </div>
             </div>
@@ -420,6 +429,11 @@
                 var feedback_message = $(".feedback-message").val();
                 var case_type_name = $(".case_type_name").val();
                 var source = $(".source").val();
+                var operation_person = $(".operation-person").val();
+                var branch = $(".branch").val();
+                var amount = $(".amount").val();
+                var message = $(".internal-message").val();
+                formData.append('amount', amount);
                 //let _token = $('meta[name="csrf-token"]').attr('content');
                 formData.append('case_status', name);
                 formData.append('handled_by', handled_by);
@@ -429,6 +443,9 @@
                 formData.append('_token', _token);
                 formData.append('case_type_name', case_type_name);
                 formData.append('source', source);
+                formData.append('operation_person', operation_person);
+                formData.append('branch', branch);
+                formData.append('message', message);
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
