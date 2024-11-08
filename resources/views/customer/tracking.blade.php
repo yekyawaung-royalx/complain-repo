@@ -353,6 +353,8 @@
                     <input type="hidden" name="" id="url" value="{{ url('') }}">
                     <input type="hidden" name="" id="complaint_id" value="{{ $complaint->id }}">
                     <input type="hidden" name="" id="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="" id="source" class="source"
+                        value="{{ $complaint->source_platform }}">
                     <p class="mb-0">Copyright 2022 © Zeta theme by pixelstrap </p>
                 </div>
             </div>
@@ -417,6 +419,7 @@
                 var _token = $("#_token").val();
                 var feedback_message = $(".feedback-message").val();
                 var case_type_name = $(".case_type_name").val();
+                var source = $(".source").val();
                 //let _token = $('meta[name="csrf-token"]').attr('content');
                 formData.append('case_status', name);
                 formData.append('handled_by', handled_by);
@@ -425,6 +428,7 @@
                 formData.append('rating', rating);
                 formData.append('_token', _token);
                 formData.append('case_type_name', case_type_name);
+                formData.append('source', source);
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
