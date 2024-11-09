@@ -231,10 +231,10 @@
                                         <span cursorshover="true"></span>
                                     </span>
                                 </h4>
-                                <div class="card-options"><a class="card-options-collapse" href="#"
+                                {{-- <div class="card-options"><a class="card-options-collapse" href="#"
                                         data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
                                         class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
-                                            class="fe fe-x"></i></a></div>
+                                            class="fe fe-x"></i></a></div> --}}
                             </div>
                             <div class="card-body">
                                 <div class="mb-3" style="width:100%;margin:auto">
