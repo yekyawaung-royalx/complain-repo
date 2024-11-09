@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-12 col-sm-6">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"> <a class="home-item" href="index.html">Dashboard</a>
+                            <li class="breadcrumb-item"> <a class="home-item" href="{{ url('/dashboard') }}">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item active"> Complaints</li>
                         </ol>

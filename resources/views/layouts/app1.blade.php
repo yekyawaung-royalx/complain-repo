@@ -178,8 +178,7 @@
                                                             <div class="bookmark-content">
                                                                 <div class="bookmark-icon"><i
                                                                         data-feather="file-text"></i></div>
-                                                                <h5 class="mt-2"> <a
-                                                                        href="base-input.html">Forms</a></h5>
+                                                                <h5 class="mt-2"> <a>Forms</a></h5>
                                                             </div>
                                                         </div>
                                                         <div class="col-4 text-center">
@@ -194,8 +193,7 @@
                                                             <div class="bookmark-content">
                                                                 <div class="bookmark-icon"><i
                                                                         data-feather="server"></i></div>
-                                                                <h5 class="mt-2"> <a
-                                                                        href="datatable-basic-init.html">Tables</a>
+                                                                <h5 class="mt-2"> <a>Tables</a>
                                                                 </h5>
                                                             </div>
                                                         </div>
@@ -249,7 +247,7 @@
                                             <div class="notification-img bg-light-primary"><img src=""
                                                     alt=""></div>
                                             <div class="media-body">
-                                                <h5> <a class="f-14 m-0" href="user-profile.html">Allie Grater</a>
+                                                <h5> <a class="f-14 m-0">Allie Grater</a>
                                                 </h5>
                                                 <p>Lorem ipsum dolor sit amet...</p><span>10:20</span>
                                             </div>
@@ -262,7 +260,7 @@
                                             <div class="notification-img bg-light-secondary"><img src=""
                                                     alt=""></div>
                                             <div class="media-body">
-                                                <h5> <a class="f-14 m-0" href="user-profile.html">Olive Yew</a></h5>
+                                                <h5> <a class="f-14 m-0">Olive Yew</a></h5>
                                                 <p>Lorem ipsum dolor sit amet...</p><span>09:20</span>
                                             </div>
                                             <div class="notification-right"><a href="#"><i
@@ -274,7 +272,7 @@
                                             <div class="notification-img bg-light-info"><img src=""
                                                     alt=""></div>
                                             <div class="media-body">
-                                                <h5> <a class="f-14 m-0" href="user-profile.html">Peg Legge</a></h5>
+                                                <h5> <a class="f-14 m-0">Peg Legge</a></h5>
                                                 <p>Lorem ipsum dolor sit amet...</p><span>07:20</span>
                                             </div>
                                             <div class="notification-right"><a href="#"><i
@@ -286,7 +284,7 @@
                                             <div class="notification-img bg-light-success"><img src=""
                                                     alt=""></div>
                                             <div class="media-body">
-                                                <h5> <a class="f-14 m-0" href="user-profile.html">Teri Dactyl</a></h5>
+                                                <h5> <a class="f-14 m-0">Teri Dactyl</a></h5>
                                                 <p>Lorem ipsum dolor sit amet...</p><span>05:20</span>
                                             </div>
                                             <div class="notification-right"><a href="#"><i
@@ -359,10 +357,9 @@
                                         </form> <span>Inbox</span>
                                     </a>
                                 </li>
-                                <li><a href="kanban.html"><i data-feather="file-text"></i><span>Taskboard</span></a>
+                                <li><a><i data-feather="file-text"></i><span>Taskboard</span></a>
                                 </li>
-                                <li><a href="edit-profile.html"><i
-                                            data-feather="settings"></i><span>Settings</span></a></li>
+                                <li><a><i data-feather="settings"></i><span>Settings</span></a></li>
                                 <li><a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();"><i
