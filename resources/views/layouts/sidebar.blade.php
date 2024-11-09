@@ -106,7 +106,7 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-list">
+                    {{-- <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="#">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -127,7 +127,7 @@
                                     </g>
                                 </g>
                             </svg><span>Case Types</span></a>
-                    </li>
+                    </li> --}}
                     @if (Auth::user()->isDev())
                         <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
