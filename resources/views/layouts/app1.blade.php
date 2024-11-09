@@ -147,7 +147,9 @@
                         <li class="d-md-none resp-serch-input">
                             <div class="resp-serch-box"><i data-feather="search"></i></div>
                             <div class="form-group search-form">
-                                <input type="text" placeholder="Search here...">
+                                <form action="">
+                                    <input type="text" placeholder="Search here..." name="searchItem">
+                                </form>
                             </div>
                         </li>
                         <li class="onhover-dropdown">
