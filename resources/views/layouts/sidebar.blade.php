@@ -176,7 +176,7 @@
                             <li><a href="#">Employees</a></li>
                         </ul>
                     </li> --}}
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav"
+                    {{-- <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav"
                             href="support-ticket.html">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -192,7 +192,7 @@
                                             stroke-linejoin="round"></path>
                                     </g>
                                 </g>
-                            </svg><span>Support Ticket</span></a></li>
+                            </svg><span>Support Ticket</span></a></li> --}}
                 </ul>
                 <div class="sidebar-img-section">
                     <div class="sidebar-img-content"><img class="img-fluid"
