@@ -72,6 +72,22 @@
                             </form>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title mb-0">Damage Photo
+                                {{-- <button class="btn btn-success pull-right" type="button" cursorshover="true">
+                                    <span cursorshover="true"> {{ $complaint->status_name }}</span>
+                                </button> --}}
+                            </h4>
+                            <div class="card-options"><a class="card-options-collapse" href="#"
+                                    data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
+                                    class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
+                                        class="fe fe-x"></i></a></div>
+                        </div>
+                        <div class="card-body">
+                            <img src="{{ asset('files') }}/{{ $complaint->image }}" alt="">
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xl-4 col-md-6 dash-31 dash-xl-50">
                     <div class="card recent-activity">
