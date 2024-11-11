@@ -3,6 +3,12 @@
     .checked {
         color: #ffd900;
     }
+
+    .responsive {
+        padding: 0 6px;
+        float: left;
+        width: 33%;
+    }
 </style>
 @section('content')
     <div class="page-body">
@@ -84,8 +90,17 @@
                                     class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
                                         class="fe fe-x"></i></a></div>
                         </div>
+                        @php
+                            $images = explode('|', $complaint->image);
+                        @endphp
                         <div class="card-body">
-                            <img src="{{ asset('files') }}/{{ $complaint->image }}" alt="" style="width:100%">
+                            @foreach ($images as $image)
+                                <div class="responsive">
+                                    <img src="{{ asset('files') }}/{{ $image }}" alt="Forest" width="150"
+                                        height="100">
+                                </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>

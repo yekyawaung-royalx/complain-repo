@@ -10,8 +10,9 @@
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/customer/style.css') }}">
     <link href="{{ asset('assets/css/select2.css') }}" rel="stylesheet" />
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"> --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FJ1XQ719X"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -23,6 +24,13 @@
         gtag('config', 'G-3FJ1XQ719X');
     </script>
     <title>Customer</title>
+    <style type="text/css">
+        .dz-preview .dz-image img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -118,10 +126,10 @@
                                 <textarea name="complainant_reco" id="complainant_reco" rows="5" class="form-control"></textarea>
                             </div>
                             <div class="col-lg-12">
-                                <div>
+                                <div class="">
                                     <label for="formFileLg" class="form-label">Image Upload File</label>
                                     <input class="form-control form-control-lg" id="image" type="file"
-                                        name="image">
+                                        name="image[]" multiple>
                                 </div>
 
                             </div>
@@ -223,7 +231,7 @@
                                 <div>
                                     <label for="formFileLg" class="form-label">Image Upload File</label>
                                     <input class="form-control form-control-lg" id="image" type="file"
-                                        name="image">
+                                        name="image[]" multiple>
                                 </div>
 
                             </div>
@@ -320,7 +328,6 @@
     <script src="{{ asset('assets/js/customer/main.js') }}"></script>
     <script src="{{ asset('assets/js/customer/select2.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
 </body>
 
 </html>
