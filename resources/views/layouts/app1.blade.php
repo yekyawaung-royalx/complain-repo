@@ -12,7 +12,7 @@
     <meta name="author" content="pixelstrap">
     <meta property="og:image" content="{{ asset('assets/images/icons/favicon.png') }}" />
     <link rel="shortcut icon" href="../assets/images/logo/favicon-icon.png" type="image/x-icon">
-    <title>Zeta admin dashboard </title>
+    <title>Royal Express</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
