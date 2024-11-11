@@ -10,7 +10,7 @@
     <meta name="keywords"
         content="admin template, Zeta admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="../assets/images/logo/favicon-icon.png" type="image/x-icon">
+    <meta property="og:image" content="{{ asset('assets/images/icons/favicon.png') }}" />
     <link rel="shortcut icon" href="../assets/images/logo/favicon-icon.png" type="image/x-icon">
     <title>Zeta admin dashboard </title>
     <!-- Google font-->
