@@ -33,11 +33,11 @@ function uuid()
 
 function groupStatus($status)
 {
-    if(Auth::user()->isAdmin()){
-        $complaints = DB::table('complaints')
-        ->orderBy('id', 'desc')
-        ->paginate(50);
-    }else{
+    // if(Auth::user()->isAdmin()){
+    //     $complaints = DB::table('complaints')
+    //     ->orderBy('id', 'desc')
+    //     ->paginate(50);
+    // }else{
         
     
     if ($status == 'pending') {
@@ -72,7 +72,7 @@ function groupStatus($status)
         ->paginate(50);
         // $status_array['status'] = $complaints;
     }
-}
+// }
     //return response()->json($status_array);
     return $complaints;
 }
