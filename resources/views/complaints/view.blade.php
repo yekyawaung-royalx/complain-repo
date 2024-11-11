@@ -85,7 +85,7 @@
                                         class="fe fe-x"></i></a></div>
                         </div>
                         <div class="card-body">
-                            <img src="{{ asset('files') }}/{{ $complaint->image }}" alt="">
+                            <img src="{{ asset('files') }}/{{ $complaint->image }}" alt="" style="width:100%">
                         </div>
                     </div>
                 </div>
