@@ -33,11 +33,40 @@ function uuid()
 
 function groupStatus($status)
 {
-    // if(Auth::user()->isAdmin()){
-    //     $complaints = DB::table('complaints')
-    //     ->orderBy('id', 'desc')
-    //     ->paginate(50);
-    // }else{
+    if(Auth::user()->isAdmin()){
+        if ($status == 'pending') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
+            //->Where('handle_by',Auth::user()->name)
+            ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'follow-up') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['handled'])
+            //->Where('handle_by',Auth::user()->name)
+            ->paginate(50);
+            // $status_array['status'] = $complaints;
+            # code...
+        }
+        if ($status == 'assigned') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['assigned'])
+           // ->Where('handle_by',Auth::user()->name)
+            ->paginate(50);
+            // $status_array['status'] = $complaints;
+            # code...
+        }
+        if ($status == 'progress') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
+           //->Where('handle_by',Auth::user()->name)
+            ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'completed') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['completed','review'])
+            //->Where('handle_by',Auth::user()->name)
+            ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+    }else{
         
     
     if ($status == 'pending') {
@@ -72,7 +101,7 @@ function groupStatus($status)
         ->paginate(50);
         // $status_array['status'] = $complaints;
     }
-// }
+}
     //return response()->json($status_array);
     return $complaints;
 }
