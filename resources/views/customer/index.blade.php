@@ -129,7 +129,7 @@
                                 <div class="">
                                     <label for="formFileLg" class="form-label">Image Upload File</label>
                                     <input class="form-control form-control-lg" id="image" type="file"
-                                        name="image[]" multiple>
+                                        name="image[]" max-size="2000" multiple accept="image/png, image/jpeg" />
                                 </div>
 
                             </div>
@@ -231,7 +231,7 @@
                                 <div>
                                     <label for="formFileLg" class="form-label">Image Upload File</label>
                                     <input class="form-control form-control-lg" id="image" type="file"
-                                        name="image[]" multiple>
+                                        name="image[]" max-size="2000" multiple accept="image/png, image/jpeg" />
                                 </div>
 
                             </div>
@@ -280,15 +280,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header" id="">
-                    <h5 class="modal-title" id="uid"></h5>
-                    <h5 class="modal-title" id="diu"></h5>
+                    <h5 class="modal-title" id="uid">Alert Image Size</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="msg"></p>
-                    <p id="mgs"></p>
+                    <p><strong>File is too big!</strong></p>
                 </div>
             </div>
         </div>
@@ -328,6 +326,17 @@
     <script src="{{ asset('assets/js/customer/main.js') }}"></script>
     <script src="{{ asset('assets/js/customer/select2.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        const uploadField = document.getElementById("image");
+
+        uploadField.onchange = function() {
+            if (this.files[0].size > 2097152) {
+                //alert("File is too big!");
+                $('#exampleModal1').modal('show');
+                this.value = "";
+            }
+        };
+    </script>
 </body>
 
 </html>
