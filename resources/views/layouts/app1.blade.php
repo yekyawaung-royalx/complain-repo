@@ -11,7 +11,7 @@
         content="admin template, Zeta admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
     <meta property="og:image" content="{{ asset('assets/images/icons/favicon.png') }}" />
-    <link rel="shortcut icon" href="../assets/images/logo/favicon-icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
     <title>Royal Express</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
