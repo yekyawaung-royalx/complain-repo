@@ -67,6 +67,10 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card o-hidden">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title mb-0">
+                                Loss & Damage Types</h4>
+                        </div>
                         <div class="card-body">
                             <div class="media static-widget">
                                 @if ($complaints->isNotEmpty())
@@ -75,7 +79,7 @@
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">{{ $mainGroup }}</th>
+                                                        <th scope="col">Name</th>
                                                         <th scope="col">Qty</th>
                                                     </tr>
                                                 </thead>
@@ -129,6 +133,10 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="card o-hidden">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title mb-0">
+                                Service Complaint Types</h4>
+                        </div>
                         <div class="card-body">
                             <div class="media static-widget">
                                 @if ($complaints->isNotEmpty())
@@ -137,7 +145,7 @@
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">{{ $mainGroup }}</th>
+                                                        <th scope="col">Name</th>
                                                         <th scope="col">Qty</th>
                                                     </tr>
                                                 </thead>
@@ -191,6 +199,10 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="card o-hidden">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title mb-0">
+                                Refund Amount Status</h4>
+                        </div>
                         <div class="card-body">
                             <div class="media static-widget">
                                 <table class="table table-bordered">
@@ -225,7 +237,7 @@
                     <div class="col-xl-8 col-md-8 dash-35 dash-xl-60">
                         <div class="card">
                             <div class="card-header pb-0">
-                                <h4 class="card-title mb-0">Complaint
+                                <h4 class="card-title mb-0">Complaint (Chart)
                                     {{-- <span class="badge badge-secondary inline-block pull-right" cursorshover="true">
                                         <span cursorshover="true"></span>
                                     </span> --}}
@@ -246,7 +258,7 @@
                         <div class="card o-hidden">
                             <div class="card" style="width:100%;">
                                 <div class="card-header">
-                                    <h4>Featured</h4>
+                                    <h4>Refund Amount (Pie)</h4>
                                 </div>
                                 <div class="" style="width:300px;margin:auto">
                                     <canvas id="myPie"></canvas>
