@@ -238,11 +238,11 @@
                                                     value="{{ $complaint->refund_amount }}" disabled>
                                             </div>
                                         </div>
-                                        <div class="mb-3">
+                                        {{-- <div class="mb-3">
                                             <label class="form-label">ဓာတ်ပုံတင်ရန်</label>
                                             <input class="form-control" type="file" name="image"
                                                 id="image">
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-3">
                                             <label class="form-label text-muted">မှတ်ချက်</label>
                                             <textarea class="form-control internal-message" rows="4" placeholder="မှတ်ချက်ရေးရန်"></textarea>
