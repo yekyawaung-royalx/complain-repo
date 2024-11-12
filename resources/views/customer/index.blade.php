@@ -130,6 +130,7 @@
                                     <label for="formFileLg" class="form-label">Image Upload File</label>
                                     <input class="form-control form-control-lg" id="image" type="file"
                                         name="image[]" max-size="2000" multiple accept="image/png, image/jpeg" />
+                                    <p id="selectedImage"></p>
                                 </div>
 
                             </div>
@@ -230,8 +231,9 @@
                             <div class="col-lg-12 re-hide">
                                 <div>
                                     <label for="formFileLg" class="form-label">Image Upload File</label>
-                                    <input class="form-control form-control-lg" id="image" type="file"
+                                    <input class="form-control form-control-lg" id="images" type="file"
                                         name="image[]" max-size="2000" multiple accept="image/png, image/jpeg" />
+                                    <p id="selectedImage"></p>
                                 </div>
 
                             </div>
@@ -334,6 +336,15 @@
                 //alert("File is too big!");
                 $('#exampleModal1').modal('show');
                 this.value = "";
+            }
+            if ($("#image")[0].files.length > 3) {
+                $("#selectedImage").append('<strong>You can select only 3 images</strong>')
+                $("#customer-submit").prop('disabled', true)
+                $("#employee-submit").prop('disabled', true)
+            } else {
+                $("#selectedImage").empty();
+                $("#customer-submit").prop('disabled', false)
+                $("#employee-submit").prop('disabled', false)
             }
         };
     </script>

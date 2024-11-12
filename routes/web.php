@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::get('/complaints/{id}', function () {
     return view('complaints.view');
 })->middleware('auth');
+
 Route::get('/test', function () {
     $today = date('Y-m');
     $complaints = DB::table('complaints')
@@ -94,20 +95,28 @@ Route::get('/complaints/all-json/{status}',[App\Http\Controllers\ComplaintContro
 Route::get('/user-dashboard', function () {
     $complaint_count = DB::table('complaints')
     ->Where('handle_by',Auth::user()->name)
+    ->where('deleted_at','0')
     ->count();
     $completed=DB::table('complaints')->whereIn('status_name',['completed'])
     ->Where('handle_by',Auth::user()->name)
+    ->where('deleted_at','0')
     ->count();
     $follow=DB::table('complaints')->whereIn('status_name', ['handled'])
     ->Where('handle_by',Auth::user()->name)
+    ->where('deleted_at','0')
     ->count();
     $assigned=DB::table('complaints')->whereIn('status_name',['assigned'])
     ->Where('handle_by',Auth::user()->name)
+    ->where('deleted_at','0')
     ->count();
     $progress=DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
     ->Where('handle_by',Auth::user()->name)
+    ->where('deleted_at','0')
     ->count();
-    $complaint_review = DB::table('complaints')->groupBy('stars_rated')->count();
+    $complaint_review = DB::table('complaints')
+    ->where('deleted_at','0')
+    ->groupBy('stars_rated')
+    ->count();
     return view('dashboard2',compact('complaint_count','completed','follow','assigned','progress','complaint_review'));
 })->middleware(['auth', 'verified'])->name('dashboard2');
 
@@ -153,6 +162,7 @@ Route::get('/dashboard', [App\Http\Controllers\ComplaintController::class,'dashb
  Route::get('/complaints/{id}/edit',[App\Http\Controllers\ComplaintController::class,'edit']);
 Route::get('/complaints/{id}/view',[App\Http\Controllers\ComplaintController::class,'view']);
 Route::post('/complaints/{id}/update',[App\Http\Controllers\ComplaintController::class,'update']);
+Route::delete('/delete/{id}',[App\Http\Controllers\ComplaintController::class,'destroy']);
 
 //export route//
 Route::get('/export-complaints', [ComplaintController::class, 'exportComplaints']);

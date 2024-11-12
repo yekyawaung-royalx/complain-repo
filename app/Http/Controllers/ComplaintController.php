@@ -198,13 +198,18 @@ class ComplaintController extends Controller
 
     }
     public function json_complaints($status){
-        if(Auth::user()->isAdmin() || Auth::user()->isDev()){
+        if(Auth::user()->isDev()){
             $complaints = DB::table('complaints')
             ->orderBy('id', 'desc')
             ->paginate(50);
-        }else{
+        }if(Auth::user()->isAdmin()){
+           $complaints=DB::table('complaints')->where('deleted_at','0')
+           ->orderBy('id','desc')
+           ->paginate(50);
+        }if(Auth::user()->isUser()){
             $complaints = DB::table('complaints')
             ->where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
             ->paginate(50);
         }
        
@@ -580,6 +585,26 @@ public function exportComplaints(Request $request)
         $endDate = $request->input('date_to');
        //dd($request->all());
         return Excel::download(new ComplaintExport($startDate, $endDate), 'complaints.xlsx');
+    }
+
+
+    public function destroy($id){
+        $complaints = DB::table('complaints')->where('id', $id)->first();
+
+        if ($complaints) {
+            if ($complaints->deleted_at == '1') {
+                DB::table('complaints')
+                    ->where('id', $id)
+                    ->update(['deleted_at' => '0']);
+            } else {
+                DB::table('complaints')
+                    ->where('id', $id)
+                    ->update(['deleted_at' => '1']);
+            }
+        }
+        
+        return response()->json(['success' => 'Status changed successfully.', 'status' => '1']);
+        
     }
        
 }

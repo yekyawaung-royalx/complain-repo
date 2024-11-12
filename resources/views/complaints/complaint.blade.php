@@ -1,5 +1,6 @@
 @extends('layouts.app1')
 @section('content')
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-title">
@@ -50,8 +51,9 @@
     <!-- footer start-->
     <input type="hidden" name="" id="url" value="{{ url('') }}">
     <input type="hidden" name="" id="json" value="complaints/all-json/pending">
+    <input type="hidden" name="" id="connection" value="{{ permission() }}">
     <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
-
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script>
         $(document).ready(function() {
             var url = $("#url").val();
@@ -97,7 +99,9 @@
                                     '/view"  class="btn btn-success btn-sm px-2 me-1" ><i class="icon-eye fs-16" cursorshover="true"></i></a>' +
                                     '<a  href="' + url + '/complaints/' + value.id +
                                     '/edit"  class="btn btn-primary btn-sm px-2 me-1" ><i class="icon-pencil fs-16" cursorshover="true"></i></a>' +
-                                    '<button class="btn btn-danger btn-sm px-2" type="button" data-bs-original-title="" title="" data-original-title="btn btn-primary-gradien"><i class="icon-trash fs-16" cursorshover="true"></i></button>' +
+                                    '<button class="btn btn-danger btn-sm px-2 deleted_at" value="' +
+                                    value.id +
+                                    '" type="button" data-bs-original-title="" title="" data-original-title="btn btn-primary-gradien"><i class="icon-trash fs-16" cursorshover="true"></i></button>' +
                                     '</td></tr>'
                                 );
                             });
@@ -128,9 +132,6 @@
             };
 
             fetched_data();
-
-
-
             $('.pagination-btn').click(function() {
                 //clicked url json data
                 $(".data-loading").show();
@@ -167,8 +168,8 @@
                                 .waybill_no +
                                 '" class="btn btn-success btn-sm btn-rounded waves-effect waves-light">' +
                                 replace_icon('eye') + '</a> ' +
-                                '<button class="btn btn-danger btn-sm btn-rounded waves-effect waves-light sync-odoo" data-bs-toggle="modal" data-bs-target="#sync-odoo" value=' +
-                                value.waybill_no + ' id="' + value.id + '">' +
+                                '<button class="btn btn-danger btn-sm btn-rounded deleted_at" data-bs-toggle="modal" data-bs-target="#sync-odoo" value=' +
+                                value.id + ' id="' + value.id + '">' +
                                 replace_icon('map-pin') + '</button>' +
                                 '</td>' +
                                 '</tr>'
@@ -194,7 +195,34 @@
                 });
             });
 
-
+            //delete //
+            $(document).on('click', '.deleted_at', function() {
+                var id = $(this).val();
+                //var waybill_no = $(this).attr('waybill_no');
+                var url = $("#url").val();
+                var _token = $("#_token").val();
+                //alert(url)
+                $.ajax({
+                    method: "delete",
+                    url: url + '/delete/' + id, // Correct concatenation for URL
+                    data: {
+                        id: id,
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    success: function(data) {
+                        if (data.status == '1') {
+                            swal("Deleted!", "Waybill deleted successfully", "success");
+                            window.location.reload();
+                        }
+                    }
+                })
+            })
+            var connection = $("#connection").val()
+            if (connection == 'Admin') {
+                $("button").css('display', 'none')
+            } else {
+                $("button").css('display', 'none')
+            }
         });
     </script>
 @endsection
