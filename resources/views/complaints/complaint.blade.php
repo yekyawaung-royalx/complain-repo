@@ -217,12 +217,7 @@
                     }
                 })
             })
-            var connection = $("#connection").val()
-            if (connection == 'Admin') {
-                $("button").css('display', 'none')
-            } else {
-                $("button").css('display', 'none')
-            }
+
         });
     </script>
 @endsection
