@@ -1,6 +1,5 @@
 @extends('layouts.app1')
 @section('content')
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-title">
@@ -58,7 +57,7 @@
         $(document).ready(function() {
             var url = $("#url").val();
             var json = $("#json").val();
-
+            var connection = $("#connection").val();
             //declared first loaded json data
             var load_json = url + '/' + json;
             var _token = $("#_token").val();
@@ -105,6 +104,10 @@
                                     '</td></tr>'
                                 );
                             });
+                            // Hide delete buttons if connection is set
+                            if (connection == 'Admin') {
+                                $(".deleted_at").hide();
+                            }
                             $(".data-loading").hide();
 
                             $("#to-records").text(data.to);
