@@ -1,5 +1,10 @@
 @extends('layouts.app1')
 @section('content')
+    <style>
+        .deleted_at {
+            display: none;
+        }
+    </style>
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-title">
