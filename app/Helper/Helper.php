@@ -66,7 +66,7 @@ function groupStatus($status)
             ->paginate(50);
             // $status_array['status'] = $complaints;
         }
-    }else{ 
+    }if(Auth::user()->isUser()){ 
     if ($status == 'pending') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
         ->Where('handle_by',Auth::user()->name)
@@ -101,6 +101,39 @@ function groupStatus($status)
         $complaints = DB::table('complaints')->whereIn('status_name', ['completed','review'])
         ->Where('handle_by',Auth::user()->name)
         ->where('deleted_at','0')
+        ->paginate(50);
+        // $status_array['status'] = $complaints;
+    }
+}if(Auth::user()->isDev()){
+    if ($status == 'pending') {
+        $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
+       // ->where('deleted_at','0')
+        ->paginate(50);
+        // $status_array['status'] = $complaints;
+    }
+    if ($status == 'follow-up') {
+        $complaints = DB::table('complaints')->whereIn('status_name', ['handled'])
+      //  ->where('deleted_at','0')
+        ->paginate(50);
+        // $status_array['status'] = $complaints;
+        # code...
+    }
+    if ($status == 'assigned') {
+        $complaints = DB::table('complaints')->whereIn('status_name', ['assigned'])
+        //->where('deleted_at','0')
+        ->paginate(50);
+        // $status_array['status'] = $complaints;
+        # code...
+    }
+    if ($status == 'progress') {
+        $complaints = DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
+       // ->where('deleted_at','0')
+        ->paginate(50);
+        // $status_array['status'] = $complaints;
+    }
+    if ($status == 'completed') {
+        $complaints = DB::table('complaints')->whereIn('status_name', ['completed','review'])
+       // ->where('deleted_at','0')
         ->paginate(50);
         // $status_array['status'] = $complaints;
     }
