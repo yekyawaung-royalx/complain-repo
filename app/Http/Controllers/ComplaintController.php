@@ -201,16 +201,16 @@ class ComplaintController extends Controller
         if(Auth::user()->isDev()){
             $complaints = DB::table('complaints')
             ->orderBy('id', 'desc')
-            ->paginate(50);
+            ->paginate(20);
         }if(Auth::user()->isAdmin()){
            $complaints=DB::table('complaints')->where('deleted_at','0')
            ->orderBy('id','desc')
-           ->paginate(50);
+           ->paginate(20);
         }if(Auth::user()->isUser()){
             $complaints = DB::table('complaints')
             ->where('handle_by',Auth::user()->name)
             ->where('deleted_at','0')
-            ->paginate(50);
+            ->paginate(20);
         }
        
        // dd($complaints);
