@@ -25,8 +25,7 @@ $(document).ready(function() {
                             '</div>' +
                             '</td>' +
                             '<td>' +
-                            '<a  href="' + url + '/complaints/' + item.id +
-                            '/view"  class="btn btn-success btn-sm px-2 me-1" ><i class="icon-eye fs-16" cursorshover="true"></i></a>' +
+                            '<button class="btn btn-success btn-sm px-2 me-1 viewbtn" value="'+item.id+'"><i class="icon-eye fs-16" cursorshover="true"></i></button>' +
                             '<button  class="btn btn-primary btn-sm px-2 me-1 editbtn" value="'+item.id+'"><i class="icon-pencil fs-16" cursorshover="true"></i></button>' +
                             '<button class="btn btn-danger btn-sm px-2 deletebtn" type="button" value="'+item.id+'" data-bs-original-title="" title="" data-original-title="btn btn-primary-gradien"><i class="icon-trash fs-16" cursorshover="true"></i></button>' +
                             '</td></tr>'
@@ -82,8 +81,7 @@ $(document).ready(function() {
                         '</div>' +
                         '</td>' +
                         '<td>' +
-                        '<a  href="' + url + '/complaints/' + item.id +
-                        '/view"  class="btn btn-success btn-sm px-2 me-1" ><i class="icon-eye fs-16" cursorshover="true"></i></a>' +
+                        '<button class="btn btn-success btn-sm px-2 me-1 viewbtn" value="'+item.id+'"><i class="icon-eye fs-16" cursorshover="true"></i></button>' +
                         '<button class="btn btn-primary btn-sm px-2 me-1 editbtn" value="'+item.id+'"><i class="icon-pencil fs-16" cursorshover="true"></i></button>' +
                         '<button class="btn btn-danger btn-sm px-2 deletebtn" type="button" value="'+item.id+'" data-bs-original-title="" title="" data-original-title="btn btn-primary-gradien"><i class="icon-trash fs-16" cursorshover="true"></i></button>' +
                         '</td></tr>'
@@ -288,6 +286,9 @@ $(document).on('click', '.deletebtn', function () {
     $('#DeleteModal').modal('show');
     $('#deleteing_id').val(stud_id);
 });
+$(document).on('click', '.viewbtn', function () {
+    $("#viewModal").modal('show');
+})
 
 //maodal tracking //
 
