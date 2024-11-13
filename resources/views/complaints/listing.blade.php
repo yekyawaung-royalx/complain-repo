@@ -102,7 +102,7 @@
                                 '<div class="media">' +
                                 '<div class="square-box me-2"><img class="img-fluid b-r-5" src="https://admin.pixelstrap.com/zeta/assets/images/avtar/chinese.png" alt=""></div>' +
                                 '<div class="media-body ps-2">' +
-                                '<div class="avatar-details"><a href="product-page.html">' +
+                                '<div class="avatar-details"><a>' +
                                 '<span>' + value.customer_name + '</span></a><br>' +
                                 '<span>' + value.customer_mobile + '</span></div>' +
                                 '</div>' +
@@ -178,7 +178,7 @@
                             '<div class="media">' +
                             '<div class="square-box me-2"><img class="img-fluid b-r-5" src="https://admin.pixelstrap.com/zeta/assets/images/avtar/chinese.png" alt=""></div>' +
                             '<div class="media-body ps-2">' +
-                            '<div class="avatar-details"><a href="product-page.html">' +
+                            '<div class="avatar-details"><a>' +
                             '<span>' + value.customer_name + '</span></a><br>' +
                             '<span>' + value.customer_mobile + '</span></div>' +
                             '</div>' +
