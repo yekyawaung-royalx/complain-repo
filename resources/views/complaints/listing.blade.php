@@ -1,5 +1,10 @@
 @extends('layouts.app1')
 @section('content')
+    <style>
+        .deleted_at {
+            display: none;
+        }
+    </style>
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-title">
@@ -53,11 +58,12 @@
 <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
 <input type="hidden" name="" id="url" value="{{ url('') }}">
 <input type="hidden" name="" id="json" value="complaints/json/{{ $segment = \Request::segment(3) }}">
+<input type="hidden" name="" id="connection" value="{{ permission() }}">
 <script>
     $(document).ready(function() {
         var url = $("#url").val();
         var json = $("#json").val();
-
+        var connection = $("#connection").val();
         //declared first loaded json data
         var load_json = url + '/' + json;
         var _token = $("#_token").val();
@@ -103,6 +109,9 @@
                                 '</td></tr>'
                             );
                         });
+                        if (connection == 'Developer') {
+                            $(".deleted_at").show();
+                        }
                         $(".data-loading").hide();
 
                         $("#to-records").text(data.to);

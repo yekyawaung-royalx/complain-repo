@@ -105,8 +105,8 @@
                                 );
                             });
                             // Hide delete buttons if connection is set
-                            if (connection == 'Admin') {
-                                $(".deleted_at").hide();
+                            if (connection == 'Developer') {
+                                $(".deleted_at").show();
                             }
                             $(".data-loading").hide();
 
