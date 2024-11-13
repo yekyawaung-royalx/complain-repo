@@ -4,14 +4,15 @@
         .deleted_at {
             display: none;
         }
+
+        .page-wrapper .page-body-wrapper .page-title .breadcrumb {
+            justify-content: flex-start;
+        }
     </style>
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-title">
                 <div class="row">
-                    <div class="col-12 col-sm-6">
-                        <h3>Complaints</h3>
-                    </div>
                     <div class="col-12 col-sm-6">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"> <a class="home-item" href="{{ url('/dashboard') }}">Dashboard</a>
@@ -19,6 +20,21 @@
                             <li class="breadcrumb-item active"> Complaints</li>
                             <li class="breadcrumb-item active"> {{ $segment = \Request::segment(3) }}</li>
                         </ol>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="mb-1 breadcrumb-right" style="text-align: end">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button"
+                                    class="btn btn-primary waves-effect waves-float waves-light pagination-btn"
+                                    id="prev-btn"><i data-feather='skip-back'></i></button>
+                                <button type="button"
+                                    class="btn btn-primary waves-effect waves-float waves-light pagination-btn"
+                                    id="next-btn"><i data-feather='skip-forward'></i></button>
+                                <button type="button"
+                                    class="btn btn-outline-primary waves-effect waves-float waves-light">Records: <span
+                                        id="to-records">0</span> of <span id="total-records">0</span></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,33 +169,36 @@
                 data: {},
                 success: function(data) {
                     $.each(data.data, function(key, value) {
-                        $("#fetched-data").append(
-                            '<tr>' +
-                            '<td><span class="text-muted">' + value.created_at +
-                            '</span></td>' +
-                            '<td><span class="waybill-no text-danger">' + value
-                            .waybill_no + '</span></td>' +
-                            '<td>' + (value.courier == null ? 'Anonymous' :
-                                value.courier) + '</td>' +
-                            '<td class="h6 text-primary">' + (value.branch ==
-                                null ? 'Unknown' : value.branch) + '</td>' +
-                            '<td>' + outbound_status(value.action_id) +
-                            '</td>' +
-                            '<td class="h6">' + value.qty + '</td>' +
-                            '<td>' + same_day(value.same_day) + '</td>' +
-                            '<td><span class="end-point-' + value.id + '">' + (
-                                value.end_point == null ? '---' : value
-                                .end_point) + '</span></td>' +
+                        $("#fetched-data").append('<tr>' +
                             '<td>' +
-                            '<a href="' + url + '/waybills/view/' + value
-                            .waybill_no +
-                            '" class="btn btn-success btn-sm btn-rounded waves-effect waves-light">' +
-                            replace_icon('eye') + '</a> ' +
-                            '<button class="btn btn-danger btn-sm btn-rounded waves-effect waves-light sync-odoo" data-bs-toggle="modal" data-bs-target="#sync-odoo" value=' +
-                            value.waybill_no + ' id="' + value.id + '">' +
-                            replace_icon('map-pin') + '</button>' +
+                            '<h6>' + value.complaint_uuid + '</h6><span>' +
+                            value.created_at + '</span>' +
                             '</td>' +
-                            '</tr>'
+                            '<td class="img-content-box">' +
+                            '<div class="media">' +
+                            '<div class="square-box me-2"><img class="img-fluid b-r-5" src="https://admin.pixelstrap.com/zeta/assets/images/avtar/chinese.png" alt=""></div>' +
+                            '<div class="media-body ps-2">' +
+                            '<div class="avatar-details"><a href="product-page.html">' +
+                            '<span>' + value.customer_name + '</span></a><br>' +
+                            '<span>' + value.customer_mobile + '</span></div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</td>' +
+                            '<td>' +
+                            '' + value.case_type_name +
+                            '<br>Service Complaint Types' +
+                            '</td>' +
+                            '<td>' +
+                            '<div class="badge badge-light-primary">' + value
+                            .status_name + '</div>' +
+                            '</td>' +
+                            '<td>' +
+                            '<a  href="' + url + '/complaints/' + value.id +
+                            '/view"  class="btn btn-success btn-sm px-2 me-1" ><i class="icon-eye fs-16" cursorshover="true"></i></a>' +
+                            '<a  href="' + url + '/complaints/' + value.id +
+                            '/edit"  class="btn btn-primary btn-sm px-2 me-1" ><i class="icon-pencil fs-16" cursorshover="true"></i></a>' +
+                            '<button class="btn btn-danger btn-sm px-2" type="button" data-bs-original-title="" title="" data-original-title="btn btn-primary-gradien"><i class="icon-trash fs-16" cursorshover="true"></i></button>' +
+                            '</td></tr>'
                         );
                     });
                     $(".data-loading").hide();
