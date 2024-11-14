@@ -239,8 +239,7 @@
                     },
                     success: function(data) {
                         if (data.status == '1') {
-                            swal("Deleted!", "Waybill deleted successfully", "success");
-                            window.location.reload();
+
                         }
                     }
                 })
