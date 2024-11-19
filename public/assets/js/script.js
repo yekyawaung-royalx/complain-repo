@@ -428,3 +428,9 @@ $(".color-selector ul li ").on("click", function (e) {
 $(document).ready(function () {
   $("body").addClass("rtl");
 });
+
+$(document).ready(function(){
+  $('#searchItem').keyup(function(){
+    alert('hello')
+  })
+})

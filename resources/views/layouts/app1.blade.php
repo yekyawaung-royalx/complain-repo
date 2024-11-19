@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.css') }}">
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style1.css') }}">
     <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-1.css') }}" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
@@ -100,22 +101,31 @@
                     </div>
                 </div>
                 <div class="left-side-header col ps-0 d-none d-md-block">
-                    <div class="input-group"><span class="input-group-text" id="basic-addon1">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g>
                                     <g>
                                         <path fill-rule="evenodd" clip-rule="evenodd"
                                             d="M11.2753 2.71436C16.0029 2.71436 19.8363 6.54674 19.8363 11.2753C19.8363 16.0039 16.0029 19.8363 11.2753 19.8363C6.54674 19.8363 2.71436 16.0039 2.71436 11.2753C2.71436 6.54674 6.54674 2.71436 11.2753 2.71436Z"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        </path>
                                         <path fill-rule="evenodd" clip-rule="evenodd"
                                             d="M19.8987 18.4878C20.6778 18.4878 21.3092 19.1202 21.3092 19.8983C21.3092 20.6783 20.6778 21.3097 19.8987 21.3097C19.1197 21.3097 18.4873 20.6783 18.4873 19.8983C18.4873 19.1202 19.1197 18.4878 19.8987 18.4878Z"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        </path>
                                     </g>
                                 </g>
-                            </svg></span>
+                            </svg>
+                        </span>
                         <input class="form-control" type="text" placeholder="Search here.." aria-label="search"
-                            aria-describedby="basic-addon1">
+                            aria-describedby="basic-addon1" name="searchItem" id="" class="searchItem"
+                            value="">
+                    </div>
+                    <div id="myDropdown" class="dropdown-content">
+                        <div class="d-flex flex-row" id="searchResult">
+                        </div>
                     </div>
                 </div>
                 <div class="nav-right col-10 col-sm-6 pull-right right-header p-0">
@@ -147,9 +157,7 @@
                         <li class="d-md-none resp-serch-input">
                             <div class="resp-serch-box"><i data-feather="search"></i></div>
                             <div class="form-group search-form">
-                                <form action="">
-                                    <input type="text" placeholder="Search here..." name="searchItem">
-                                </form>
+                                <input type="text" placeholder="Search here...">
                             </div>
                         </li>
                         <li class="onhover-dropdown">
@@ -194,7 +202,8 @@
                                                         <div class="col-4 text-center">
                                                             <div class="bookmark-content">
                                                                 <div class="bookmark-icon"><i
-                                                                        data-feather="server"></i></div>
+                                                                        data-feather="server"></i>
+                                                                </div>
                                                                 <h5 class="mt-2"> <a>Tables</a>
                                                                 </h5>
                                                             </div>
@@ -386,12 +395,15 @@
                 <script class="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
             </div>
         </div>
+        <!--search result-->
         <!-- Page Header Ends                              -->
         <!-- Page Body Start-->
         <div class="page-body-wrapper">
+
             <!-- Page Sidebar Start-->
             @include('layouts.sidebar')
             <!-- Page Sidebar Ends-->
+
             @yield('content')
             <!-- footer start-->
             <footer class="footer">
@@ -407,6 +419,7 @@
     </div>
     <!-- latest jquery-->
     <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
+
     <!-- Bootstrap js-->
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <!-- feather icon js-->
@@ -443,7 +456,62 @@
     <!-- Theme js-->
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="{{ asset('assets/js/customizer.js') }}"></script>
-    <!-- login js-->
+    <input type="hidden" name="" id="url" value="{{ url('') }}">
+    <script>
+        $(document).ready(function() {
+            $("input[name=searchItem]").keyup(function() {
+                var search = $(this).val().toUpperCase();
+                var url = $("#url").val();
+                //alert(search)
+                if (search.length == 8) {
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('search-item') }}",
+                        data: {
+                            search: search
+                        },
+                        success: function(data) {
+                            // console.log(data)
+                            $.each(data, function(key, value) {
+                                $("#searchResult").append('<div class="p-2">' + value
+                                    .complaint_uuid + '</div><div class="p-2">' +
+                                    value
+                                    .customer_name + '</div><div class="p-2">' +
+                                    value
+                                    .customer_mobile + '</div><div class="p-2">' +
+                                    value
+                                    .case_type_name +
+                                    '</div></div><div class="p-2">' + value
+                                    .status_name +
+                                    '</div><div class="p-2"><a href="' + url +
+                                    '/complaints/' + value.id +
+                                    '/view" class="btn btn-success btn-sm px-2 me-1"><i class="fa fa-arrow-right fs-16" cursorshover="true"></i></a></div>'
+                                )
+                            })
+
+                            document.getElementById("myDropdown").classList.toggle("show");
+
+                        }
+                    });
+
+
+                } else {
+                    if (!event.target.matches('.searchItem')) {
+                        var dropdowns = document.getElementsByClassName("dropdown-content");
+                        var i;
+                        for (i = 0; i < dropdowns.length; i++) {
+                            var openDropdown = dropdowns[i];
+                            if (openDropdown.classList.contains('show')) {
+                                openDropdown.classList.remove('show');
+                            }
+                        }
+                    }
+                }
+            })
+        });
+    </script>
+    <!-- login js
+        -->
     <!-- Plugin used-->
 </body>
 

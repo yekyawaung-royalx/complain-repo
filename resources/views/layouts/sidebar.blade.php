@@ -17,7 +17,8 @@
                     </li>
                     @if (Auth::user()->isAdmin() || Auth::user()->isDev())
                         <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="{{ url('dashboard') }}">
+                            <a class="sidebar-link sidebar-title link-nav {{ request()->is('dashboard') ? 'active' : '' }}"
+                                href="{{ url('dashboard') }}">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g>
@@ -34,7 +35,8 @@
                         </li>
                     @else
                         <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="{{ url('user-dashboard') }}">
+                            <a class="sidebar-link sidebar-title link-nav {{ request()->is('user-dashboard') ? 'active' : '' }}"
+                                href="{{ url('user-dashboard') }}">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g>
@@ -50,7 +52,8 @@
                                 </svg><span class="lan-3">Dashboard</span></a>
                         </li>
                     @endif
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav"
+                    <li class="sidebar-list"><a
+                            class="sidebar-link sidebar-title link-nav {{ request()->is('complaints/all-status/all') ? 'active' : '' }}"
                             href="{{ url('complaints/all-status/all') }}">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">

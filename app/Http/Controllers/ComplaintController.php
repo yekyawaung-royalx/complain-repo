@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Exports\ComplaintExport;
@@ -605,6 +606,16 @@ public function exportComplaints(Request $request)
         
         return response()->json(['success' => 'Status changed successfully.', 'status' => '1']);
         
+    }
+
+    public function searchItem(Request $request){
+        //$search = $request->input('searchItem');
+       // $searchItem = Str::upper($search);
+       // dd($searchItem);
+        $complaints = DB::table('complaints')
+        ->where('complaint_uuid', 'LIKE', '%' . $request->search . '%')
+        ->get();
+        return response()->json($complaints);
     }
        
 }

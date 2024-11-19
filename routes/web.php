@@ -166,6 +166,7 @@ Route::delete('/delete/{id}',[App\Http\Controllers\ComplaintController::class,'d
 
 //export route//
 Route::get('/export-complaints', [ComplaintController::class, 'exportComplaints']);
+Route::get('/search-item', [ComplaintController::class, 'searchItem']);
 
 
 });
