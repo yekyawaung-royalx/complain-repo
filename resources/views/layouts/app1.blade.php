@@ -124,7 +124,20 @@
                             value="">
                     </div>
                     <div id="myDropdown" class="dropdown-content">
-                        <div class="d-flex flex-row" id="searchResult">
+                        <div class="table-responsive custom-scrollbar">
+                            <table class="table table-bordernone">
+                                <thead>
+                                    <tr>
+                                        <th><span>Customer</span></th>
+                                        <th><span>Complaint Type</span></th>
+                                        <th><span>Status</span></th>
+                                        <th><span>Action</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="searchResult">
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -473,19 +486,23 @@
                         success: function(data) {
                             // console.log(data)
                             $.each(data, function(key, value) {
-                                $("#searchResult").append('<div class="p-2">' + value
-                                    .complaint_uuid + '</div><div class="p-2">' +
+                                $("#searchResult").append(
+                                    '<tr><td>' +
+                                    '' + value.customer_name +
+                                    '<br>' + value.customer_mobile + '' +
+                                    '</td>' +
+                                    '<td>' +
+                                    '' + value.case_type_name +
+                                    '<br>Service Complaint Types' +
+                                    '</td>' +
+                                    '<td>' +
+                                    '<div class="badge badge-light-primary">' +
                                     value
-                                    .customer_name + '</div><div class="p-2">' +
-                                    value
-                                    .customer_mobile + '</div><div class="p-2">' +
-                                    value
-                                    .case_type_name +
-                                    '</div></div><div class="p-2">' + value
-                                    .status_name +
-                                    '</div><div class="p-2"><a href="' + url +
-                                    '/complaints/' + value.id +
-                                    '/view" class="btn btn-success btn-sm px-2 me-1"><i class="fa fa-arrow-right fs-16" cursorshover="true"></i></a></div>'
+                                    .status_name + '</div>' +
+                                    '</td>' +
+                                    '<td>' +
+                                    '<a  href="' + url + '/complaints/' + value.id +
+                                    '/view"  class="btn btn-success btn-sm px-2 me-1" ><i class="icon-eye fs-16" cursorshover="true"></i></a></td></tr>'
                                 )
                             })
 
@@ -503,6 +520,7 @@
                             var openDropdown = dropdowns[i];
                             if (openDropdown.classList.contains('show')) {
                                 openDropdown.classList.remove('show');
+                                $("#searchResult").empty();
                             }
                         }
                     }
