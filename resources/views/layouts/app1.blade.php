@@ -484,8 +484,9 @@
                             search: search
                         },
                         success: function(data) {
-                            // console.log(data)
+                            //console.log(data)
                             $.each(data, function(key, value) {
+                                //console.log(value)
                                 $("#searchResult").append(
                                     '<tr><td>' +
                                     '' + value.customer_name +
@@ -501,7 +502,8 @@
                                     .status_name + '</div>' +
                                     '</td>' +
                                     '<td>' +
-                                    '<a  href="' + url + '/complaints/' + value.id +
+                                    '<a  href="' + url + '/complaints/' + value
+                                    .id +
                                     '/view"  class="btn btn-success btn-sm px-2 me-1" ><i class="icon-eye fs-16" cursorshover="true"></i></a></td></tr>'
                                 )
                             })
