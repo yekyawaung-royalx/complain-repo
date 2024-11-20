@@ -17,7 +17,7 @@
                     </li>
                     @if (Auth::user()->isAdmin() || Auth::user()->isDev())
                         <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav {{ request()->is('dashboard') ? 'active' : '' }}"
+                            <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}"
                                 href="{{ url('dashboard') }}">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
