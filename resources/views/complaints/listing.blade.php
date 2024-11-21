@@ -110,7 +110,7 @@
                                 '</td>' +
                                 '<td>' +
                                 '' + value.case_type_name +
-                                '<br>Service Complaint Types' +
+                                '<br>' + value.main_category + '' +
                                 '</td>' +
                                 '<td>' +
                                 '<div class="badge badge-light-primary">' + value
