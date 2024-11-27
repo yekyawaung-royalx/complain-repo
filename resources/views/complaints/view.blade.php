@@ -268,7 +268,7 @@
 @endsection
 <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
 <script type="text/javascript" src="https://awik.io/demo/webshop-zoom/Drift.min.js"></script>
-<script type="text/javascript">
+<script>
     new Drift(document.querySelector('.drift-demo-trigger'), {
         paneContainer: document.querySelector('.details'),
         inlinePane: 769,
