@@ -472,7 +472,7 @@
     <input type="hidden" name="" id="url" value="{{ url('') }}">
     <script>
         $(document).ready(function() {
-            $("input[name=searchItem]").keyup(function() {
+            $("input[name=searchItem]").on("keydown", function() {
                 var search = $(this).val().toUpperCase();
                 var url = $("#url").val();
                 //alert(search)
@@ -510,11 +510,16 @@
 
                             document.getElementById("myDropdown").classList.toggle("show");
 
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error: ", error);
+                            alert("An error occurred while fetching data.");
                         }
                     });
 
 
                 } else {
+                    $("#searchResult").empty();
                     if (!event.target.matches('.searchItem')) {
                         var dropdowns = document.getElementsByClassName("dropdown-content");
                         var i;
