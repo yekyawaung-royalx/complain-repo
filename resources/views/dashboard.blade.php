@@ -6,6 +6,10 @@
             float: right;
             margin: 10px;
         }
+
+        .dash-card {
+            height: 90%;
+        }
     </style>
     <div class="page-body">
         <div class="container-fluid">
@@ -66,7 +70,7 @@
         <div class="container-fluid default-dash">
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="card o-hidden">
+                    <div class="card o-hidden dash-card">
                         <div class="card-header pb-0">
                             <h4 class="card-title mb-0">
                                 Loss & Damage Types</h4>
@@ -132,7 +136,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="card o-hidden">
+                    <div class="card o-hidden dash-card">
                         <div class="card-header pb-0">
                             <h4 class="card-title mb-0">
                                 Service Complaint Types</h4>
@@ -198,7 +202,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="card o-hidden">
+                    <div class="card o-hidden dash-card">
                         <div class="card-header pb-0">
                             <h4 class="card-title mb-0">
                                 Refund Amount Status</h4>
