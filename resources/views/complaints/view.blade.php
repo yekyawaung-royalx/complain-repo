@@ -13,6 +13,7 @@
     .details {
         width: 100%;
         height: 100%;
+        float: left;
     }
 </style>
 @section('content')
@@ -81,32 +82,6 @@
                                         class="btn   btn-primary btn-block">Edit</a>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            <h4 class="card-title mb-0">Damage Photo
-                                {{-- <button class="btn btn-success pull-right" type="button" cursorshover="true">
-                                    <span cursorshover="true"> {{ $complaint->status_name }}</span>
-                                </button> --}}
-                            </h4>
-                            <div class="card-options"><a class="card-options-collapse" href="#"
-                                    data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
-                                    class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
-                                        class="fe fe-x"></i></a></div>
-                        </div>
-                        @php
-                            $images = explode('|', $complaint->image);
-                        @endphp
-                        <div class="card-body">
-                            @foreach ($images as $image)
-                                <div class="responsive">
-                                    {{-- <img src="{{ asset('files') }}/{{ $image }}" id="imgZoom" alt="Forest"
-                                        width="150" height="100" onmousemove="zoomIn(event)" onmouseout="zoomOut()"> --}}
-                                    <img class="drift-demo-trigger" data-zoom="{{ asset('files') }}/{{ $image }}"
-                                        src="{{ asset('files') }}/{{ $image }}" width="150" height="200">
-                                </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -235,24 +210,36 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card recent-activity">
-                        <div class="card-header card-no-border">
-                            <div class="media media-dashboard">
-                                <div class="media-body">
-                                    <h5 class="mb-0">Customer's Feedback </h5>
-                                </div>
-                                <div class="icon-box onhover-dropdown"><i data-feather="more-horizontal"></i>
-                                    <div class="icon-box-show onhover-show-div">
-
-                                    </div>
-                                </div>
-                            </div>
+                </div>
+                <div class="col-xl-4 col-md-6 dash-35 dash-xl-50">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title mb-0">Damage Photo
+                                {{-- <button class="btn btn-success pull-right" type="button" cursorshover="true">
+                                    <span cursorshover="true"> {{ $complaint->status_name }}</span>
+                                </button> --}}
+                            </h4>
+                            <div class="card-options"><a class="card-options-collapse" href="#"
+                                    data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
+                                    class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
+                                        class="fe fe-x"></i></a></div>
                         </div>
-                        <div class="card-body pt-0">
-                            <div class="table-responsive custom-scrollbar">
-                                <div class="details"></div>
-                            </div>
+                        @php
+                            $images = explode('|', $complaint->image);
+                        @endphp
+                        <div class="card-body">
+                            @foreach ($images as $image)
+                                <div class="responsive">
+                                    <img class="drift-demo-trigger" data-zoom="{{ asset('files') }}/{{ $image }}"
+                                        src="{{ asset('files') }}/{{ $image }}" width="100%" height="auto">
+                                </div>
+                            @endforeach
                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 dash-35 dash-xl-50">
+                    <div class="card-body">
+                        <div class="details"></div>
                     </div>
                 </div>
 
