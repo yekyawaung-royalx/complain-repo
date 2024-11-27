@@ -266,6 +266,7 @@
         <!-- Container-fluid Ends-->
     </div>
 @endsection
+<script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
 <script type="text/javascript" src="https://awik.io/demo/webshop-zoom/Drift.min.js"></script>
 <script type="text/javascript">
     new Drift(document.querySelector('.drift-demo-trigger'), {
