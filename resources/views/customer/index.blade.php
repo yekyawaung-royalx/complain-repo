@@ -95,9 +95,9 @@
                                     name="waybill_no" id="waybill_no">
                             </div>
                             <div class="col-lg-6 input_field">
-                                <label for="">ဖြစ်စဉ်ဖြစ်ပွားသည့်နေ့စွဲ</label>
+                                <label for="">ဖြစ်စဉ်ဖြစ်ပွားသည့်နေ့စွဲ<strong>*</strong></label>
                                 <input type="date" class="form-control mb-3" name="complainant_date"
-                                    id="complainant_date">
+                                    id="complainant_date" required>
                             </div>
                             <div class="form-group">
                                 <label for="">တိုင်ကြားချက်အမျိုးအစား-
@@ -140,7 +140,7 @@
                                 <div class="g-recaptcha" data-sitekey="6LcilHYqAAAAAChr8rQAwokcMdjaKnUfqYj1Z9ap">
                                 </div>
                             </div>
-                            <p><strong>*ပြထားသောfieldsများသည်မဖြစ်မနေထည့်ပေးရပါမည်</strong></p>
+                            <p><strong>*ပြထားသောfieldများသည်မဖြစ်မနေထည့်ပေးရပါမည်</strong></p>
                             <div class="col-lg-3">
                                 <div class="form-group p-1">
                                     <button class="btn btn-danger" id="customer-submit"
@@ -198,9 +198,9 @@
                                     id="waybill_no" name="waybill_no">
                             </div>
                             <div class="col-lg-6 input_field re-hide">
-                                <label for="">ဖြစ်စဉ်ဖြစ်ပွားသည့်နေ့စွဲ</label>
+                                <label for="">ဖြစ်စဉ်ဖြစ်ပွားသည့်နေ့စွဲ<strong>*</strong></label>
                                 <input type="date" class="form-control mb-3" name="complainant_date"
-                                    id="complainant_date">
+                                    id="complainant_date" required>
                             </div>
                             <div class="form-group re-hide">
                                 <label for="">တိုင်ကြားချက်အမျိုးအစား-
@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                             <div class="re-hide">
-                                <p><strong>*ပြထားသောfieldsများသည်မဖြစ်မနေထည့်ပေးရပါမည်</strong></p>
+                                <p><strong>*ပြထားသောfieldများသည်မဖြစ်မနေထည့်ပေးရပါမည်</strong></p>
                             </div>
                             <div class="col-lg-3 re-hide">
                                 <div class="form-group p-1">
