@@ -107,7 +107,7 @@
                                     {{-- <img src="{{ asset('files') }}/{{ $image }}" id="imgZoom" alt="Forest"
                                         width="150" height="100" onmousemove="zoomIn(event)" onmouseout="zoomOut()"> --}}
                                     <img class="drift-demo-trigger" data-zoom="{{ asset('files') }}/{{ $image }}"
-                                        src="{{ asset('files') }}/{{ $image }}">
+                                        src="{{ asset('files') }}/{{ $image }}" width="150" height="100">
                                 </div>
                             @endforeach
                         </div>
