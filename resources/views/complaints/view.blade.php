@@ -265,10 +265,10 @@
 <script type="text/javascript" src="https://awik.io/demo/webshop-zoom/Drift.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const images = document.querySelectorAll('.zoomable-image');
+        const images = document.querySelectorAll('.drift-demo-trigger');
         images.forEach(image => {
             new Drift(image, {
-                paneContainer: document.querySelector('#zoom-pane'),
+                paneContainer: document.querySelector('.details'),
                 zoomFactor: 2,
             });
         });
