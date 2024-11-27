@@ -239,7 +239,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-8 col-md-8 dash-35 dash-xl-60">
-                        <div class="card">
+                        <div class="card dash-card">
                             <div class="card-header pb-0">
                                 <h4 class="card-title mb-0">Complaint (Chart)
                                     {{-- <span class="badge badge-secondary inline-block pull-right" cursorshover="true">
@@ -259,7 +259,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4 col-xl-4 col-lg-4">
-                        <div class="card o-hidden">
+                        <div class="card o-hidden dash-card">
                             <div class="card" style="width:100%;">
                                 <div class="card-header">
                                     <h4>Refund Amount (Pie)</h4>
