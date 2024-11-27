@@ -104,7 +104,7 @@
                                     {{-- <img src="{{ asset('files') }}/{{ $image }}" id="imgZoom" alt="Forest"
                                         width="150" height="100" onmousemove="zoomIn(event)" onmouseout="zoomOut()"> --}}
                                     <img class="drift-demo-trigger" data-zoom="{{ asset('files') }}/{{ $image }}"
-                                        src="{{ asset('files') }}/{{ $image }}" width="150" height="100">
+                                        src="{{ asset('files') }}/{{ $image }}" width="150" height="200">
                                 </div>
                             @endforeach
                         </div>
@@ -235,7 +235,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container">
+                    <div class="card recent-activity">
                         <div class="details">
 
                         </div>
