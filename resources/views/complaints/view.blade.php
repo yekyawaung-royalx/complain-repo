@@ -15,7 +15,6 @@
         width: 200px;
         height: 200px;
         display: inline-block;
-        background-image: url('https://via.placeholder.com/400.png');
         background-repeat: no-repeat;
     }
 </style>
@@ -105,11 +104,12 @@
                         <div class="card-body">
                             @foreach ($images as $image)
                                 <div class="responsive">
-                                    <img src="{{ asset('files') }}/{{ $image }}" id="imgZoom" alt="Forest"
-                                        width="150" height="100" onmousemove="zoomIn(event)" onmouseout="zoomOut()">
+                                    {{-- <img src="{{ asset('files') }}/{{ $image }}" id="imgZoom" alt="Forest"
+                                        width="150" height="100" onmousemove="zoomIn(event)" onmouseout="zoomOut()"> --}}
+                                    <img class="drift-demo-trigger" data-zoom="{{ asset('files') }}/{{ $image }}"
+                                        src="{{ asset('files') }}/{{ $image }}">
                                 </div>
                             @endforeach
-                            <div id="overlay" onmousemove="zoomIn(event)"></div>
                         </div>
                     </div>
                 </div>
@@ -238,6 +238,27 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card recent-activity">
+                        <div class="card-header card-no-border">
+                            <div class="media media-dashboard">
+                                <div class="media-body">
+                                    <h5 class="mb-0">Customer's Feedback </h5>
+                                </div>
+                                <div class="icon-box onhover-dropdown"><i data-feather="more-horizontal"></i>
+                                    <div class="icon-box-show onhover-show-div">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="table-responsive custom-scrollbar">
+                                <div class="details">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -245,19 +266,13 @@
         <!-- Container-fluid Ends-->
     </div>
 @endsection
-<script>
-    function zoomIn(event) {
-        var element = document.getElementById("overlay");
-        element.style.display = "inline-block";
-        var img = document.getElementById("imgZoom");
-        var posX = event.offsetX ? (event.offsetX) : event.pageX - img.offsetLeft;
-        var posY = event.offsetY ? (event.offsetY) : event.pageY - img.offsetTop;
-        element.style.backgroundPosition = (-posX * 4) + "px " + (-posY * 4) + "px";
-
-    }
-
-    function zoomOut() {
-        var element = document.getElementById("overlay");
-        element.style.display = "none";
-    }
+<script type="text/javascript" src="https://awik.io/demo/webshop-zoom/Drift.min.js"></script>
+<script type="text/javascript">
+    new Drift(document.querySelector('.drift-demo-trigger'), {
+        paneContainer: document.querySelector('.details'),
+        inlinePane: 769,
+        inlineOffsetY: -85,
+        containInline: true,
+        hoverBoundingBox: true
+    });
 </script>
