@@ -269,11 +269,14 @@
 <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
 <script type="text/javascript" src="https://awik.io/demo/webshop-zoom/Drift.min.js"></script>
 <script>
-    new Drift(document.querySelector('.drift-demo-trigger'), {
-        paneContainer: document.querySelector('.details'),
-        inlinePane: 769,
-        inlineOffsetY: -85,
-        containInline: true,
-        hoverBoundingBox: true
+    document.addEventListener('DOMContentLoaded', () => {
+        const imageElement = document.querySelector('.drift-demo-trigger');
+        if (imageElement) {
+            new Drift(imageElement, {
+                paneContainer: document.querySelector('.details'),
+            });
+        } else {
+            console.error('Image element not found!');
+        }
     });
 </script>
