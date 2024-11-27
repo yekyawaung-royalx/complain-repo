@@ -118,16 +118,18 @@
                                 </select>
                             </div>
                             <div class="col-lg-12">
-                                <label for="">တိုင်ကြားချက်အသေးစိတ်</label>
-                                <textarea name="detail_complainant" id="detail_complainant" rows="5" class="form-control"></textarea>
+                                <label for="">တိုင်ကြားချက်အသေးစိတ်<strong>*</strong></label>
+                                <textarea name="detail_complainant" id="detail_complainant" rows="5" class="form-control" required></textarea>
                             </div>
                             <div class="col-lg-12">
-                                <label for="">တိုင်ကြားသူအကြံပြုချက်</label>
-                                <textarea name="complainant_reco" id="complainant_reco" rows="5" class="form-control"></textarea>
+                                <label for="">တိုင်ကြားသူအကြံပြုချက်<strong>*</strong></label>
+                                <textarea name="complainant_reco" id="complainant_reco" rows="5" class="form-control" required></textarea>
                             </div>
                             <div class="col-lg-12">
                                 <div class="">
-                                    <label for="formFileLg" class="form-label">Image Upload File</label>
+                                    <label for="formFileLg"
+                                        class="form-label">ဓါတ်ပုံတင်ရန်<strong>(အများဆုံး-၃ပုံသာတင်ရန်
+                                            size-2MB)</strong></label>
                                     <input class="form-control form-control-lg" id="image" type="file"
                                         name="image[]" max-size="2000" multiple accept="image/png, image/jpeg" />
                                     <p id="selectedImage"></p>
@@ -138,7 +140,7 @@
                                 <div class="g-recaptcha" data-sitekey="6LcilHYqAAAAAChr8rQAwokcMdjaKnUfqYj1Z9ap">
                                 </div>
                             </div>
-                            <p><strong>* is required</strong></p>
+                            <p><strong>*ပြထားသောfieldsများသည်မဖြစ်မနေထည့်ပေးရပါမည်</strong></p>
                             <div class="col-lg-3">
                                 <div class="form-group p-1">
                                     <button class="btn btn-danger" id="customer-submit"
@@ -221,16 +223,18 @@
                                 </select>
                             </div>
                             <div class="col-lg-12 re-hide">
-                                <label for="">တိုင်ကြားချက်အသေးစိတ်</label>
-                                <textarea name="detail_complainant" id="detail_complainant" rows="5" class="form-control"></textarea>
+                                <label for="">တိုင်ကြားချက်အသေးစိတ်<strong>*</strong></label>
+                                <textarea name="detail_complainant" id="detail_complainant" rows="5" class="form-control" required></textarea>
                             </div>
                             <div class="col-lg-12 re-hide">
-                                <label for="">တိုင်ကြားသူအကြံပြုချက်</label>
-                                <textarea name="complainant_reco" id="complainant_reco" rows="5" class="form-control"></textarea>
+                                <label for="">တိုင်ကြားသူအကြံပြုချက်<strong>*</strong></label>
+                                <textarea name="complainant_reco" id="complainant_reco" rows="5" class="form-control" required></textarea>
                             </div>
                             <div class="col-lg-12 re-hide">
                                 <div>
-                                    <label for="formFileLg" class="form-label">Image Upload File</label>
+                                    <label for="formFileLg"
+                                        class="form-label">ဓါတ်ပုံတင်ရန်<strong>(အများဆုံး-၃ပုံသာတင်ရန်
+                                            size-2MB)</strong></label>
                                     <input class="form-control form-control-lg" id="images" type="file"
                                         name="image[]" max-size="2000" multiple accept="image/png, image/jpeg" />
                                     <p id="selectedImage"></p>
@@ -242,7 +246,7 @@
                                 </div>
                             </div>
                             <div class="re-hide">
-                                <p><strong>* is required</strong></p>
+                                <p><strong>*ပြထားသောfieldsများသည်မဖြစ်မနေထည့်ပေးရပါမည်</strong></p>
                             </div>
                             <div class="col-lg-3 re-hide">
                                 <div class="form-group p-1">
