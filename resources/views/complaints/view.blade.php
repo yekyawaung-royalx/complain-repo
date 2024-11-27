@@ -13,7 +13,6 @@
     .details {
         width: 100%;
         height: 100%;
-        position: relative;
     }
 </style>
 @section('content')
@@ -236,25 +235,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card recent-activity">
-                        {{-- <div class="card-header card-no-border">
-                            <div class="media media-dashboard">
-                                <div class="media-body">
-                                    <h5 class="mb-0">Customer's Feedback </h5>
-                                </div>
-                                <div class="icon-box onhover-dropdown"><i data-feather="more-horizontal"></i>
-                                    <div class="icon-box-show onhover-show-div">
+                    <div class="container">
+                        <div class="details">
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <div class="card-body pt-0">
-                            <div class="table-responsive custom-scrollbar">
-                                <div class="details">
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
