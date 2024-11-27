@@ -11,7 +11,7 @@
     }
 
     .details {
-        position: relative;
+        /* position: relative; */
         width: 100%;
         height: 100%;
         float: left;
