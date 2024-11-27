@@ -11,8 +11,10 @@
     }
 
     .details {
+        position: relative;
         width: 100%;
         height: 100%;
+        float: left;
     }
 </style>
 @section('content')
@@ -234,14 +236,11 @@
                                 </div>
                             @endforeach
                         </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6 dash-35 dash-xl-50">
-                    <div class="card-body">
-                        <div class="details"></div>
-                    </div>
-                </div>
+                        <div class="details">
 
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Container-fluid Ends-->
@@ -255,7 +254,10 @@
         images.forEach(image => {
             new Drift(image, {
                 paneContainer: document.querySelector('.details'),
-                zoomFactor: 2,
+                inlinePane: 769,
+                inlineOffsetY: -85,
+                containInline: true,
+                hoverBoundingBox: true
             });
         });
     });
