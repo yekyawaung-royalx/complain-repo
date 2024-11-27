@@ -10,12 +10,10 @@
         width: 33%;
     }
 
-    #overlay {
-        border: 1px solid black;
-        width: 200px;
-        height: 200px;
-        display: inline-block;
-        background-repeat: no-repeat;
+    .details {
+        width: 100%;
+        height: 100%;
+        position: relative;
     }
 </style>
 @section('content')
@@ -239,7 +237,7 @@
                         </div>
                     </div>
                     <div class="card recent-activity">
-                        <div class="card-header card-no-border">
+                        {{-- <div class="card-header card-no-border">
                             <div class="media media-dashboard">
                                 <div class="media-body">
                                     <h5 class="mb-0">Customer's Feedback </h5>
@@ -250,7 +248,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="card-body pt-0">
                             <div class="table-responsive custom-scrollbar">
                                 <div class="details">
