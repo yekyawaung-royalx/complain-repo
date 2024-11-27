@@ -8,15 +8,15 @@
         padding: 0 6px;
         float: left;
         width: 33%;
-        transition: transform .2s;
     }
 
-    .responsive:hover {
-        -ms-transform: scale(1.5);
-        /* IE 9 */
-        -webkit-transform: scale(1.5);
-        /* Safari 3-8 */
-        transform: scale(1.5);
+    #overlay {
+        border: 1px solid black;
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+        background-image: url('https://via.placeholder.com/400.png');
+        background-repeat: no-repeat;
     }
 </style>
 @section('content')
@@ -105,11 +105,11 @@
                         <div class="card-body">
                             @foreach ($images as $image)
                                 <div class="responsive">
-                                    <img src="{{ asset('files') }}/{{ $image }}" alt="Forest" width="150"
-                                        height="100">
+                                    <img src="{{ asset('files') }}/{{ $image }}" id="imgZoom" alt="Forest"
+                                        width="150" height="100" onmousemove="zoomIn(event)" onmouseout="zoomOut()">
                                 </div>
                             @endforeach
-
+                            <div id="overlay" onmousemove="zoomIn(event)"></div>
                         </div>
                     </div>
                 </div>
@@ -245,3 +245,19 @@
         <!-- Container-fluid Ends-->
     </div>
 @endsection
+<script>
+    function zoomIn(event) {
+        var element = document.getElementById("overlay");
+        element.style.display = "inline-block";
+        var img = document.getElementById("imgZoom");
+        var posX = event.offsetX ? (event.offsetX) : event.pageX - img.offsetLeft;
+        var posY = event.offsetY ? (event.offsetY) : event.pageY - img.offsetTop;
+        element.style.backgroundPosition = (-posX * 4) + "px " + (-posY * 4) + "px";
+
+    }
+
+    function zoomOut() {
+        var element = document.getElementById("overlay");
+        element.style.display = "none";
+    }
+</script>
