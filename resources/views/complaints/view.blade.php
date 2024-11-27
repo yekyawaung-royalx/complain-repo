@@ -13,7 +13,7 @@
     .details {
         width: 100%;
         height: 100%;
-        float: left;
+        position: relative;
     }
 </style>
 @section('content')
