@@ -200,10 +200,10 @@
                 <div class="sidebar-img-section">
                     <div class="sidebar-img-content"><img class="img-fluid"
                             src="{{ asset('assets/images/side-bar.png') }}" alt="">
-                        <h4>Need Help ?</h4><a class="txt"
-                            href="https://pixelstrap.freshdesk.com/support/home">Raise ticket at
-                            "support@pixelstrap.com"</a><a class="btn btn-secondary"
-                            href="https://themeforest.net/user/pixelstrap/portfolio">Buy Now</a>
+                        <h4>Need Help ?</h4><a class="txt" href="{{ url('customer') }}">Raise ticket at
+                            "info@royalx.net"</a>
+                        {{-- <a class="btn btn-secondary"
+                            href="">Buy Now</a> --}}
                     </div>
                 </div>
             </div>
