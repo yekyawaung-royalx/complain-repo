@@ -69,7 +69,7 @@
         <!-- Container-fluid starts-->
         <div class="container-fluid default-dash">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="card o-hidden dash-card">
                         <div class="card-header pb-0">
                             <h4 class="card-title mb-0">
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="card o-hidden dash-card">
                         <div class="card-header pb-0">
                             <h4 class="card-title mb-0">
@@ -201,7 +201,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="card o-hidden dash-card">
                         <div class="card-header pb-0">
                             <h4 class="card-title mb-0">
@@ -228,6 +228,48 @@
                                         <tr>
                                             <td>Other Branch</td>
                                             <td>{{ $otherBranchTotal }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card o-hidden dash-card">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title mb-0">
+                                Complaint Status</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="media static-widget">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Qty</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Pending</td>
+                                            <td>{{ $pending }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Follow</td>
+                                            <td>{{ $follow }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Assigned</td>
+                                            <td>{{ $assigned }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Progress</td>
+                                            <td>{{ $progress }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Completed</td>
+                                            <td>{{ $completed }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

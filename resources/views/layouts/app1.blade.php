@@ -48,6 +48,17 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
 </head>
 
+<style>
+    @font-face {
+        font-family: myFirstFont;
+        src: url(sansation_light.woff);
+    }
+
+    body {
+        font-family: myFirstFont;
+    }
+</style>
+
 <body>
     <!-- Loader starts-->
     <div class="loader-wrapper">

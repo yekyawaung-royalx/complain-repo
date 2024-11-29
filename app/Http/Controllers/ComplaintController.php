@@ -215,7 +215,7 @@ class ComplaintController extends Controller
             $complaints = DB::table('complaints')
             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-            ->where('handle_by',Auth::user()->name)
+            //->where('handle_by',Auth::user()->name)
             ->where('deleted_at','0')
             ->paginate(20);
         }
@@ -465,8 +465,29 @@ $chartData = [
         ]
             ]
 ];
+//complaint status count//
+    $completed=DB::table('complaints')->whereIn('status_name',['completed','review'])
+    ->whereDate('created_at','>=',$start_date)
+    ->whereDate('created_at','<=',$end_date)
+    ->count();
+    $follow=DB::table('complaints')->whereIn('status_name', ['handled'])
+    ->whereDate('created_at','>=',$start_date)
+    ->whereDate('created_at','<=',$end_date)
+    ->count();
+    $assigned=DB::table('complaints')->whereIn('status_name',['assigned'])
+    ->whereDate('created_at','>=',$start_date)
+    ->whereDate('created_at','<=',$end_date)
+    ->count();
+    $progress=DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
+    ->whereDate('created_at','>=',$start_date)
+    ->whereDate('created_at','<=',$end_date)
+    ->count();
+    $pending=DB::table('complaints')->whereIn('status_name', ['pending'])
+    ->whereDate('created_at','>=',$start_date)
+    ->whereDate('created_at','<=',$end_date)
+    ->count();
        // dd($result);
-     return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal','serviceComplaintTotal','lossDamageTotal'));
+     return view('dashboard',compact('complaints','datasetsIn','label','completed','pending','follow','assigned','progress','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal','serviceComplaintTotal','lossDamageTotal'));
     }
 
     public function searchdashboard(Request $request){
@@ -580,7 +601,28 @@ $chartData = [
         ]
             ]
 ];
-            return view('dashboard',compact('complaints','datasetsIn','label','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal','serviceComplaintTotal','lossDamageTotal'));
+//complaint status count//
+$completed=DB::table('complaints')->whereIn('status_name',['completed','review'])
+    ->whereDate('created_at','>=',$start_date)
+    ->whereDate('created_at','<=',$end_date)
+    ->count();
+    $follow=DB::table('complaints')->whereIn('status_name', ['handled'])
+    ->whereDate('created_at','>=',$start_date)
+    ->whereDate('created_at','<=',$end_date)
+    ->count();
+    $assigned=DB::table('complaints')->whereIn('status_name',['assigned'])
+    ->whereDate('created_at','>=',$start_date)
+    ->whereDate('created_at','<=',$end_date)
+    ->count();
+    $progress=DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
+    ->whereDate('created_at','>=',$start_date)
+    ->whereDate('created_at','<=',$end_date)
+    ->count();
+    $pending=DB::table('complaints')->whereIn('status_name', ['pending'])
+    ->whereDate('created_at','>=',$start_date)
+    ->whereDate('created_at','<=',$end_date)
+    ->count();
+    return view('dashboard',compact('complaints','datasetsIn','label','completed','pending','follow','assigned','progress','chartData','start_date','end_date','ygnBranchTotal','otherBranchTotal','RopTotal','serviceComplaintTotal','lossDamageTotal'));
 }
 
 //export controller//

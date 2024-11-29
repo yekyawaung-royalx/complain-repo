@@ -404,24 +404,22 @@
     </div>
     <!-- latest jquery-->
     <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
+
     <!-- Bootstrap js-->
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <!-- feather icon js-->
     <script src="{{ asset('assets/js/feather.min.js') }}"></script>
     <script src="{{ asset('assets/js/feather-icon.js') }}"></script>
     <!-- scrollbar js-->
-    <script src="{{ asset('assets/js/simplebar.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
     <!-- Sidebar jquery-->
     <script src="{{ asset('assets/js/config.js') }}"></script>
     <!-- Plugins JS start-->
-    <script src="{{ asset('assets/js/sidebar-menu.js') }}"></script>
     <script src="{{ asset('assets/js/knob.min.js') }}"></script>
     <script src="{{ asset('assets/js/knob-chart.js') }}"></script>
-    <script src="{{ asset('assets/js/apex-chart.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/apex-chart.js') }}"></script> --}}
     <script src="{{ asset('assets/js/stock-prices.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-notify.min.js') }}"></script>
-    <script src="{{ asset('assets/js/default.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/default.js') }}"></script> --}}
     <script src="{{ asset('assets/js/index.js') }}"></script>
     <script src="{{ asset('assets/js/datepicker.js') }}"></script>
     <script src="{{ asset('assets/js/datepicker.en.js') }}"></script>
@@ -430,10 +428,9 @@
     <script src="{{ asset('assets/js/photoswipe-ui-default.min.js') }}"></script>
     <script src="{{ asset('assets/js/photoswipe.js') }}"></script>
     <script src="{{ asset('assets/js/handlebars.js') }}"></script>
-    <script src="{{ asset('assets/js/typeahead.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/typeahead.custom.js') }}"></script>
-    <script src="{{ asset('assets/js/handlebars.js') }}"></script>
-    <script src="{{ asset('assets/js/typeahead-custom.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/typeahead.bundle.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/typeahead.custom.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/typeahead-custom.js') }}"></script> --}}
     <script src="{{ asset('assets/js/height-equal.js') }}"></script>
     <script src="{{ asset('assets/js/select2-custom.js') }}"></script>
     <script src="{{ asset('assets/js/select2.full.min.js') }}"></script>
@@ -460,7 +457,7 @@
                 var amount = $(".amount").val();
                 var complaint_id = $("#complaint_id").val();
                 var message = $(".internal-message").val();
-                var photo = $('#image').prop('files')[0];
+                //var photo = $('#image').prop('files')[0];
                 var form = this;
                 var _token = $("#_token").val();
                 var case_type_name = $(".case_type_name").val();
@@ -469,7 +466,7 @@
                 //let _token = $('meta[name="csrf-token"]').attr('content');
 
 
-                formData.append('image', photo);
+                //formData.append('image', photo);
                 formData.append('handled_by', handled_by);
                 formData.append('operation_person', operation_person);
                 formData.append('operation_id', operation_id);
