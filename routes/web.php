@@ -167,10 +167,9 @@ Route::delete('/delete/{id}',[App\Http\Controllers\ComplaintController::class,'d
 //export route//
 Route::get('/export-complaints', [ComplaintController::class, 'exportComplaints']);
 Route::get('/search-item', [ComplaintController::class, 'searchItem']);
+Route::get('/filter', [ComplaintController::class, 'search_filter']);
 
 
 });
 // Route::get('/cx-team',[App\Http\Controllers\ComplaintController::class,'cx_team']);
-Route::get('/info', function () {
-   phpinfo();
-});
+Route::post('/complaints/{id}/update-operation',[App\Http\Controllers\ComplaintController::class,'update_operation']);

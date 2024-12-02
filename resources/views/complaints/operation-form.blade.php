@@ -88,7 +88,7 @@
             </div>
             <!-- Container-fluid starts-->
             <div class="container-fluid default-dash">
-                <form action="{{ url('complaints/' . $complaint->id . '/update') }}" method="POST"
+                <form action="{{ url('complaints/' . $complaint->id . '/update-operation') }}" method="POST"
                     enctype="multipart/form-data" id="form-data">
                     @csrf
                     <div class="row">
@@ -484,7 +484,7 @@
                 });
 
                 $.ajax({
-                    url: url + '/complaints/' + complaint_id + '/update',
+                    url: url + '/complaints/' + complaint_id + '/update-operation',
                     type: 'POST',
                     contentType: 'multipart/form-data',
                     cache: false,

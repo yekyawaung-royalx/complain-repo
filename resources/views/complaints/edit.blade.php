@@ -9,6 +9,56 @@
         #target-1 {
             display: none;
         }
+
+        .input_copy_wrapper {
+            /* width: 450px; */
+            /* padding: 50px; */
+            margin: 0 auto;
+        }
+
+        .input_copy {
+            padding: 15px 25px;
+            background: #eee;
+            border: 2px solid #aaa;
+            color: #aaa;
+            font-size: 1rem;
+        }
+
+        .input_copy .icon {
+            display: block;
+            max-width: 25px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .input_copy .icon i {
+            max-width: 25px;
+        }
+
+        .input_copy .txt {
+            width: 80%;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+
+        /* click animation */
+
+        .flashBG {
+            animation-name: flash;
+            animation-timing-function: ease-out;
+            animation-duration: 1s;
+        }
+
+        @keyframes flash {
+            0% {
+                background: #28a745;
+            }
+
+            100% {
+                background: transparent;
+            }
+        }
     </style>
     <div class="page-body">
         <div class="container-fluid">
@@ -107,8 +157,15 @@
                                     <div class="media media-dashboard">
                                         <div class="media-body">
                                             <label class="form-label text-muted">operation-reply Link</label>
-                                            <input type="text" class="form-control" value="{{ $url }}"
-                                                readonly>
+                                            <div class="input_copy_wrapper">
+                                                <div class="input_copy">
+                                                    <span class="txt">{{ $url }}</span>
+                                                    <span class="icon right">
+                                                        <i class="fa fa-clone"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +234,7 @@
                                                                 {{ $user->name }}</option>
                                                         @endif
                                                     @else
-                                                        @if ($user->name == $complaint->handle_by)
+                                                        @if ($user->name == Auth::user()->name)
                                                             <option
                                                                 value="{{ $user->name }}"{{ $user->name == $complaint->handle_by ? 'selected' : '' }}>
                                                                 {{ $user->name }}</option>
@@ -602,8 +659,13 @@
                 }
 
             } else {
-                // return true;
-                //alert('not status')
+                if (operation_person == '' || branch == '' || handled_by == '') {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'ရုံးခွဲတာဝန်ခံ/ရုံးခွဲအမည်/တာဝန်ခံသူရွေးပေးပါရန်',
+                    })
+                    return false;
+                }
                 var status = 'true';
                 //alert(status + 'not status');
             }
@@ -755,6 +817,23 @@
                 $('#save').prop('disabled', false)
             }
         })
+
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+
+        var addrsField = $('.input_copy .txt');
+        $('.input_copy .icon').click(function() {
+            copyToClipboard('.input_copy .txt');
+            addrsField.addClass('flashBG').delay('1000').queue(function() {
+                addrsField.removeClass('flashBG').dequeue();
+            });
+        });
+
 
     })
 </script>

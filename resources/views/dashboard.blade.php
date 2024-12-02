@@ -256,7 +256,7 @@
                                             <td>{{ $pending }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Follow</td>
+                                            <td>Handled</td>
                                             <td>{{ $follow }}</td>
                                         </tr>
                                         <tr>

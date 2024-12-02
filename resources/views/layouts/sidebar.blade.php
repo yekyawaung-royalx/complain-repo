@@ -102,7 +102,7 @@
                             <li><a href="{{ url('complaints/status/operation-reply') }}">Operation Reply</a></li>
                             <li><a href="{{ url('complaints/status/completed') }}">Completed</a></li> --}}
                             <li><a href="{{ url('complaints/status/pending') }}">Pending</a></li>
-                            <li><a href="{{ url('complaints/status/follow-up') }}">Follow Up</a></li>
+                            <li><a href="{{ url('complaints/status/follow-up') }}">Handled</a></li>
                             <li><a href="{{ url('complaints/status/assigned') }}">Assigned</a></li>
                             <li><a href="{{ url('complaints/status/progress') }}">Progress</a></li>
                             <li><a href="{{ url('complaints/status/completed') }}">Completed</a></li>

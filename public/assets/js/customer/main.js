@@ -39,8 +39,9 @@ $('[name=nav]').each(function(i,d){
       success: function(data){
       $.each(data, function(i, v) {
         //console.log(v.case_name);
-        $("#case_type").append('<option class="case" value="'+v.case_name+'">'+v.case_name+'</option>')
-        
+        if(v.case_name!=='Pest Control' && v.case_name!=='Force Majeure' && v.case_name!=='Illegal  Restricted Material' && v.case_name!=='Wrong Transfer City' && v.case_name!=='Parcel Wrong' && v.case_name!=='CX Complain' && v.case_name!=='Not Collect Pick Up Complain'){
+          $("#case_type").append('<option class="case" value="'+v.case_name+'">'+v.case_name+'</option>')
+        }
     });
       }
     })

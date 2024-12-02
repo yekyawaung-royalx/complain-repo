@@ -665,6 +665,58 @@ public function exportComplaints(Request $request)
         ->get();
         return response()->json($complaints);
     }
+
+    public function update_operation(Request $request,$id){
+        $complaint = DB::table('complaints')->where('id', $id)->first();
+        if ($request->case_status == 'operation-reply') {
+            $message_by = $request->operation_person . ' operation-reply complaint to ' . $request->handled_by. '.';
+            $department = $request->operation_person;
+        }else {
+            $message_bimagey = '';
+            $department = 'CX-Team';
+        }
+        if($complaint){
+            if ($complaint) {
+                DB::table('complaints')->where('id', $id)->update([
+                    'status_name' => $request->case_status,
+                    'company_remark' => $request->message,
+                    'updated_at' =>  date('Y-m-d H:i:s'),
+                ]);
+                DB::table('complaint_logs')->insert([
+                    'complaint_id' => $id,
+                    'status_name' => $request->case_status,
+                    'message_by' => $message_by,
+                    'department' => $department,
+                    'message' => $request->message,
+                    //'image'=>$request->$file_name,
+                    'created_at' =>  date('Y-m-d H:i:s'),
+                    'updated_at' =>  date('Y-m-d H:i:s'),
+                ]);
+            }
+        }
+    }
+
+    public function search_filter(Request $request){
+        $type=$request->service;
+       if($type=='service'){
+        $complaints = DB::table('complaints')
+        ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
+        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+       //->Where('handle_by',Auth::user()->name)
+       ->where('deleted_at','0')
+       ->paginate(50);
+       }if($type=='loss'){
+        $complaints = DB::table('complaints')
+        ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
+        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+       //->Where('handle_by',Auth::user()->name)
+       ->where('deleted_at','0')
+       ->paginate(50);
+       }
+       return response()->json($complaints);
+    }
        
 }
 
