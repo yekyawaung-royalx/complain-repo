@@ -121,7 +121,7 @@
 
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 my-2">
                                     <div class="checkbox-dropdown">
                                         Complaint Type
                                         <ul class="checkbox-dropdown-list">
