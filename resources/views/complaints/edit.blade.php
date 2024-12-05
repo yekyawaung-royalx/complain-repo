@@ -659,13 +659,7 @@
                 }
 
             } else {
-                if (operation_person == '' || branch == '' || handled_by == '') {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'ရုံးခွဲတာဝန်ခံ/ရုံးခွဲအမည်/တာဝန်ခံသူရွေးပေးပါရန်',
-                    })
-                    return false;
-                }
+
                 var status = 'true';
                 //alert(status + 'not status');
             }
