@@ -94,23 +94,23 @@ Route::get('/complaints/all-json/{status}',[App\Http\Controllers\ComplaintContro
  
 Route::get('/user-dashboard', function () {
     $complaint_count = DB::table('complaints')
-   // ->Where('handle_by',Auth::user()->name)
+    ->Where('handle_by',Auth::user()->name)
     ->where('deleted_at','0')
     ->count();
     $completed=DB::table('complaints')->whereIn('status_name',['completed','review'])
-   // ->Where('handle_by',Auth::user()->name)
+    ->Where('handle_by',Auth::user()->name)
     ->where('deleted_at','0')
     ->count();
     $follow=DB::table('complaints')->whereIn('status_name', ['handled'])
-   // ->Where('handle_by',Auth::user()->name)
+    ->Where('handle_by',Auth::user()->name)
     ->where('deleted_at','0')
     ->count();
     $assigned=DB::table('complaints')->whereIn('status_name',['assigned'])
-    //->Where('handle_by',Auth::user()->name)
+    ->Where('handle_by',Auth::user()->name)
     ->where('deleted_at','0')
     ->count();
     $progress=DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
-    //->Where('handle_by',Auth::user()->name)
+    ->Where('handle_by',Auth::user()->name)
     ->where('deleted_at','0')
     ->count();
     $complaint_review = DB::table('complaints')

@@ -78,4 +78,15 @@ class User extends Authenticatable
 			return false; 
 		}
 	}
+    public function isDemage()
+	{
+		if($this->role === '3')
+		{ 
+			return true; 
+		} 
+		else 
+		{ 
+			return false; 
+		}
+	}
 }

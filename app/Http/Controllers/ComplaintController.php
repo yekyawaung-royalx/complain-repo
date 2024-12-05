@@ -215,6 +215,13 @@ class ComplaintController extends Controller
             $complaints = DB::table('complaints')
             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            ->where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->paginate(20);
+        }if(Auth::user()->isDemage()){
+            $complaints = DB::table('complaints')
+            ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
             //->where('handle_by',Auth::user()->name)
             ->where('deleted_at','0')
             ->paginate(20);

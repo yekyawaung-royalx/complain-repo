@@ -79,7 +79,7 @@
                         <div class="row wrapper">
                             <div class="col-lg-6 input_field">
                                 <label for="">တိုင်ကြား /
-                                    အကြံပြုသူအမည်<strong>*</strong></label>
+                                    အကြံပြုသူအမည်<strong>*(customer)</strong></label>
                                 <input type="text" class="form-control mb-3" placeholder="Mg Mg"
                                     name="complainant_name" id="complainant_name" required>
                                 <p id="name-validate"></p>
@@ -183,7 +183,7 @@
                             </div>
                             <div class="col-lg-6 input_field re-hide">
                                 <label for="">တိုင်ကြား /
-                                    အကြံပြုသူအမည်<strong>*</strong></label>
+                                    အကြံပြုသူအမည်<strong>*(customer)</strong></label>
                                 <input type="text" class="form-control mb-3" placeholder="Mg Mg"
                                     id="e_complainant_name" name="e_complainant_name" required>
                             </div>
@@ -269,7 +269,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     {{-- <h5 class="modal-title" id="exampleModalLabel"><label></label></h5> --}}
-                    <label>Your Code Number</label>
+                    <label>Your Code Number<stron>(Staff ID)</strong></label>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

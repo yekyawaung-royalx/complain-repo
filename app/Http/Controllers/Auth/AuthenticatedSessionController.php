@@ -33,6 +33,8 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('dashboard2');
         }if(Auth::user()->isDev()){
             return redirect()->intended(RouteServiceProvider::HOME);
+        }if(Auth::user()->isDemage()){
+            return redirect()->route('dashboard2');
         }
         
     }
