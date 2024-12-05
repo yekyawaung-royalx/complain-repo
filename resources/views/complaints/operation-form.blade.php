@@ -498,7 +498,7 @@
     <!-- Theme js-->
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="{{ asset('assets/js/customizer.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('assets/js/sweetalert.js') }}"></script>
     <!-- login js-->
     <!-- Plugin used-->
     <script>
