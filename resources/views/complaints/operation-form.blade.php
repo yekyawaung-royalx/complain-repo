@@ -264,10 +264,16 @@
                                                     disabled>
                                                     <option value="">No Person</option>
                                                     @foreach ($employees as $employee)
-                                                        <option
-                                                            value="{{ $employee->employee_id }}({{ $employee->employee_id }})"
-                                                            {{ $employee->employee_name . '(' . $employee->employee_id . ')' == $complaint->employee_name ? 'selected' : '' }}>
-                                                            {{ $employee->employee_name }}({{ $employee->employee_id }})
+                                                        @php
+                                                            $optionValue =
+                                                                $employee->employee_name .
+                                                                ' (' .
+                                                                $employee->employee_id .
+                                                                ')';
+                                                        @endphp
+                                                        <option value="{{ $optionValue }}"
+                                                            {{ trim(strtolower($complaint->employee_name)) == trim(strtolower($optionValue)) ? 'selected' : '' }}>
+                                                            {{ $optionValue }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -294,8 +300,11 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="col-form-label text-muted">ပေးလျော်သည့်ငွေပမဏ</label>
-                                                <input class="form-control amount" type="text"
-                                                    value="{{ $complaint->refund_amount }}" disabled>
+                                                @foreach ($pricing as $pricings)
+                                                    <input class="form-control amount" type="text"
+                                                        value="{{ $pricings->negotiable_price }}" disabled>
+                                                @endforeach
+
                                             </div>
                                         </div>
                                         {{-- <div class="mb-3">
@@ -310,7 +319,10 @@
                                         <input type="hidden" name="case_status" id="case_status"
                                             value="operation-reply">
                                         <div class="form-footer">
-                                            @if ($complaint->status_name == 'assigned' || $complaint->status_name == 'cx-reply')
+                                            @if (
+                                                $complaint->status_name == 'assigned' ||
+                                                    $complaint->status_name == 'cx-reply' ||
+                                                    $complaint->status_name == 'refund')
                                                 <button class="btn btn-primary btn-block" id="save"
                                                     type="submit">Save</button>
                                             @endif

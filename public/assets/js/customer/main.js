@@ -95,7 +95,7 @@ $('[name=nav]').each(function(i,d){
             showForm();
            
            $.each(data,function(i,v){
-            $("#employee_rex").val(v.employee_id)
+            $("#employee_rex").val(v.employee_id + " (" + v.employee_name + ")");
            })
            }
         },

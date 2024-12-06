@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
@@ -113,7 +114,22 @@ class CustomerController extends Controller
         $e_case_type = $request->e_case_type;
         $detail_complainant = $request->detail_complainant;
         $complainant_reco = $request->complainant_reco;
+         //validation phone number//
+         $validator = Validator::make($request->all(), [
+           'e_complainant_phone' => [
+            'required',
+            'regex:/^[0-9]+$/', // Only digits, no limit
+        ],[
+            'e_complainant_phone.regex' => 'The phone number must contain exactly 10 digits.',
+            ],
 
+        ]);
+
+        if($validator->fails())
+        {
+            return back()->with('danger',$validator->messages());
+        }
+        //end validation phone number//
         $image=array();
         if($images=$request->file('image')){
           foreach($images as $file){

@@ -53,36 +53,165 @@
                                         class="fe fe-x"></i></a></div>
                         </div>
                         <div class="card-body">
-                            <form>
-                                <div class="mb-3">
-                                    <label class="form-label text-muted">တိုင်ကြားချက်အသေးစိတ်</label>
-                                    <div class="text-dark">{{ $complaint->customer_message }}</div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-muted">ဆက်သွယ်ရန်ဖုန်းနံပါတ်</label>
+                                        <div class="text-dark">{{ $complaint->customer_mobile }}</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-muted">တိုင်ကြား / အကြံပြုသူအမည်</label>
+                                        <div class="text-dark">{{ $complaint->customer_name }}</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-muted">Waybill No</label>
+                                        @if ($complaint->waybill_no)
+                                            <div class="text-dark">{{ $complaint->waybill_no }}</div>
+                                        @else
+                                            <div class="text-dark">Empty Waybill</div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-muted">ဖြစ်စဉ်ဖြစ်ပွားသည့်နေ့စွဲ</label>
+                                        <div class="text-dark">{{ $complaint->issue_date }}</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-muted">တိုင်ကြားသည့်ရုံး</label>
+                                        @if ($complaint->source_branch)
+                                            <div class="text-dark">{{ $complaint->source_branch }}</div>
+                                        @else
+                                            <div class="text-dark">Empty Branch</div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-muted">တိုင်ကြားသူID</label>
+                                        @if ($complaint->employee_id)
+                                            <div class="text-dark">{{ $complaint->employee_id }}</div>
+                                        @else
+                                            <div class="text-dark">Empty ID</div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-muted">တိုင်ကြားချက်အမျိုးအစား</label>
+                                        <div class="text-dark">{{ $complaint->case_type_name }}</div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label text-muted">တိုင်ကြား / အကြံပြုသူအမည်</label>
-                                    <div class="text-dark">{{ $complaint->customer_name }}</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted">တိုင်ကြားချက်အသေးစိတ်</label>
+                                <div class="text-dark">{{ $complaint->customer_message }}</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted">တိုင်ကြားသူအကြံပြုချက်</label>
+                                <div class="text-dark">{{ $complaint->customer_recommendation }}</div>
+                            </div>
+                            <div class="form-footer">
+                                <a href="{{ url('complaints/' . $complaint->id . '/edit') }}"
+                                    class="btn   btn-primary btn-block">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title mb-0">Refund Amount
+                                {{-- <button class="btn btn-success pull-right" type="button" cursorshover="true">
+                                    <span cursorshover="true"></span>
+                                </button> --}}
+                            </h4>
+                            <div class="card-options"><a class="card-options-collapse" href="#"
+                                    data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
+                                    class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
+                                        class="fe fe-x"></i></a></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive custom-scrollbar">
+                                <table class="table table-bordernone">
+                                    <thead>
+                                        <tr>
+                                            <th><span>YGN Amount</span></th>
+                                            <th><span>ROP Amount</span></th>
+                                            <th><span>Other Amount</span></th>
+                                            <th><span>Original Amount</span></th>
+                                            <th><span>Negotiable Amount</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="">
+                                        @foreach ($pricing as $pricings)
+                                            <tr>
+                                                <td>
+                                                    @if ($pricings->ygn_branch)
+                                                        <h6>{{ $pricings->ygn_branch }}</h6>
+                                                        <span>{{ $pricings->ygn_refund }}mmk</span>
+                                                    @else
+                                                        <h6>Empty Branch</h6>
+                                                        <h6>0mmk</h6>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($pricings->rop_branch)
+                                                        <h6>{{ $pricings->rop_branch }}</h6>
+                                                        <span>{{ $pricings->rop_refund }}mmk</span>
+                                                    @else
+                                                        <h6>Empty</h6>
+                                                        <h6>0mmk</h6>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($pricings->other_branch)
+                                                        <h6>{{ $pricings->other_branch }}</h6>
+                                                        <span>{{ $pricings->other_refund }}mmk</span>
+                                                    @else
+                                                        <h6>Empty</h6>
+                                                        <h6>0mmk</h6>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($pricings->default_value)
+                                                        <h6>{{ $pricings->default_value }}mmk</h6>
+                                                    @else
+                                                        <h6>0mmk</h6>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($pricings->negotiable_price)
+                                                        <h6>{{ $pricings->negotiable_price }}mmk</h6>
+                                                    @else
+                                                        <h6>0mmk</h6>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title mb-0">Damage Photo
+                                {{-- <button class="btn btn-success pull-right" type="button" cursorshover="true">
+                                    <span cursorshover="true"> {{ $complaint->status_name }}</span>
+                                </button> --}}
+                            </h4>
+                            <div class="card-options"><a class="card-options-collapse" href="#"
+                                    data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
+                                    class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
+                                        class="fe fe-x"></i></a></div>
+                        </div>
+                        @php
+                            $images = explode('|', $complaint->image);
+                        @endphp
+                        <div class="card-body">
+                            @foreach ($images as $image)
+                                <div class="responsive">
+                                    <img class="drift-demo-trigger" data-zoom="{{ asset('files') }}/{{ $image }}"
+                                        src="{{ asset('files') }}/{{ $image }}" width="100%" height="auto">
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label text-muted">ဆက်သွယ်ရန်ဖုန်းနံပါတ်</label>
-                                    <div class="text-dark">{{ $complaint->customer_mobile }}</div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label text-muted">ဖြစ်စဉ်ဖြစ်ပွားသည့်နေ့စွဲ</label>
-                                    <div class="text-dark">{{ $complaint->issue_date }}</div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label text-muted">တိုင်ကြားချက်အမျိုးအစား</label>
-                                    <div class="text-dark">{{ $complaint->case_type_name }}</div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label text-muted">တိုင်ကြားသူအကြံပြုချက်</label>
-                                    <div class="text-dark">{{ $complaint->customer_recommendation }}</div>
-                                </div>
-                                <div class="form-footer">
-                                    <a href="{{ url('complaints/' . $complaint->id . '/edit') }}"
-                                        class="btn   btn-primary btn-block">Edit</a>
-                                </div>
-                            </form>
+                            @endforeach
+                        </div>
+                        <div class="details">
+
                         </div>
                     </div>
                 </div>
@@ -209,35 +338,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6 dash-35 dash-xl-50">
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            <h4 class="card-title mb-0">Damage Photo
-                                {{-- <button class="btn btn-success pull-right" type="button" cursorshover="true">
-                                    <span cursorshover="true"> {{ $complaint->status_name }}</span>
-                                </button> --}}
-                            </h4>
-                            <div class="card-options"><a class="card-options-collapse" href="#"
-                                    data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
-                                    class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
-                                        class="fe fe-x"></i></a></div>
-                        </div>
-                        @php
-                            $images = explode('|', $complaint->image);
-                        @endphp
-                        <div class="card-body">
-                            @foreach ($images as $image)
-                                <div class="responsive">
-                                    <img class="drift-demo-trigger" data-zoom="{{ asset('files') }}/{{ $image }}"
-                                        src="{{ asset('files') }}/{{ $image }}" width="100%" height="auto">
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="details">
-
                         </div>
                     </div>
                 </div>

@@ -62,9 +62,10 @@ Route::get('complaints-form/{uuid}', function ($uuid) {
         $branches = DB::table('branches')->get();
         $employees = DB::table('employees')->get();
         $users = DB::table('users')->get();
+        $pricing = DB::table('pricing')->where('complaint_id',$complaint->id)->get();
         $logs = DB::table('complaint_logs')->where('complaint_id',$complaint->id)->get();
-        
-        return view('complaints.operation-form',compact('complaint','categories','statuses','branches','employees','users','logs','ratings','rating_sum','rating_value'));
+        //dd($pricing);
+        return view('complaints.operation-form',compact('complaint','categories','statuses','branches','employees','users','logs','ratings','rating_sum','rating_value','pricing'));
     }else{
          return view('complaints.404',compact('uuid'));
     }

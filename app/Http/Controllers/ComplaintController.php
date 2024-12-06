@@ -64,9 +64,10 @@ class ComplaintController extends Controller
         $employees = DB::table('employees')->get();
         $users = DB::table('users')->get();
         $logs = DB::table('complaint_logs')->where('complaint_id', $id)->get();
+        $pricing = DB::table('pricing')->where('complaint_id',$complaint->id)->get();
         $url = url('complaints-form', ['uuid' => $complaint->complaint_uuid]);
-        // dd($signedUrl);
-        return view('complaints.view', compact('complaint', 'categories', 'statuses', 'branches', 'employees', 'users', 'logs', 'url','rating_sum','rating_value','ratings'));
+        // dd($pricing);
+        return view('complaints.view', compact('complaint', 'categories', 'statuses', 'branches', 'employees', 'users', 'logs', 'url','rating_sum','rating_value','ratings','pricing'));
     }
 
     public function update(Request $request, $id)
@@ -101,6 +102,9 @@ class ComplaintController extends Controller
             $department = 'Customer';
         } elseif ($request->case_status == 'closed') {
             $message_by = $request->handled_by . ' has been closed complaint.';
+            $department = 'CX-Team';
+        }elseif ($request->case_status == 'rejected') {
+            $message_by = $request->handled_by . ' has been rejected complaint.';
             $department = 'CX-Team';
         } else {
             $message_bimagey = '';
@@ -203,14 +207,14 @@ class ComplaintController extends Controller
             $complaints = DB::table('complaints')
             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-           // ->orderBy('id', 'desc')
+            ->orderBy('id', 'desc')
             ->paginate(20);
         }if(Auth::user()->isAdmin()){
            $complaints=DB::table('complaints')->where('deleted_at','0')
            ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
             ->where('deleted_at','0')
-           //->orderBy('id','desc')
+           ->orderBy('id','desc')
            ->paginate(20);
         }if(Auth::user()->isUser()){
             $complaints = DB::table('complaints')
@@ -218,6 +222,7 @@ class ComplaintController extends Controller
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
             ->where('handle_by',Auth::user()->name)
             ->where('deleted_at','0')
+            ->orderBy('id','desc')
             ->paginate(20);
         }if(Auth::user()->isDemage()){
             $complaints = DB::table('complaints')
@@ -225,6 +230,7 @@ class ComplaintController extends Controller
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
             //->where('handle_by',Auth::user()->name)
             ->where('deleted_at','0')
+            ->orderBy('id','desc')
             ->paginate(20);
         }
        
@@ -715,6 +721,7 @@ public function exportComplaints(Request $request)
         ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
        //->Where('handle_by',Auth::user()->name)
        ->where('deleted_at','0')
+       ->orderBy('id','desc')
        ->paginate(50);
        }if($type=='loss'){
         $complaints = DB::table('complaints')
@@ -723,6 +730,7 @@ public function exportComplaints(Request $request)
         ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
        //->Where('handle_by',Auth::user()->name)
        ->where('deleted_at','0')
+       ->orderBy('id','desc')
        ->paginate(50);
        }
     }if(Auth::user()->isAdmin()){
@@ -733,6 +741,7 @@ public function exportComplaints(Request $request)
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
            //->Where('handle_by',Auth::user()->name)
            ->where('deleted_at','0')
+           ->orderBy('id','desc')
            ->paginate(50);
            }if($type=='loss'){
             $complaints = DB::table('complaints')
@@ -741,6 +750,7 @@ public function exportComplaints(Request $request)
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
            //->Where('handle_by',Auth::user()->name)
            ->where('deleted_at','0')
+           ->orderBy('id','desc')
            ->paginate(50);
            }
     }if(Auth::user()->isUser()){
@@ -751,6 +761,7 @@ public function exportComplaints(Request $request)
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
            ->Where('handle_by',Auth::user()->name)
            ->where('deleted_at','0')
+           ->orderBy('id','desc')
            ->paginate(50);
            }if($type=='loss'){
             $complaints = DB::table('complaints')
@@ -759,6 +770,7 @@ public function exportComplaints(Request $request)
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
            ->Where('handle_by',Auth::user()->name)
            ->where('deleted_at','0')
+           ->orderBy('id','desc')
            ->paginate(50);
            }
     }if(Auth::user()->isDemage()){
@@ -767,16 +779,18 @@ public function exportComplaints(Request $request)
             ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-           ->Where('handle_by',Auth::user()->name)
+           //->Where('handle_by',Auth::user()->name)
            ->where('deleted_at','0')
+           ->orderBy('id','desc')
            ->paginate(50);
            }if($type=='loss'){
             $complaints = DB::table('complaints')
             ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-           ->Where('handle_by',Auth::user()->name)
+           //->Where('handle_by',Auth::user()->name)
            ->where('deleted_at','0')
+           ->orderBy('id','desc')
            ->paginate(50);
            }
     }

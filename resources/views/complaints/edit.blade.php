@@ -250,13 +250,20 @@
                                             <select class="js-example-basic-single col-sm-12 operation-person">
                                                 <option value="">No Person</option>
                                                 @foreach ($employees as $employee)
-                                                    <option
-                                                        value="{{ $employee->employee_id }}({{ $employee->employee_name }})"
-                                                        {{ $employee->employee_name . '(' . $employee->employee_id . ')' == $complaint->employee_name ? 'selected' : '' }}>
-                                                        {{ $employee->employee_name }}({{ $employee->employee_id }})
+                                                    @php
+                                                        $optionValue =
+                                                            $employee->employee_name .
+                                                            ' (' .
+                                                            $employee->employee_id .
+                                                            ')';
+                                                    @endphp
+                                                    <option value="{{ $optionValue }}"
+                                                        {{ trim(strtolower($complaint->employee_name)) == trim(strtolower($optionValue)) ? 'selected' : '' }}>
+                                                        {{ $optionValue }}
                                                     </option>
                                                 @endforeach
                                             </select>
+
                                         </div>
                                         <div class="col-md-6">
                                             <label class="col-form-label text-muted">ရုံးခွဲအမည်</label>
@@ -567,6 +574,7 @@
         var current_status_u = $(".case-status-u").val();
         var current_status = $(".case-status").val();
         var connection = $("#connection").val();
+
         //alert(connection)
         $('#form-data').on('submit', (e) => {
             e.preventDefault();
@@ -827,6 +835,25 @@
                 addrsField.removeClass('flashBG').dequeue();
             });
         });
+
+        //disable assigned rop//
+
+        var current_status_u = $(".case-status-u").val();
+        var current_status = $(".case-status").val();
+        if (current_status == 'pending' || current_status == 'handled') {
+            $('.operation-person').prop('disabled', true);
+            $('.branch').prop('disabled', true);
+        }
+        $(".case-status,.case-status-u").on('change', function() {
+            if ($(this).val() == 'pending' || $(this).val() == 'handled') {
+                $('.operation-person').prop('disabled', true);
+                $('.branch').prop('disabled', true);
+            } else {
+                $('.operation-person').prop('disabled', false);
+                $('.branch').prop('disabled', false);
+            }
+
+        })
 
 
     })
