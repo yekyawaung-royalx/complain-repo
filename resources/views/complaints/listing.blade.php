@@ -9,6 +9,90 @@
             justify-content: flex-start;
         }
     </style>
+    <style>
+        .deleted_at {
+            display: none;
+        }
+
+        .page-wrapper .page-body-wrapper .page-title .breadcrumb {
+            justify-content: flex-start;
+        }
+
+        .checkbox-dropdown {
+            width: 200px;
+            border: 1px solid #aaa;
+            padding: 10px;
+            position: relative;
+            /* margin: 0 auto; */
+
+            user-select: none;
+        }
+
+        /* Display CSS arrow to the right of the dropdown text */
+        .checkbox-dropdown:after {
+            content: '';
+            height: 0;
+            position: absolute;
+            width: 0;
+            border: 6px solid transparent;
+            border-top-color: #000;
+            top: 50%;
+            right: 10px;
+            margin-top: -3px;
+        }
+
+        /* Reverse the CSS arrow when the dropdown is active */
+        .checkbox-dropdown.is-active:after {
+            border-bottom-color: #000;
+            border-top-color: #fff;
+            margin-top: -9px;
+        }
+
+        .checkbox-dropdown-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 100%;
+            /* align the dropdown right below the dropdown text */
+            border: inherit;
+            border-top: none;
+            left: -1px;
+            /* align the dropdown to the left */
+            right: -1px;
+            /* align the dropdown to the right */
+            opacity: 0;
+            /* hide the dropdown */
+
+            transition: opacity 0.4s ease-in-out;
+            height: 100px;
+            overflow: scroll;
+            overflow-x: hidden;
+            pointer-events: none;
+            background-color: #fff;
+            /* avoid mouse click events inside the dropdown */
+        }
+
+        .is-active .checkbox-dropdown-list {
+            opacity: 1;
+            /* display the dropdown */
+            pointer-events: auto;
+            /* make sure that the user still can select checkboxes */
+        }
+
+        .checkbox-dropdown-list li label {
+            display: block;
+            border-bottom: 1px solid silver;
+            padding: 10px;
+
+            transition: all 0.2s ease-out;
+        }
+
+        .checkbox-dropdown-list li label:hover {
+            background-color: #555;
+            color: white;
+        }
+    </style>
     <div class="page-body">
         <div class="container-fluid">
             <div class="page-title">
@@ -46,6 +130,29 @@
                     <div class="card ongoing-project">
 
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 my-2">
+                                    <div class="checkbox-dropdown">
+                                        Complaint Type
+                                        <ul class="checkbox-dropdown-list">
+                                            <li>
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    <input class="form-check-input service" type="radio"
+                                                        name="flexRadioDefault" id="flexRadioDefault1"
+                                                        value="service">Service
+                                                    Complaint</label>
+                                            </li>
+                                            <li>
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    <input class="form-check-input service" type="radio"
+                                                        name="flexRadioDefault" id="flexRadioDefault2" value="loss">Loss
+                                                    &
+                                                    Damage</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="table-responsive custom-scrollbar">
                                 <table class="table table-bordernone">
                                     <thead>
@@ -188,7 +295,7 @@
                             '</td>' +
                             '<td>' +
                             '' + value.case_type_name +
-                            '<br>Service Complaint Types' +
+                            '<br>' + value.main_category + ' ' +
                             '</td>' +
                             '<td>' +
                             '<div class="badge badge-light-primary">' + value
@@ -244,7 +351,100 @@
                 }
             })
         })
+        $(".checkbox-dropdown").click(function() {
+            $(this).toggleClass("is-active");
+        });
 
+        $(".checkbox-dropdown ul").click(function(e) {
+            e.stopPropagation();
+        });
+        $(".service").on('change', function() {
+            var value = $(this).prop("checked") ? 'true' : 'false';
+            var type = $(this).val();
+            var url = $("#url").val();
+            var filter_url = $(this).val();
+            // alert(filter_url)
+            var _token = $("#_token").val();
+            $.ajax({
+                method: "GET",
+                url: load_json + '/filters/' + filter_url,
+                data: {
+                    "service": type,
+                },
+                success: function(data) {
+                    $("#fetched-data").empty();
+                    if (data.total > 0) {
+                        $.each(data.data, function(key, value) {
+                            $("#fetched-data").append('<tr>' +
+                                '<td>' +
+                                '<h6>' + value.complaint_uuid + '</h6><span>' +
+                                value.created_at + '</span>' +
+                                '</td>' +
+                                '<td class="img-content-box">' +
+                                '<div class="media">' +
+                                '<div class="square-box me-2"><img class="img-fluid b-r-5" src="https://admin.pixelstrap.com/zeta/assets/images/avtar/chinese.png" alt=""></div>' +
+                                '<div class="media-body ps-2">' +
+                                '<div class="avatar-details"><a>' +
+                                '<span>' + value.customer_name +
+                                '</span></a><br>' +
+                                '<span>' + value.customer_mobile +
+                                '</span></div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</td>' +
+                                '<td>' +
+                                '' + value.case_type_name +
+                                '<br>' + value.main_category + '' +
+                                '</td>' +
+                                '<td>' +
+                                '<div class="badge badge-light-primary">' +
+                                value
+                                .status_name + '</div>' +
+                                '</td>' +
+                                '<td>' +
+                                '<a  href="' + url + '/complaints/' + value.id +
+                                '/view"  class="btn btn-success btn-sm px-2 me-1" ><i class="icon-eye fs-16" cursorshover="true"></i></a>' +
+                                '<a  href="' + url + '/complaints/' + value.id +
+                                '/edit"  class="btn btn-primary btn-sm px-2 me-1" ><i class="icon-pencil fs-16" cursorshover="true"></i></a>' +
+                                '<button class="btn btn-danger btn-sm px-2 deleted_at" value="' +
+                                value.id +
+                                '" type="button" data-bs-original-title="" title="" data-original-title="btn btn-primary-gradien"><i class="icon-trash fs-16" cursorshover="true"></i></button>' +
+                                '</td></tr>'
+                            );
+                        });
+                        if (connection == 'Developer') {
+                            $(".deleted_at").show();
+                        }
+                        $(".data-loading").hide();
+
+                        $("#to-records").text(data.to);
+                        $("#total-records").text(data.total);
+
+                        if (data.prev_page_url === null) {
+                            $("#prev-btn").attr('disabled', true);
+                        } else {
+                            $("#prev-btn").attr('disabled', false);
+                        }
+                        if (data.next_page_url === null) {
+                            $("#next-btn").attr('disabled', true);
+                        } else {
+                            $("#next-btn").attr('disabled', false);
+                        }
+                        $("#prev-btn").val(data.prev_page_url);
+                        $("#next-btn").val(data.next_page_url);
+                    } else {
+                        $(".show-alert").show();
+                        $(".pagination").hide();
+                        $(".data-loading").hide();
+                    }
+                },
+                error: function(xhr) {
+                    console.error("AJAX Error:", xhr.responseText);
+                    $(".data-loading").hide();
+                },
+
+            })
+        })
 
     });
 </script>

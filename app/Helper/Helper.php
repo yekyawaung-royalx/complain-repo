@@ -81,6 +81,15 @@ function groupStatus($status)
             ->paginate(50);
             // $status_array['status'] = $complaints;
         }
+        if ($status == 'rejected') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
+            ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
     }if(Auth::user()->isUser()){ 
     if ($status == 'pending') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
@@ -126,6 +135,16 @@ function groupStatus($status)
     }
     if ($status == 'completed') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['completed','review'])
+        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+        ->Where('handle_by',Auth::user()->name)
+        ->where('deleted_at','0')
+        ->orderBy('id','desc')
+        ->paginate(50);
+        // $status_array['status'] = $complaints;
+    }
+    if ($status == 'rejected') {
+        $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
         ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
         ->Where('handle_by',Auth::user()->name)
@@ -182,6 +201,15 @@ function groupStatus($status)
         ->paginate(50);
         // $status_array['status'] = $complaints;
     }
+    if ($status == 'rejected') {
+        $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
+        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+       // ->where('deleted_at','0')
+       ->orderBy('id','desc')
+        ->paginate(50);
+        // $status_array['status'] = $complaints;
+    }
 }if(Auth::user()->isDemage()){ 
     if ($status == 'pending') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
@@ -227,6 +255,16 @@ function groupStatus($status)
     }
     if ($status == 'completed') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['completed','review'])
+        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+       // ->Where('handle_by',Auth::user()->name)
+        ->where('deleted_at','0')
+        ->orderBy('id','desc')
+        ->paginate(50);
+        // $status_array['status'] = $complaints;
+    }
+    if ($status == 'rejected') {
+        $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
         ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
        // ->Where('handle_by',Auth::user()->name)

@@ -271,6 +271,10 @@
                                             <td>Completed</td>
                                             <td>{{ $completed }}</td>
                                         </tr>
+                                        <tr>
+                                            <td>Rejected</td>
+                                            <td>{{ $rejected }}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

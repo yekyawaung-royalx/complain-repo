@@ -168,8 +168,8 @@ Route::delete('/delete/{id}',[App\Http\Controllers\ComplaintController::class,'d
 //export route//
 Route::get('/export-complaints', [ComplaintController::class, 'exportComplaints']);
 Route::get('/search-item', [ComplaintController::class, 'searchItem']);
-Route::get('/filter', [ComplaintController::class, 'search_filter']);
-
+Route::get('filter/{status}', [ComplaintController::class, 'search_filter']);
+Route::get('/complaints/json/{status}/filters/{id}', [ComplaintController::class, 'search_status_filter']);
 
 });
 // Route::get('/cx-team',[App\Http\Controllers\ComplaintController::class,'cx_team']);

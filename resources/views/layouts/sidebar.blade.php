@@ -106,6 +106,7 @@
                             <li><a href="{{ url('complaints/status/assigned') }}">Assigned</a></li>
                             <li><a href="{{ url('complaints/status/progress') }}">Progress</a></li>
                             <li><a href="{{ url('complaints/status/completed') }}">Completed</a></li>
+                            <li><a href="{{ url('complaints/status/rejected') }}">Reject</a></li>
                         </ul>
                     </li>
 

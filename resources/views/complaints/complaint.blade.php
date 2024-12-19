@@ -259,7 +259,6 @@
                 $(".data-loading").show();
                 $("#fetched-data").empty();
                 var clicked_url = $(this).val();
-
                 $(this).siblings().removeClass('active')
                 $(this).addClass('active');
                 $.ajax({
@@ -285,7 +284,7 @@
                                 '</td>' +
                                 '<td>' +
                                 '' + value.case_type_name +
-                                '<br>Service Complaint Types' +
+                                '<br>' + value.main_category + ' ' +
                                 '</td>' +
                                 '<td>' +
                                 '<div class="badge badge-light-primary">' + value
@@ -302,6 +301,9 @@
                                 '</td></tr>'
                             );
                         });
+                        if (connection == 'Developer') {
+                            $(".deleted_at").show();
+                        }
                         $(".data-loading").hide();
 
 
@@ -354,14 +356,16 @@
             //filter search//
             $(".service").on('change', function() {
                 var value = $(this).prop("checked") ? 'true' : 'false';
-                var value = $(this).val();
+                var type = $(this).val();
                 var url = $("#url").val();
+                var filter_url = $(this).val();
+                // alert(filter_url)
                 var _token = $("#_token").val();
                 $.ajax({
                     method: "GET",
-                    url: url + '/filter',
+                    url: url + '/filter/' + filter_url,
                     data: {
-                        "service": value,
+                        "service": type,
                     },
                     success: function(data) {
                         $("#fetched-data").empty();
@@ -404,7 +408,6 @@
                                     '</td></tr>'
                                 );
                             });
-                            // Hide delete buttons if connection is set
                             if (connection == 'Developer') {
                                 $(".deleted_at").show();
                             }
@@ -430,13 +433,14 @@
                             $(".pagination").hide();
                             $(".data-loading").hide();
                         }
-                    }
+                    },
+                    error: function(xhr) {
+                        console.error("AJAX Error:", xhr.responseText);
+                        $(".data-loading").hide();
+                    },
 
                 })
-
-
             })
-
         });
     </script>
 @endsection
