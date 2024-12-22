@@ -4,11 +4,94 @@
         .float-right {
             display: flex;
             float: right;
-            margin: 10px;
+            /* margin: 10px; */
         }
 
         .dash-card {
             height: 90%;
+        }
+
+        .session-by-channel-legend ul li {
+            list-style-type: none;
+            color: #9c9fa6;
+            font-size: .75rem;
+        }
+
+        .session-by-channel-legend li {
+            margin-top: 1rem;
+
+        }
+
+        .session-by-channel-legend {
+            padding-left: 22px;
+            /* margin-top: 5rem; */
+            margin-bottom: 0;
+        }
+
+        .legend-dots {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 100%;
+            display: inline-block;
+            vertical-align: text-bottom;
+            margin-right: .5rem;
+        }
+
+        .ps-x1 {
+            padding-left: 1.25rem;
+        }
+
+        .py-1 {
+            padding-top: 0.25rem !important;
+            padding-bottom: 0.25rem;
+        }
+
+        .avatar-xl {
+            height: 2rem;
+            width: 2rem;
+        }
+
+        .avatar {
+            position: relative;
+            display: inline-block;
+        }
+
+        .avatar .avatar-name {
+            background-color: var(--falcon-avatar-name-bg);
+            position: absolute;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .avatar .avatar-name>span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+        }
+
+        .py-1 {
+            padding-top: 0.25rem !important;
+            padding-bottom: 0.25rem !important;
+        }
+
+        .pe-x1 {
+            padding-right: 1.25rem;
+        }
+
+        .flex-end-center {
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
         }
     </style>
     <div class="page-body">
@@ -69,249 +152,312 @@
         <!-- Container-fluid starts-->
         <div class="container-fluid default-dash">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-6">
                     <div class="card o-hidden dash-card">
                         <div class="card-header pb-0">
-                            <h4 class="card-title mb-0">
-                                Loss & Damage Types</h4>
+                            <h6 class="card-title mb-0">Refund Amount</h6>
                         </div>
                         <div class="card-body">
                             <div class="media static-widget">
-                                @if ($complaints->isNotEmpty())
-                                    @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
-                                        @if ($mainGroup == 'Loss & Damage Types')
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Qty</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($groupComplaints as $index => $complaint)
-                                                        <tr>
-                                                            <td>{{ $complaint->case_type_name }}</td>
-                                                            <td>{{ $complaint->num }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        @else
-                                            @if ($mainGroup !== 'Service Complaint Types')
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Other</th>
-                                                            <th scope="col">Qty</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>No data available</td>
-                                                            <td>0</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                @else
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Loss & Damage Types</th>
-                                                <th scope="col">Qty</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>No data available</td>
-                                                <td>0</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                @endif
+
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="" style="width:300px;margin:auto">
+                                                <canvas id="myPie"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <ul class="session-by-channel-legend">
+                                                <li>
+                                                    <span class="legend-dots bg-info"></span>YGN Branch
+                                                    <span class="float-right">{{ $ygnBranchTotal }}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="legend-dots bg-success"></span>Other Branch
+                                                    <span class="float-right">{{ $otherBranchTotal }}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="legend-dots bg-danger"></span>ROP Branch
+                                                    <span class="float-right">{{ $RopTotal }}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="card o-hidden dash-card">
-                        <div class="card-header pb-0">
-                            <h4 class="card-title mb-0">
-                                Service Complaint Types</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="media static-widget">
-                                @if ($complaints->isNotEmpty())
-                                    @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
-                                        @if ($mainGroup == 'Service Complaint Types')
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Qty</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($groupComplaints as $index => $complaint)
-                                                        <tr>
-                                                            <td>{{ $complaint->case_type_name }}</td>
-                                                            <td>{{ $complaint->num }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        @else
-                                            @if ($mainGroup !== 'Loss & Damage Types')
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Other</th>
-                                                            <th scope="col">Qty</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>No data available</td>
-                                                            <td>0</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                @else
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Service Complaint Types</th>
-                                                <th scope="col">Qty</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>No data available</td>
-                                                <td>0</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                @endif
+                <div class="col-lg-6">
+                    <div class="card h-lg-100 overflow-hidden">
+                        <div class="card-header bg-body-tertiary">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="mb-0">Complaint Status</h6>
+                                </div>
+                                {{-- <div class="col-auto text-center pe-x1"><select class="form-select form-select-sm">
+                                        <option>Working Time</option>
+                                        <option>Estimated Time</option>
+                                        <option>Billable Time</option>
+                                    </select></div> --}}
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card o-hidden dash-card">
-                        <div class="card-header pb-0">
-                            <h4 class="card-title mb-0">
-                                Refund Amount Status</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="media static-widget">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Branch</th>
-                                            <th scope="col">Amount</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>YGN Branch</td>
-                                            <td>{{ $ygnBranchTotal }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>ROP Branch</td>
-                                            <td>{{ $RopTotal }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other Branch</td>
-                                            <td>{{ $otherBranchTotal }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="card-body p-0">
+                            <div class="row g-0 align-items-center py-2 position-relative border-bottom border-200">
+                                <div class="col ps-x1 py-1 position-static">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-xl me-3">
+                                            <div class="avatar-name rounded-circle bg-light text-dark"><span
+                                                    class="fs-9 text-primary">P</span></div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h6 class="mb-0 d-flex align-items-center"><a class="text-800 stretched-link"
+                                                    href="{{ url('complaints/status/pending') }}">Pending</a><span
+                                                    class="badge rounded-pill ms-2 bg-200 text-primary"></span>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col py-1">
+                                    <div class="row flex-end-center g-0">
+                                        <div class="col-auto pe-2">
+                                            <div class="fs-10 fw-semi-bold">{{ $pending }}</div>
+                                        </div>
+                                        <div class="col-5 pe-x1 ps-2">
+                                            <div class="progress bg-200 me-2" style="height: 5px;" role="progressbar"
+                                                aria-valuenow="38" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar rounded-pill" style="width: 38%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0 align-items-center py-2 position-relative border-bottom border-200">
+                                <div class="col ps-x1 py-1 position-static">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-xl me-3">
+                                            <div class="avatar-name rounded-circle bg-light text-dark"
+                                                style="--bs-bg-opacity: .5;">
+                                                <span class="fs-9 text-success">H</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h6 class="mb-0 d-flex align-items-center"><a class="text-800 stretched-link"
+                                                    href="{{ url('complaints/status/follow-up') }}">Handled</a><span
+                                                    class="badge rounded-pill ms-2 bg-200 text-primary"></span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col py-1">
+                                    <div class="row flex-end-center g-0">
+                                        <div class="col-auto pe-2">
+                                            <div class="fs-10 fw-semi-bold">{{ $follow }}</div>
+                                        </div>
+                                        <div class="col-5 pe-x1 ps-2">
+                                            <div class="progress bg-200 me-2" style="height: 5px;" role="progressbar"
+                                                aria-valuenow="79" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar rounded-pill" style="width: 79%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0 align-items-center py-2 position-relative border-bottom border-200">
+                                <div class="col ps-x1 py-1 position-static">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-xl me-3">
+                                            <div class="avatar-name rounded-circle bg-light text-dark"><span
+                                                    class="fs-9 text-info">A</span></div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h6 class="mb-0 d-flex align-items-center"><a class="text-800 stretched-link"
+                                                    href="{{ url('complaints/status/assigned') }}">Assigned</a><span
+                                                    class="badge rounded-pill ms-2 bg-200 text-primary"></span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col py-1">
+                                    <div class="row flex-end-center g-0">
+                                        <div class="col-auto pe-2">
+                                            <div class="fs-10 fw-semi-bold">{{ $assigned }}</div>
+                                        </div>
+                                        <div class="col-5 pe-x1 ps-2">
+                                            <div class="progress bg-200 me-2" style="height: 5px;" role="progressbar"
+                                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar rounded-pill" style="width: 90%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0 align-items-center py-2 position-relative border-bottom border-200">
+                                <div class="col ps-x1 py-1 position-static">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-xl me-3">
+                                            <div class="avatar-name rounded-circle bg-light text-dark"><span
+                                                    class="fs-9 text-warning">P</span></div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h6 class="mb-0 d-flex align-items-center"><a class="text-800 stretched-link"
+                                                    href="{{ url('complaints/status/progress') }}">Progress</a><span
+                                                    class="badge rounded-pill ms-2 bg-200 text-primary"></span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col py-1">
+                                    <div class="row flex-end-center g-0">
+                                        <div class="col-auto pe-2">
+                                            <div class="fs-10 fw-semi-bold">{{ $progress }}</div>
+                                        </div>
+                                        <div class="col-5 pe-x1 ps-2">
+                                            <div class="progress bg-200 me-2" style="height: 5px;" role="progressbar"
+                                                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar rounded-pill" style="width: 40%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0 align-items-center py-2 position-relative border-bottom border-200">
+                                <div class="col ps-x1 py-1 position-static">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-xl me-3">
+                                            <div class="avatar-name rounded-circle bg-light text-dark"><span
+                                                    class="fs-9 text-danger">C</span></div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h6 class="mb-0 d-flex align-items-center"><a class="text-800 stretched-link"
+                                                    href="{{ url('complaints/status/completed') }}">Completed</a><span
+                                                    class="badge rounded-pill ms-2 bg-200 text-primary"></span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col py-1">
+                                    <div class="row flex-end-center g-0">
+                                        <div class="col-auto pe-2">
+                                            <div class="fs-10 fw-semi-bold">{{ $completed }}</div>
+                                        </div>
+                                        <div class="col-5 pe-x1 ps-2">
+                                            <div class="progress bg-200 me-2" style="height: 5px;" role="progressbar"
+                                                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar rounded-pill" style="width: 70%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0 align-items-center py-2 position-relative border-bottom border-200">
+                                <div class="col ps-x1 py-1 position-static">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-xl me-3">
+                                            <div class="avatar-name rounded-circle bg-light text-dark bg-opacity-25"><span
+                                                    class="fs-9 text-danger">R</span></div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h6 class="mb-0 d-flex align-items-center"><a class="text-800 stretched-link"
+                                                    href="{{ url('complaints/status/rejected') }}">Rejected</a><span
+                                                    class="badge rounded-pill ms-2 bg-200 text-primary"></span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col py-1">
+                                    <div class="row flex-end-center g-0">
+                                        <div class="col-auto pe-2">
+                                            <div class="fs-10 fw-semi-bold">{{ $rejected }}</div>
+                                        </div>
+                                        <div class="col-5 pe-x1 ps-2">
+                                            <div class="progress bg-200 me-2" style="height: 5px;" role="progressbar"
+                                                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar rounded-pill" style="width: 70%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card o-hidden dash-card">
-                        <div class="card-header pb-0">
-                            <h4 class="card-title mb-0">
-                                Complaint Status</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="media static-widget">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Qty</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Pending</td>
-                                            <td>{{ $pending }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Handled</td>
-                                            <td>{{ $follow }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Assigned</td>
-                                            <td>{{ $assigned }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Progress</td>
-                                            <td>{{ $progress }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Completed</td>
-                                            <td>{{ $completed }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rejected</td>
-                                            <td>{{ $rejected }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        {{-- <div class="card-footer bg-body-tertiary p-0"><a class="btn btn-sm btn-link d-block w-100 py-2"
+                                href="#!">Show all projects<span class="fas fa-chevron-right ms-1 fs-11"></span></a>
+                        </div> --}}
                     </div>
                 </div>
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-8 col-md-8 dash-35 dash-xl-60">
-                        <div class="card dash-card">
-                            <div class="card-header pb-0">
-                                <h4 class="card-title mb-0">Complaint (Chart)
-                                    {{-- <span class="badge badge-secondary inline-block pull-right" cursorshover="true">
-                                        <span cursorshover="true"></span>
-                                    </span> --}}
-                                </h4>
-                                {{-- <div class="card-options"><a class="card-options-collapse" href="#"
-                                        data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
-                                        class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
-                                            class="fe fe-x"></i></a></div> --}}
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-3" style="width:100%;margin:auto">
-                                    <canvas id="myChart"></canvas>
-                                </div>
-                            </div>
+                    <div class="card o-hidden dash-card">
+                        <div class="card-header pb-0">
+                            <h6 class="card-title mb-0">Service Complaint Type</h6>
                         </div>
-                    </div>
-                    <div class="col-sm-4 col-xl-4 col-lg-4">
-                        <div class="card o-hidden dash-card">
-                            <div class="card" style="width:100%;">
-                                <div class="card-header">
-                                    <h4>Refund Amount (Pie)</h4>
-                                </div>
-                                <div class="" style="width:300px;margin:auto">
-                                    <canvas id="myPie"></canvas>
+                        <div class="card-body">
+                            <div class="media static-widget">
+
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-9">
+                                            <div class="mb-3" style="width:100%;margin:auto">
+                                                <canvas id="myChart"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div>
+                                                <div class="d-flex justify-content-between mb-3">
+                                                    <div class="text-success font-weight-bold">Loss & Damage</div>
+                                                </div>
+                                                @if ($complaints->isNotEmpty())
+                                                    @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
+                                                        @if ($mainGroup == 'Loss & Damage Types')
+                                                            @foreach ($groupComplaints as $index => $complaint)
+                                                                <div class="d-flex justify-content-between mb-3">
+                                                                    <div class="font-weight-medium">
+                                                                        {{ $complaint->case_type_name }}</div>
+                                                                    <div class="text-muted">{{ $complaint->num }}</div>
+                                                                </div>
+                                                            @endforeach
+                                                        @else
+                                                            @if ($mainGroup !== 'Service Complaint Types')
+                                                                <div class="d-flex justify-content-between mb-3">
+                                                                    {{-- <div class="font-weight-medium"></div>
+                                                                    <div class="text-muted">38.34M</div> --}}
+                                                                    <p>NO Data</p>
+                                                                </div>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    <p>no data</p>
+                                                @endif
+                                            </div>
+                                            <hr>
+                                            <div>
+                                                <div class="d-flex justify-content-between mb-3">
+                                                    <div class="text-success font-weight-bold">Service Complaint</div>
+                                                </div>
+                                                @if ($complaints->isNotEmpty())
+                                                    @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
+                                                        @if ($mainGroup == 'Service Complaint Types')
+                                                            @foreach ($groupComplaints as $index => $complaint)
+                                                                <div class="d-flex justify-content-between mb-3">
+                                                                    <div class="font-weight-medium">
+                                                                        {{ $complaint->case_type_name }}</div>
+                                                                    <div class="text-muted">{{ $complaint->num }}</div>
+                                                                </div>
+                                                            @endforeach
+                                                        @else
+                                                            @if ($mainGroup !== 'Loss & Damage Types')
+                                                                <div class="d-flex justify-content-between mb-3">
+                                                                    {{-- <div class="font-weight-medium"></div>
+                                                                    <div class="text-muted">38.34M</div> --}}
+                                                                    <p>NO Data</p>
+                                                                </div>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    <p>no data</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -331,7 +477,7 @@
 
         const myChart = new Chart(ctx, {
             // chart config
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: {!! json_encode($label) !!},
                 datasets: {!! json_encode($datasetsIn) !!}
@@ -345,7 +491,7 @@
                             color: "#8b8a96",
                             font: {
                                 size: 12,
-                                weight: 600,
+                                weight: 20,
                             },
                         },
                     },
@@ -365,7 +511,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        display: true,
+                        display: false,
                         labels: {
                             color: "#8b8a96",
                             font: {

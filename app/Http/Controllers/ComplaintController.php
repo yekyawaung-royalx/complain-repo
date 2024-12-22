@@ -461,14 +461,14 @@ $chartData = [
                 $RopTotal             // Grand total (6200)
             ],
             'backgroundColor' => [
-                '#FF6384',            // Color for YGN Branch Total
-                '#36A2EB',            // Color for Other Branch Total
-                '#FFCE56'             // Color for Grand Total
+               '#1d97ff',            // Color for YGN Branch Total
+                '#7dc006',            // Color for Other Branch Total
+                '#e52727'           // Color for Grand Total
             ],
             'hoverBackgroundColor' => [
-                '#FF6384',            // Hover color for YGN Branch Total
-                '#36A2EB',            // Hover color for Other Branch Total
-                '#FFCE56'             // Hover color for Grand Total
+                '#1d97ff',            // Color for YGN Branch Total
+                '#7dc006',            // Color for Other Branch Total
+                '#e52727'           // Hover color for Grand Total
             ],
             'label'=>[
                 'Pricing',
@@ -601,14 +601,14 @@ $chartData = [
                 $RopTotal             // Grand total (6200)
             ],
             'backgroundColor' => [
-                '#FF6384',            // Color for YGN Branch Total
-                '#36A2EB',            // Color for Other Branch Total
-                '#FFCE56'             // Color for Grand Total
+                '#1d97ff',            // Color for YGN Branch Total
+                '#7dc006',            // Color for Other Branch Total
+                '#e52727'             // Color for Grand Total
             ],
             'hoverBackgroundColor' => [
-                '#FF6384',            // Hover color for YGN Branch Total
-                '#36A2EB',            // Hover color for Other Branch Total
-                '#FFCE56'             // Hover color for Grand Total
+                '#1d97ff',            // Hover color for YGN Branch Total
+                '#7dc006',            // Hover color for Other Branch Total
+                '#e52727'             // Hover color for Grand Total
             ],
             'label'=>[
                 'Pricing',
