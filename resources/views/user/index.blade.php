@@ -86,7 +86,7 @@
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="role1" id="role1"
                                             value="3">
-                                        <label class="form-check-label" for="user_role">Loss & Demage</label>
+                                        <label class="form-check-label" for="user_role">Hod</label>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="role" id="role"
                                     value="3">
-                                <label class="form-check-label" for="user_role">Loss & Demage</label>
+                                <label class="form-check-label" for="user_role">Hod</label>
                             </div>
                         </div>
                     </form>

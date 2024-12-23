@@ -224,7 +224,7 @@ class ComplaintController extends Controller
             ->where('deleted_at','0')
             ->orderBy('id','desc')
             ->paginate(20);
-        }if(Auth::user()->isDemage()){
+        }if(Auth::user()->isHod()){
             $complaints = DB::table('complaints')
             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
@@ -781,7 +781,7 @@ public function exportComplaints(Request $request)
            ->orderBy('id','desc')
            ->paginate(50);
            }
-    }if(Auth::user()->isDemage()){
+    }if(Auth::user()->isHod()){
         if($status=='service'){
             $complaints = DB::table('complaints')
             ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
@@ -1214,7 +1214,7 @@ public function exportComplaints(Request $request)
                 ->paginate(20);
                 }
             }
-         }if(Auth::user()->isDemage()){
+         }if(Auth::user()->isHod()){
             if($status=='pending'){
                 if($id=='service'){
                  $complaints = DB::table('complaints')
@@ -1233,125 +1233,121 @@ public function exportComplaints(Request $request)
                  ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
                  ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
                 //->Where('handle_by',Auth::user()->name)
-               // ->where('deleted_at','0')
-                ->orderBy('id','desc')
-                ->paginate(20);
-                }
-            }if($status=='follow-up'){
-                if($id=='service'){
-                 $complaints = DB::table('complaints')
-                 ->whereIn('status_name', ['handled'])
-                 ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
-                 ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-                 ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-                //->Where('handle_by',Auth::user()->name)
                 ->where('deleted_at','0')
                 ->orderBy('id','desc')
                 ->paginate(20);
-                }else{
-                 $complaints = DB::table('complaints')
-                 ->whereIn('status_name', ['handled'])
-                 ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
-                 ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-                 ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-                //->Where('handle_by',Auth::user()->name)
-               // ->where('deleted_at','0')
-                ->orderBy('id','desc')
-                ->paginate(20);
                 }
+         }if($status=='follow-up'){
+            if($id=='service'){
+             $complaints = DB::table('complaints')
+             ->whereIn('status_name', ['handled'])
+             ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
+             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            //->Where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(20);
+            }else{
+             $complaints = DB::table('complaints')
+             ->whereIn('status_name', ['handled'])
+             ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
+             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            //->Where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(20);
             }
-            if($status=='assigned'){
-                if($id=='service'){
-                 $complaints = DB::table('complaints')
-                 ->whereIn('status_name', ['assigned'])
-                 ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
-                 ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-                 ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-                //->Where('handle_by',Auth::user()->name)
-                ->where('deleted_at','0')
-                ->orderBy('id','desc')
-                ->paginate(20);
-                }else{
-                 $complaints = DB::table('complaints')
-                 ->whereIn('status_name', ['assigned'])
-                 ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
-                 ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-                 ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-                //->Where('handle_by',Auth::user()->name)
-               // ->where('deleted_at','0')
-                ->orderBy('id','desc')
-                ->paginate(20);
-                }
+        }if($status=='assigned'){
+            if($id=='service'){
+             $complaints = DB::table('complaints')
+             ->whereIn('status_name', ['assigned'])
+             ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
+             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            //->Where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(20);
+            }else{
+             $complaints = DB::table('complaints')
+             ->whereIn('status_name', ['assigned'])
+             ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
+             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            //->Where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(20);
             }
-            if($status=='progress'){
-                if($id=='service'){
-                 $complaints = DB::table('complaints')
-                 ->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
-                 ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
-                 ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-                 ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-                //->Where('handle_by',Auth::user()->name)
-                ->where('deleted_at','0')
-                ->orderBy('id','desc')
-                ->paginate(20);
-                }else{
-                 $complaints = DB::table('complaints')
-                 ->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
-                 ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
-                 ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-                 ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-                //->Where('handle_by',Auth::user()->name)
-               // ->where('deleted_at','0')
-                ->orderBy('id','desc')
-                ->paginate(20);
-                }
+        }if($status=='progress'){
+            if($id=='service'){
+             $complaints = DB::table('complaints')
+             ->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
+             ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
+             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            //->Where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(20);
+            }else{
+             $complaints = DB::table('complaints')
+             ->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
+             ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
+             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            //->Where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(20);
             }
-            if($status='completed'){
-                if($id=='service'){
-                 $complaints = DB::table('complaints')
-                 ->whereIn('status_name', ['completed','review'])
-                 ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
-                 ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-                 ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-                //->Where('handle_by',Auth::user()->name)
-                ->where('deleted_at','0')
-                ->orderBy('id','desc')
-                ->paginate(20);
-                }else{
-                 $complaints = DB::table('complaints')
-                 ->whereIn('status_name', ['completed','review'])
-                 ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
-                 ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-                 ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-                //->Where('handle_by',Auth::user()->name)
-               // ->where('deleted_at','0')
-                ->orderBy('id','desc')
-                ->paginate(20);
-                }
+        }if($status=='completed'){
+            if($id=='service'){
+             $complaints = DB::table('complaints')
+             ->whereIn('status_name', ['completed','review'])
+             ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
+             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            //->Where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(20);
+            }else{
+             $complaints = DB::table('complaints')
+             ->whereIn('status_name', ['completed','review'])
+             ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
+             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            //->Where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(20);
             }
-            if($status=='rejected'){
-                if($id=='service'){
-                 $complaints = DB::table('complaints')
-                 ->whereIn('status_name', ['rejected'])
-                 ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
-                 ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-                 ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-                //->Where('handle_by',Auth::user()->name)
-                ->where('deleted_at','0')
-                ->orderBy('id','desc')
-                ->paginate(20);
-                }else{
-                 $complaints = DB::table('complaints')
-                 ->whereIn('status_name', ['rejected'])
-                 ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
-                 ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-                 ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-                //->Where('handle_by',Auth::user()->name)
-               // ->where('deleted_at','0')
-                ->orderBy('id','desc')
-                ->paginate(20);
-                }
+        }if($status=='rejected'){
+            if($id=='service'){
+             $complaints = DB::table('complaints')
+             ->whereIn('status_name', ['rejected'])
+             ->whereIn('case_type_name', ['Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain'])
+             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            //->Where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(20);
+            }else{
+             $complaints = DB::table('complaints')
+             ->whereIn('status_name', ['rejected'])
+             ->whereIn('case_type_name', ['Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material'])
+             ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+             ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+            //->Where('handle_by',Auth::user()->name)
+            ->where('deleted_at','0')
+            ->orderBy('id','desc')
+            ->paginate(20);
             }
+        }
         }
          return response()->json($complaints);
     }

@@ -78,7 +78,7 @@ class User extends Authenticatable
 			return false; 
 		}
 	}
-    public function isDemage()
+    public function isHod()
 	{
 		if($this->role === '3')
 		{ 

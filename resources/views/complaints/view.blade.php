@@ -106,8 +106,10 @@
                                 <div class="text-dark">{{ $complaint->customer_recommendation }}</div>
                             </div>
                             <div class="form-footer">
-                                <a href="{{ url('complaints/' . $complaint->id . '/edit') }}"
-                                    class="btn   btn-primary btn-block">Edit</a>
+                                @if (!Auth::user()->isHod())
+                                    <a href="{{ url('complaints/' . $complaint->id . '/edit') }}"
+                                        class="btn   btn-primary btn-block">Edit</a>
+                                @endif
                             </div>
                         </div>
                     </div>

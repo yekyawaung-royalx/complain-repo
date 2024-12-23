@@ -216,7 +216,7 @@
                                     '<a  href="' + url + '/complaints/' + value.id +
                                     '/view"  class="btn btn-success btn-sm px-2 me-1" ><i class="icon-eye fs-16" cursorshover="true"></i></a>' +
                                     '<a  href="' + url + '/complaints/' + value.id +
-                                    '/edit"  class="btn btn-primary btn-sm px-2 me-1" ><i class="icon-pencil fs-16" cursorshover="true"></i></a>' +
+                                    '/edit"  class="btn btn-primary btn-sm px-2 me-1 view_at" ><i class="icon-pencil fs-16" cursorshover="true"></i></a>' +
                                     '<button class="btn btn-danger btn-sm px-2 deleted_at" value="' +
                                     value.id +
                                     '" type="button" data-bs-original-title="" title="" data-original-title="btn btn-primary-gradien"><i class="icon-trash fs-16" cursorshover="true"></i></button>' +
@@ -226,6 +226,8 @@
                             // Hide delete buttons if connection is set
                             if (connection == 'Developer') {
                                 $(".deleted_at").show();
+                            } else if (connection == 'Hod') {
+                                $(".view_at").hide();
                             }
                             $(".data-loading").hide();
 
@@ -294,7 +296,7 @@
                                 '<a  href="' + url + '/complaints/' + value.id +
                                 '/view"  class="btn btn-success btn-sm px-2 me-1" ><i class="icon-eye fs-16" cursorshover="true"></i></a>' +
                                 '<a  href="' + url + '/complaints/' + value.id +
-                                '/edit"  class="btn btn-primary btn-sm px-2 me-1" ><i class="icon-pencil fs-16" cursorshover="true"></i></a>' +
+                                '/edit"  class="btn btn-primary btn-sm px-2 me-1 view_at" ><i class="icon-pencil fs-16" cursorshover="true"></i></a>' +
                                 '<button class="btn btn-danger btn-sm px-2 deleted_at" value="' +
                                 value.id +
                                 '" type="button" data-bs-original-title="" title="" data-original-title="btn btn-primary-gradien"><i class="icon-trash fs-16" cursorshover="true"></i></button>' +
@@ -303,6 +305,8 @@
                         });
                         if (connection == 'Developer') {
                             $(".deleted_at").show();
+                        } else if (connection == 'Hod') {
+                            $(".view_at").hide();
                         }
                         $(".data-loading").hide();
 
@@ -401,7 +405,7 @@
                                     '<a  href="' + url + '/complaints/' + value.id +
                                     '/view"  class="btn btn-success btn-sm px-2 me-1" ><i class="icon-eye fs-16" cursorshover="true"></i></a>' +
                                     '<a  href="' + url + '/complaints/' + value.id +
-                                    '/edit"  class="btn btn-primary btn-sm px-2 me-1" ><i class="icon-pencil fs-16" cursorshover="true"></i></a>' +
+                                    '/edit"  class="btn btn-primary btn-sm px-2 me-1 view_at" ><i class="icon-pencil fs-16" cursorshover="true"></i></a>' +
                                     '<button class="btn btn-danger btn-sm px-2 deleted_at" value="' +
                                     value.id +
                                     '" type="button" data-bs-original-title="" title="" data-original-title="btn btn-primary-gradien"><i class="icon-trash fs-16" cursorshover="true"></i></button>' +
@@ -410,6 +414,8 @@
                             });
                             if (connection == 'Developer') {
                                 $(".deleted_at").show();
+                            } else if (connection == 'Hod') {
+                                $(".view_at").hide();
                             }
                             $(".data-loading").hide();
 

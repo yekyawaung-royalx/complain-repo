@@ -15,7 +15,7 @@
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
                                 aria-hidden="true"> </i></div>
                     </li>
-                    @if (Auth::user()->isAdmin() || Auth::user()->isDev())
+                    @if (Auth::user()->isAdmin() || Auth::user()->isDev() || Auth::user()->isHod())
                         <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}"
                                 href="{{ url('dashboard') }}">

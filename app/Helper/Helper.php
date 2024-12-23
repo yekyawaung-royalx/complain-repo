@@ -210,12 +210,11 @@ function groupStatus($status)
         ->paginate(50);
         // $status_array['status'] = $complaints;
     }
-}if(Auth::user()->isDemage()){ 
+}if(Auth::user()->isHod()){ 
     if ($status == 'pending') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
         ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        //->Where('handle_by',Auth::user()->name)
+        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
         ->where('deleted_at','0')
         ->orderBy('id','desc')
         ->paginate(50);
@@ -224,8 +223,7 @@ function groupStatus($status)
     if ($status == 'follow-up') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['handled'])
         ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-       // ->Where('handle_by',Auth::user()->name)
+        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
         ->where('deleted_at','0')
         ->orderBy('id','desc')
         ->paginate(50);
@@ -235,8 +233,7 @@ function groupStatus($status)
     if ($status == 'assigned') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['assigned'])
         ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-       // ->Where('handle_by',Auth::user()->name)
+        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
         ->where('deleted_at','0')
         ->orderBy('id','desc')
         ->paginate(50);
@@ -246,18 +243,16 @@ function groupStatus($status)
     if ($status == 'progress') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
         ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-      // ->Where('handle_by',Auth::user()->name)
-       ->where('deleted_at','0')
-       ->orderBy('id','desc')
+        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
+        ->where('deleted_at','0')
+        ->orderBy('id','desc')
         ->paginate(50);
         // $status_array['status'] = $complaints;
     }
     if ($status == 'completed') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['completed','review'])
         ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-       // ->Where('handle_by',Auth::user()->name)
+        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
         ->where('deleted_at','0')
         ->orderBy('id','desc')
         ->paginate(50);
@@ -266,8 +261,7 @@ function groupStatus($status)
     if ($status == 'rejected') {
         $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
         ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-       // ->Where('handle_by',Auth::user()->name)
+        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
         ->where('deleted_at','0')
         ->orderBy('id','desc')
         ->paginate(50);
@@ -309,7 +303,7 @@ function permission() {
     $user = Auth::user();
     if($user->role=='2'){$rolestatus='Developer';}
     elseif($user->role=='1'){$rolestatus='Admin';}
-    elseif($user->role=='1'){$rolestatus='Admin';}
+    elseif($user->role=='3'){$rolestatus='Hod';}
     else{$rolestatus='user';}
     return $rolestatus;
 }
