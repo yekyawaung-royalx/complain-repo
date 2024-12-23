@@ -198,15 +198,15 @@
                                 </g>
                             </svg><span>Support Ticket</span></a></li> --}}
                 </ul>
-                <div class="sidebar-img-section">
+                {{-- <div class="sidebar-img-section">
                     <div class="sidebar-img-content"><img class="img-fluid"
                             src="{{ asset('assets/images/side-bar.png') }}" alt="">
                         <h4>Need Help ?</h4><a class="txt" href="{{ url('customer') }}">Raise ticket at
                             "info@royalx.net"</a>
-                        {{-- <a class="btn btn-secondary"
-                            href="">Buy Now</a> --}}
+                        <a class="btn btn-secondary"
+                            href="">Buy Now</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
         </nav>

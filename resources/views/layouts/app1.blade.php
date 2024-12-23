@@ -61,7 +61,7 @@
 
 <body>
     <!-- Loader starts-->
-    <div class="loader-wrapper">
+    {{-- <div class="loader-wrapper">
         <div class="loader">
             <div class="loader-bar"></div>
             <div class="loader-bar"></div>
@@ -70,7 +70,7 @@
             <div class="loader-bar"></div>
             <div class="loader-ball"></div>
         </div>
-    </div>
+    </div> --}}
     <!-- Loader ends-->
     <!-- tap on top starts-->
     <div class="tap-top"><i data-feather="chevrons-up"></i></div>
@@ -382,7 +382,7 @@
                             <ul class="profile-dropdown onhover-show-div">
                                 <li><a href="user-profile.html"><i
                                             data-feather="user"></i><span>{{ Auth::user()->name }}</span></a></li>
-                                <li><a href="{{ route('logout') }}"
+                                {{-- <li><a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();"><i
                                             data-feather="mail"></i>
@@ -391,10 +391,10 @@
                                             @csrf
                                         </form> <span>Inbox</span>
                                     </a>
-                                </li>
-                                <li><a><i data-feather="file-text"></i><span>Taskboard</span></a>
-                                </li>
-                                <li><a><i data-feather="settings"></i><span>Settings</span></a></li>
+                                </li> --}}
+                                {{-- <li><a><i data-feather="file-text"></i><span>Taskboard</span></a>
+                                </li> --}}
+                                {{-- <li><a><i data-feather="settings"></i><span>Settings</span></a></li> --}}
                                 <li><a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();"><i
