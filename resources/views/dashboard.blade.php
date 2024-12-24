@@ -420,7 +420,7 @@
 
         const myChart = new Chart(ctx, {
             // chart config
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: {!! json_encode($label) !!},
                 datasets: {!! json_encode($datasetsIn) !!}

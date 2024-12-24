@@ -113,12 +113,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    {{-- <div class="card">
                         <div class="card-header pb-0">
                             <h4 class="card-title mb-0">Refund Amount
-                                {{-- <button class="btn btn-success pull-right" type="button" cursorshover="true">
+                                <button class="btn btn-success pull-right" type="button" cursorshover="true">
                                     <span cursorshover="true"></span>
-                                </button> --}}
+                                </button>
                             </h4>
                             <div class="card-options"><a class="card-options-collapse" href="#"
                                     data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
@@ -138,7 +138,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="">
-                                        @foreach ($pricing as $pricings)
+                                        @forelse ($pricing as $pricings)
                                             <tr>
                                                 <td>
                                                     @if ($pricings->ygn_branch)
@@ -182,13 +182,18 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <tr>
+                                                <td colspan="4" class="text-center">There Is No Data</td>
+                                            </tr>
+                                        @endforelse
+
 
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="card">
                         <div class="card-header pb-0">
                             <h4 class="card-title mb-0">Damage Photo
@@ -202,14 +207,22 @@
                                         class="fe fe-x"></i></a></div>
                         </div>
                         @php
-                            $images = explode('|', $complaint->image);
+                            $images = !empty($complaint->image) ? explode('|', $complaint->image) : [];
                         @endphp
                         <div class="card-body">
                             @foreach ($images as $image)
-                                <div class="responsive">
-                                    <img class="drift-demo-trigger" data-zoom="{{ asset('files') }}/{{ $image }}"
-                                        src="{{ asset('files') }}/{{ $image }}" width="100%" height="auto">
-                                </div>
+                                @if (!empty($image))
+                                    <div class="responsive">
+                                        <img class="drift-demo-trigger"
+                                            data-zoom="{{ asset('files') }}/{{ $image }}"
+                                            src="{{ asset('files') }}/{{ $image }}" width="100%" height="auto">
+                                    </div>
+                                @else
+                                    <div class="responsive">
+                                        <img class="drift-demo-trigger" src="{{ asset('files') }}/no-image.jpg"
+                                            width="100%" height="auto">
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                         <div class="details">
