@@ -174,3 +174,8 @@ Route::get('/complaints/json/{status}/filters/{id}', [ComplaintController::class
 });
 // Route::get('/cx-team',[App\Http\Controllers\ComplaintController::class,'cx_team']);
 Route::post('/complaints/{id}/update-operation',[App\Http\Controllers\ComplaintController::class,'update_operation']);
+
+
+Route::get('/header', function () {
+    return view('layouts.header');
+});

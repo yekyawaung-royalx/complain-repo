@@ -487,7 +487,7 @@
                 var search = $(this).val().toUpperCase();
                 var url = $("#url").val();
                 //alert(search)
-                if (search.length == 8) {
+                if (search.length > 0) {
                     $.ajax({
                         type: "GET",
                         url: "{{ url('search-item') }}",
@@ -497,6 +497,7 @@
                         success: function(data) {
                             //console.log(data)
                             $.each(data, function(key, value) {
+                                $("#searchResult").empty();
                                 //console.log(value)
                                 $("#searchResult").append(
                                     '<tr><td>' +

@@ -684,6 +684,9 @@ public function exportComplaints(Request $request)
        // dd($searchItem);
         $complaints = DB::table('complaints')
         ->where('complaint_uuid', 'LIKE', '%' . $request->search . '%')
+        ->orWhere('waybill_no', 'LIKE', '%' . $request->search . '%')
+        ->orWhere('customer_name', 'LIKE', '%' . $request->search . '%')
+        ->orWhere('customer_mobile', 'LIKE', '%' . $request->search . '%')
         ->get();
         return response()->json($complaints);
     }

@@ -340,4 +340,6 @@ function chart(){
        // return view('dashboard',compact('labels','datasets'));
 }
 
+
+
 ?>
