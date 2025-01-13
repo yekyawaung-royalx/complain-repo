@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
     <title>Document</title>
-    <link rel="stylesheet" href="http://localhost/relx-web-1/public/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style2.css') }}">
 </head>
 
@@ -60,22 +63,22 @@
                             <button class="dropdown-toggle" type="button" id="defaultDropdown"
                                 data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
 
-                                <img src="https://royalx.biz/demo/assets/images/icons/usa.png" alt=""
-                                    width="20px" height="20px">EN
+                                <img src="{{ asset('assets/images/usa.png') }}" alt="" width="20px"
+                                    height="20px">EN
 
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 
                                 <li>
                                     <button class="btn btn-language1 action-button set-lang" value="mm"><img
-                                            height="20px" src="{{ asset('assets/images/icons/myanmar.png') }}"
+                                            height="20px" src="{{ asset('assets/images/usa.png') }}"
                                             alt="">Myanmar</button>
                                     <input class="form-check-input set-lang " type="radio" name="flexRadioDefault"
                                         id="flexRadioDefault1" style="position: relative;top:8px;font-size:18px;">
                                 </li>
                                 <li>
                                     <button class="btn btn-language action-button set-lang " value="en"><img
-                                            height="20px" src="{{ asset('assets/images/icons/usa.png') }}"
+                                            height="20px" src="{{ asset('assets/images/usa.png') }}"
                                             alt="">&nbsp;English</button>
                                     <input class="form-check-input set-lang" type="radio" name="flexRadioDefault"
                                         id="flexRadioDefault1"
@@ -114,8 +117,7 @@
                 <div class="h-100 topbar-right d-inline-flex align-items text-white py-2">
 
                     <span class="fs-5 fw-bold me-2">
-                        <img src="{{ asset('assets/images/icons/myanmar.png') }}" alt="" width="20px"
-                            height="20px"> EN
+                        <img src="{{ asset('assets/images/usa.png') }}" alt="" width="20px" height="20px"> EN
                     </span>
 
                 </div>
@@ -129,7 +131,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 ">
                 <a href="https://royalx.biz/demo" class="navbar-brand me-0">
-                    <h1 class="text-white m-0"><img src="https://royalx.biz/demo/assets/images/logo.png" alt=""
+                    <h1 class="text-white m-0"><img src="{{ asset('assets/images/logo.jpg') }}" alt=""
                             height="30px" width="100%"></h1>
                 </a>
                 <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
@@ -200,13 +202,13 @@
                             <div class="">
 
                                 <button class="btn btn-language2 action-button set-lang" value="mm"><img
-                                        height="20px" src="{{ asset('assets/images/icons/myanmar.png') }}"
+                                        height="20px" src="{{ asset('assets/images/myanmar.png') }}"
                                         alt="">Myanmar
                                     <input class="form-check-input set-lang" type="radio" name="flexRadioDefault"
                                         id="flexRadioDefault1"
                                         style="position: relative;top:-1px;font-size:18px;"></button>
                                 <button class="btn btn-language2 action-button set-lang" value="en"><img
-                                        height="20px" src="{{ asset('assets/images/icons/usa.png') }}"
+                                        height="20px" src="{{ asset('assets/images/usa.png') }}"
                                         alt="">English
                                     <input class="form-check-input set-lang" type="radio" name="flexRadioDefault"
                                         id="flexRadioDefault1"
@@ -216,7 +218,7 @@
 
                     </div>
 
-                    <form action="" method="POST" class="closemodal">
+                    {{-- <form action="" method="POST" class="closemodal">
                         {{ csrf_field() }}
                         <div class="input-group">
                             <input type="text" placeholder="Track Your Products" name="waybill-number"
@@ -228,7 +230,7 @@
                             </div>
                         </div>
                     </form>
-                    <button type="button" class="btn-close close" id="close"></button>
+                    <button type="button" class="btn-close close" id="close"></button> --}}
 
                     <a href="#" class="btn btn-primary px-3 d-none d-lg-block search-btn"
                         id="search-btn">Tracking&nbsp;<i class="fa fa-search" aria-hidden="true"></i></a>
@@ -239,7 +241,8 @@
     <!-- Navbar End -->
     <div class="container-fluid page-header-2 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container p-1 text-center">
-            <h5 class="animated slideInDown hero-title" style=""> <span style="color:red;"></span>
+            <h5 class="animated slideInDown hero-title" style="">We Value<span style="color:red;">Your
+                    Feedback</span>
             </h5>
         </div>
     </div>

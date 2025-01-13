@@ -111,19 +111,15 @@
                 {{ date('Y') }}. All rights reserved. </p>
         </div>
     </div>
-    <input type="hidden" id="url" value="{{ url('') }}">
+    {{-- <input type="hidden" id="url" value="{{ url('') }}">
     <input type="hidden" id="token" value="{{ csrf_token() }}">
-    <input type="hidden" id="lang" value="{{ get_lang() }}">
+    <input type="hidden" id="lang" value="{{ get_lang() }}"> --}}
     <!-- Footer End -->
 
 
 
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-3.7.0.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.app.js') }}"></script>
-    <script src="{{ asset('assets/js/counter.js') }}"></script>
-    <script src="{{ asset('assets/js/wow.js') }}"></script>
-    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
+    <script src="{{ asset('assets/js/customer/bootstrap-bulder-main.js') }}"></script>
+    <script src="{{ asset('assets/js/customer/jquery-min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var lang = $("#lang").val();
