@@ -6,13 +6,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Bootstrap CSS -->
-    {{-- <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/customer/style.css') }}"> --}}
+    <meta name="keywords"
+        content="International Delivery Service in Myanmar, Courier Service in Myanmar, Parcel Delivery Service in Myanmar, Postal service in Myanmar, Ecommerce Delivery in Myanmar, Myanmar Courier Service, Delivery Service in Mandalay, Express Courier Service in Myanmar, Express Delivery Service in Yangon, Postal Service Delivery,Express Service Pricing" />
+    <meta name="description"
+        content="A Pioneer of the Myanmar's Express Courier Services in the Logistics Industry - bringing you Myanmar's Most Extensive Delivery Network and providing you Fast and Reliable Delivery Services.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:url" content="{{ url('/') }}" />
+    <meta property="og:title" content="Royal Express" />
+    <meta property="og:description"
+        content="A Pioneer of the Myanmar's Express Courier Services in the Logistics Industry - bringing you Myanmar's Most Extensive Delivery Network and providing you Fast and Reliable Delivery Services." />
+    <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
     <link href="{{ asset('assets/css/select2.css') }}" rel="stylesheet" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FJ1XQ719X"></script>
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/social-share-bar.css') }}">
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -255,6 +262,7 @@
         </div>
     </div>
     @include('layouts.footer')
+
     <!--modal!-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -324,6 +332,7 @@
     <script src="{{ asset('assets/js/customer/jquery-min.js') }}"></script>
     <script src="{{ asset('assets/js/customer/main.js') }}"></script>
     <script src="{{ asset('assets/js/customer/select2.js') }}"></script>
+    <script src="{{ asset('assets/js/website/jquery-social-share-bar.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
         const uploadField = document.getElementById("image");

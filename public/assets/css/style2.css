@@ -1572,3 +1572,68 @@ strong {
     /* border-color: rgba(var(255,255,255), var(0.25)) !important; */
     border-color: rgba(255, 255, 255, 0.25) !important;
 }
+
+.spinner {
+    margin: 20px auto;
+    width: 500px;
+    height: 450px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.spinner .circle {
+    animation: spinners linear infinite;
+    position: absolute;
+    border: 5px solid transparent;
+    border-top-color: #f00;
+    border-radius: 50%;
+}
+
+.spinner .one {
+    width: 120px;
+    height: 120px;
+    border-top-color: var(--color-default);
+    animation-duration: 0.85s;
+}
+
+.spinner .two {
+    width: 140px;
+    height: 140px;
+    border-top-color: var(--color-secondary);
+    animation-duration: 0.95s;
+}
+
+.spinner .three {
+    width: 160px;
+    height: 160px;
+    border-top-color: var(--color-default);
+    animation-duration: 1.05s;
+}
+
+@keyframes spinners {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.ro {
+    font-family: "Aileron-SemiBold";
+}
+#preloader {
+    position: fixed;
+    left: 0;
+    top: -20px;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    /* background:#ffffffde url(../images/img_pigeon_ori.gif) no-repeat center center; */
+    background-size: 100% 100%;
+}
+/*end spinner*/

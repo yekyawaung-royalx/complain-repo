@@ -11,18 +11,19 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style2.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/social-share-bar.css') }}">
 </head>
 
 <body>
     <!-- Libraries Stylesheet -->
     <!-- Topbar Start -->
 
-    {{-- <div class="spinner" id="preloader">
-    <img src="https://royalx.biz/demo/assets/images/logo.png" alt="" style="width:110px;height:30px;">
-    <div class="circle one"></div>
-    <div class="circle two"></div>
-    <div class="circle three"></div>
-</div> --}}
+    <div class="spinner" id="preloader">
+        <img src="{{ asset('assets/images/logo.jpg') }}" alt="" style="width:110px;height:30px;">
+        <div class="circle one"></div>
+        <div class="circle two"></div>
+        <div class="circle three"></div>
+    </div>
     <div class="container-fluid bg-dark px-0 first-header">
         <div class="container">
             <div class="row g-0 d-none d-lg-flex">
@@ -117,7 +118,9 @@
                 <div class="h-100 topbar-right d-inline-flex align-items text-white py-2">
 
                     <span class="fs-5 fw-bold me-2">
-                        <img src="{{ asset('assets/images/usa.png') }}" alt="" width="20px" height="20px"> EN
+                        <img src="{{ asset('assets/images/usa.png') }}" alt="" width="20px"
+                            height="20px">
+                        EN
                     </span>
 
                 </div>
@@ -248,11 +251,14 @@
     </div>
 
     <div id="share-bar"></div>
-    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> --}}
-    <script src="https://royalx.biz/demo/assets/js/jquery-3.7.0.min.js"></script>
-    <script src="https://royalx.biz/demo/assets/js/fontawesome.js"></script>
 
+    <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/website/main.js') }}"></script>
+    <script src="{{ asset('assets/js/website/fontawesome.js') }}"></script>
+    <script src="{{ asset('assets/js/website/jquery-social-share-bar.js') }}"></script>
+    <script>
+        $('#share-bar').share();
+    </script>
     <script>
         $("#close").on('click', function() {
             $("body").toggleClass("search-form-open");
