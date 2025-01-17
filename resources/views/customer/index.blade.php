@@ -13,14 +13,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:url" content="{{ url('/') }}" />
     <meta property="og:title" content="Royal Express" />
-    <meta property="og:description"
-        content="A Pioneer of the Myanmar's Express Courier Services in the Logistics Industry - bringing you Myanmar's Most Extensive Delivery Network and providing you Fast and Reliable Delivery Services." />
     <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
     <link href="{{ asset('assets/css/select2.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/css/social-share-bar.css') }}">
-    <script>
+    {{-- <script>
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
@@ -29,7 +27,7 @@
         gtag('js', new Date());
 
         gtag('config', 'G-3FJ1XQ719X');
-    </script>
+    </script> --}}
     <title>Customer</title>
     <style type="text/css">
         .dz-preview .dz-image img {
@@ -326,13 +324,14 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="{{ asset('assets/js/customer/api.js') }}" async defer></script>
-    <script src="{{ asset('assets/js/customer/bootstrap-bulder-main.js') }}"></script>
-    <script src="{{ asset('assets/js/customer/popper.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/customer/api.js') }}" async defer></script> --}}
+    {{-- <script src="{{ asset('assets/js/customer/bootstrap-bulder-main.js') }}"></script>
+    <script src="{{ asset('assets/js/customer/popper.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/customer/jquery-min.js') }}"></script>
     <script src="{{ asset('assets/js/customer/main.js') }}"></script>
     <script src="{{ asset('assets/js/customer/select2.js') }}"></script>
     <script src="{{ asset('assets/js/website/jquery-social-share-bar.js') }}"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
         const uploadField = document.getElementById("image");

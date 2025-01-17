@@ -19,7 +19,7 @@
     <!-- Topbar Start -->
 
     <div class="spinner" id="preloader">
-        <img src="{{ asset('assets/images/logo.jpg') }}" alt="" style="width:110px;height:30px;">
+        <img src="{{ asset('assets/images/logo.jpg') }}" alt="" style="width:auto;height:30px;">
         <div class="circle one"></div>
         <div class="circle two"></div>
         <div class="circle three"></div>
@@ -29,7 +29,7 @@
             <div class="row g-0 d-none d-lg-flex">
                 <div class="col-lg-6 text-start">
                     <div class="h-100 d-inline-flex align-items-center">
-                        <a class="text-host" href=""><i class="fa fa-phone-alt me-2"></i>Hostline:
+                        <a class="text-host" href="tel:09779888688"><i class="fa fa-phone-alt me-2"></i>Hostline:
                             +(95)9779888688</a>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                         class="h-100 topbar-right d-inline-flex align-items-center text-white py-2 border-start border-white border-opacity-25">
 
                         <span class="fs-5 fw-bold me-2"><i class="fa fa-briefcase" aria-hidden="true"></i><a
-                                class="" href="{{ url('job-opportunity') }}"
+                                class="" href="https://www.royalx.net/job-opportunity"
                                 style="text-decoration: none; color:#fff;">
                                 Careers</a></span>
 
@@ -46,7 +46,7 @@
                     <div
                         class="h-100 topbar-right d-inline-flex align-items-center text-white py-2 border-start border-white border-opacity-25">
                         <span class="fs-5 fw-bold me-2"><i class="fa fa-file-text" aria-hidden="true"></i><a
-                                class="" href="{{ url('user-guide') }}"
+                                class="" href="https://www.royalx.net/user-guide"
                                 style="text-decoration: none; color: #fff;">
                                 User Guide</a></span>
                     </div>
@@ -103,7 +103,7 @@
         <div class="row g-0 d-lg-flex">
             <div class="d-inline-flex">
                 <div class="h-100 d-inline-flex align-items">
-                    <a class="text-host" href="" style="color:#fff"><i class="fa fa-phone-alt me-2"></i>Hostline:
+                    <a class="text-host" href="tel:09779888688" style="color:#fff"><i class="fa fa-phone-alt me-2"></i>Hostline:
                         +(84)937
                         899 999</a>
                 </div>
@@ -133,7 +133,7 @@
     <div class="container-fluid bg-white nav sticky-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 ">
-                <a href="https://royalx.biz/demo" class="navbar-brand me-0">
+                <a href="https://www.royalx.net" class="navbar-brand me-0">
                     <h1 class="text-white m-0"><img src="{{ asset('assets/images/logo.jpg') }}" alt=""
                             height="30px" width="100%"></h1>
                 </a>
@@ -143,41 +143,39 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse" class="navbarshow">
                     <div class="navbar-nav p-4 ms-auto p-lg-0">
-                        <a href="{{ url('/our-history') }}"
+                        <a href="https://www.royalx.net/our-history"
                             class="nav-item nav-link {{ Request::is('our-history') ? 'active' : '' }}">About</a>
 
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
                             <div class="dropdown-menu bg-light m-0">
-                                <a href="{{ url('/express-service') }}"
+                                <a href="https://www.royalx.net/express-service"
                                     class="dropdown-item nav-links {{ Request::is('express-service') ? 'active' : '' }}">Express
                                     Services</a>
-                                <a href="{{ url('/dispatch-service') }}"
+                                <a href="https://www.royalx.net/dispatch-service"
                                     class="dropdown-item nav-links {{ Request::is('dispatch-service') ? 'active' : '' }}">Dispatch
                                     Delivery</a>
-                                <a href="{{ url('/same-day-delivery-service') }}"
+                                <a href="https://www.royalx.net/same-day-delivery-service"
                                     class="dropdown-item nav-links {{ Request::is('same-day-delivery-service') ? 'active' : '' }}">Same
                                     Day Services</a>
-                                <a href="{{ url('/direct-marketing-solutions') }}"
+                                <a href="https://www.royalx.net/direct-marketing-solutions"
                                     class="dropdown-item nav-links {{ Request::is('direct-marketing-solutions') ? 'active' : '' }}">Direct
                                     Marketing</a>
-                                <a href="{{ url('/last-mile-delivery') }}"
+                                <a href="https://www.royalx.net/last-mile-delivery"
                                     class="dropdown-item nav-links {{ Request::is('last-mile-delivery') ? 'active' : '' }}">Last
                                     Mile &amp; Cash on Delivery</a>
-                                <a href="{{ url('/integrated-logistics-solution') }}"
+                                <a href="https://www.royalx.net/integrated-logistics-solution"
                                     class="dropdown-item nav-links {{ Request::is('integrated-logistics-solution') ? 'active' : '' }}">International</a>
-                                <a href="{{ url('/fulfillment-services') }}"
+                                <a href="https://www.royalx.net/fulfillment-services"
                                     class="dropdown-item nav-links {{ Request::is('fulfillment-services') ? 'active' : '' }}">Fulfillment
                                     and Warehousing</a>
-                                <a href="{{ url('/extra-service') }}"
+                                {{-- <a href="{{ url('/extra-service') }}"
                                     class="dropdown-item nav-links {{ Request::is('extra-service') ? 'active' : '' }}">Extra
                                     Care Service</a>
-                                {{-- <a href="{{ url('/cash-on') }}"
-                                class="dropdown-item nav-links {{ Request::is('cash-on') ? 'active' : '' }}">{{ menu_locale(get_lang())['head-15'] }}</a> --}}
                                 <a href="{{ url('/milk-run') }}"
                                     class="dropdown-item nav-links {{ Request::is('milk-run') ? 'active' : '' }}">Milk
                                     Run
-                                    Service</a>
+                                    Service</a> --}}
                             </div>
                         </div>
                         <div class="nav-item dropdown">
@@ -187,18 +185,18 @@
 
                             </div>
                         </div>
-                        <a href="{{ url('/our-network') }}"
+                        <a href="https://www.royalx.net/our-network"
                             class="nav-item nav-link {{ Request::is('our-network') ? 'active' : '' }}">Our Network</a>
 
-                        <a href="{{ url('price-calculator') }}"
+                        <a href="https://www.royalx.net/price-calculator"
                             class="nav-item nav-link {{ Request::is('price-calculator') ? 'active' : '' }}">Price
                             Calculator</a>
-                        <a href="{{ url('/contact-us') }}"
+                        <a href="https://www.royalx.net/contact-us"
                             class="nav-item nav-link {{ Request::is('contact-us') ? 'active' : '' }}">Contact Us</a>
-                        <a href="{{ url('job-opportunity') }}" class="nav-item nav-link carrer">Careers</a>
-                        <a href="{{ url('user-guide') }}" class="nav-item nav-link userguide">User Guide</a>
-                        <a href="{{ url('feedback') }}" class="nav-item nav-link fedback">Feedback Form</a>
-                        <a href="{{ url('term-and-condition') }}" class="nav-item nav-link temconditon">Terms &
+                        <a href="https://www.royalx.net/job-opportunity" class="nav-item nav-link carrer">Careers</a>
+                        <a href="https://www.royalx.net/user-guide" class="nav-item nav-link userguide">User Guide</a>
+                        <a href="{{url('/')}}" class="nav-item nav-link fedback">Feedback Form</a>
+                        <a href="https://www.royalx.net/terms-and-conditions" class="nav-item nav-link temconditon">Terms &
                             Conditions</a>
                         <a href="https://member.royalx.biz/login" class="btn btn-primary login-form">Login</a>
                         <div class="row select-language py-2">
@@ -235,7 +233,7 @@
                     </form>
                     <button type="button" class="btn-close close" id="close"></button> --}}
 
-                    <a href="#" class="btn btn-primary px-3 d-none d-lg-block search-btn"
+                    <a href="https://www.royalx.net/tracking" class="btn btn-primary px-3 d-none d-lg-block search-btn"
                         id="search-btn">Tracking&nbsp;<i class="fa fa-search" aria-hidden="true"></i></a>
                 </div>
             </nav>

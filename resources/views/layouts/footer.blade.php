@@ -21,20 +21,20 @@
             <div class="row g-4 activities_row">
                 <div class="col-lg-3 col-md-6">
                     <h6 class="text-white mb-4">Quick Links</h6>
-                    <a class="btn btn-link" href="{{ url('price-calculator') }}">About Us</a>
-                    <a class="btn btn-link" href="{{ url('price-calculator') }}">Price Calculator</a>
-                    <a class="btn btn-link" href="{{ url('price-calculator') }}">Our Network</a>
-                    <a class="btn btn-link" href="{{ url('price-calculator') }}">Tracking</a>
+                    <a class="btn btn-link" href="https://www.royalx.net/our-history">About Us</a>
+                    <a class="btn btn-link" href="https://www.royalx.net/price-calculator">Price Calculator</a>
+                    <a class="btn btn-link" href="https://www.royalx.net/our-network">Our Network</a>
+                    <a class="btn btn-link" href="https://www.royalx.net/tracking">Tracking</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h6 class="text-white mb-4">Support</h6>
-                    <a class="btn btn-link" href="{{ url('/contact-us') }}">Contact Us</a>
-                    <a class="btn btn-link" href="{{ url('user-guide') }}">User Guide</a>
-                    <a class="btn btn-link" href="{{ url('job-opportunity') }}">Job Opportunity</a>
+                    <a class="btn btn-link" href="https://www.royalx.net/contact-us">Contact Us</a>
+                    <a class="btn btn-link" href="https://www.royalx.net/user-guide">User Guide</a>
+                    <a class="btn btn-link" href="https://www.royalx.net/job-opportunity">Job Opportunity</a>
                     {{-- <a class="btn btn-link" href="{{ url('post') }}">Hr Community</a> --}}
-                    <a class="btn btn-link" href="{{ url('feedback') }}">Feedback</a>
-                    <a class="btn btn-link" href="{{ url('FAQS') }}">Frequently Asked Questions</a>
-                    <a class="btn btn-link" href="{{ url('term-and-condition') }}">Terms & Conditions</a>
+                    <a class="btn btn-link" href="{{ url('/') }}">Feedback</a>
+                    <a class="btn btn-link" href="{{ url('/') }}">Frequently Asked Questions</a>
+                    <a class="btn btn-link" href="{{ url('/') }}">Terms & Conditions</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h6 class="text-white mb-4">Royal Express Head Office</h6>
