@@ -113,12 +113,12 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="card">
+                    <div class="card">
                         <div class="card-header pb-0">
                             <h4 class="card-title mb-0">Refund Amount
-                                <button class="btn btn-success pull-right" type="button" cursorshover="true">
+                                {{-- <button class="btn btn-success pull-right" type="button" cursorshover="true">
                                     <span cursorshover="true"></span>
-                                </button>
+                                </button> --}}
                             </h4>
                             <div class="card-options"><a class="card-options-collapse" href="#"
                                     data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
@@ -193,7 +193,7 @@
                                 </table>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="card">
                         <div class="card-header pb-0">
                             <h4 class="card-title mb-0">Damage Photo

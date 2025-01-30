@@ -183,7 +183,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                        @else
+                                        {{-- @else
                                             @if ($mainGroup !== 'Service Complaint Types')
                                                 <table class="table table-bordered">
                                                     <thead>
@@ -199,7 +199,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            @endif
+                                            @endif --}}
                                         @endif
                                     @endforeach
                                 @else
@@ -249,7 +249,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                        @else
+                                        {{-- @else
                                             @if ($mainGroup !== 'Loss & Damage Types')
                                                 <table class="table table-bordered">
                                                     <thead>
@@ -265,7 +265,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            @endif
+                                            @endif --}}
                                         @endif
                                     @endforeach
                                 @else

@@ -344,7 +344,7 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
-                                                <label class="col-form-label text-muted">YGN Saving</label>
+                                                <label class="col-form-label text-muted">Amount</label>
                                                 <input class="form-control ygn_amount" type="text">
                                             </div>
                                         </div>
@@ -367,7 +367,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-md-6">
-                                                <label class="col-form-label text-muted">ROP Saving</label>
+                                                <label class="col-form-label text-muted">Amount</label>
                                                 <input class="form-control rop_amount" type="text">
                                             </div>
                                         </div>
@@ -385,10 +385,12 @@
                                                     <option value="Transport">Transport</option>
                                                     <option value="Fleet">Fleet</option>
                                                     <option value="FOC">FOC</option>
+                                                    <option value="YGN Saving">YGN Saving</option>
+                                                    <option value="ROP Saving">ROP Saving</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
-                                                <label class="col-form-label text-muted">Other Saving</label>
+                                                <label class="col-form-label text-muted">Amount</label>
                                                 <input class="form-control other_amount" type="text">
                                             </div>
                                         </div>
@@ -506,7 +508,7 @@
                                                         <div class="square-box me-2"><img class="img-fluid b-r-5"
                                                                 src="https://admin.pixelstrap.com/zeta/assets/images/avtar/chinese.png"
                                                                 alt=""></div>
-                                                        <div class="media-body"><a href="user-profile.html">
+                                                        <div class="media-body"><a href="">
 
                                                                 <h5>Customer<span
                                                                         class="badge badge-light-theme-light font-theme-light pull-right">{{ $complaint->updated_at }}</span>
