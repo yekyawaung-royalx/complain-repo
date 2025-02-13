@@ -505,7 +505,7 @@ class ComplaintController extends Controller
                 'case_type_name',
                 DB::raw("
                     CASE 
-                        WHEN case_type_name IN ('Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain') THEN 'Service Complaint Types'
+                        WHEN case_type_name IN ('Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain','COD Delay Refund') THEN 'Service Complaint Types'
                         WHEN case_type_name IN ('Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material') THEN 'Loss & Damage Types'
                         ELSE 'Other'
                     END as main_group
