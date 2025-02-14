@@ -139,7 +139,7 @@ class ComplaintController extends Controller
                 'stars_rated' => $request->rating,
                 'case_type_name' => $request->case_type_name,
                 'completed_at' => $request->currentDate,
-                'updated_at' =>  date('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->setTimezone('Asia/Yangon'),
             ]);
             DB::table('complaint_logs')->insert([
                 'complaint_id' => $id,
@@ -149,8 +149,8 @@ class ComplaintController extends Controller
                 'message' => $request->message,
                 //'image'=>$request->$file_name,
                 'attch_file' => $file_name,
-                'created_at' =>  date('Y-m-d H:i:s'),
-                'updated_at' =>  date('Y-m-d H:i:s'),
+                'created_at' => Carbon::now()->setTimezone('Asia/Yangon'), // Myanmar Timezone
+                'updated_at' => Carbon::now()->setTimezone('Asia/Yangon'),
             ]);
             if ($request->case_status == 'refund') {
                 $princing = DB::table('pricing')->where('complaint_id', $id)->first();
@@ -166,8 +166,8 @@ class ComplaintController extends Controller
                         'other_refund' => $request->other_amount,
                         //'image'=>$request->$file_name,
                         'negotiable_price' => $request->negotiable_price,
-                        'created_at' =>  date('Y-m-d H:i:s'),
-                        'updated_at' =>  date('Y-m-d H:i:s'),
+                        // 'created_at' => Carbon::now()->setTimezone('Asia/Yangon'), // Myanmar Timezone
+                        'updated_at' => Carbon::now()->setTimezone('Asia/Yangon'),
                     ]);
                 } else {
                     DB::table('pricing')->insert([
@@ -182,8 +182,8 @@ class ComplaintController extends Controller
                         'other_refund' => $request->other_amount,
                         //'image'=>$request->$file_name,
                         'negotiable_price' => $request->negotiable_price,
-                        'created_at' =>  date('Y-m-d H:i:s'),
-                        'updated_at' =>  date('Y-m-d H:i:s'),
+                        'created_at' => Carbon::now()->setTimezone('Asia/Yangon'), // Myanmar Timezone
+                        'updated_at' => Carbon::now()->setTimezone('Asia/Yangon'),
                     ]);
                 }
             }

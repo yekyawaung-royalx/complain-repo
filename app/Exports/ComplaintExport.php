@@ -30,18 +30,24 @@ class ComplaintExport implements FromCollection, WithHeadings, WithMapping
     {
         // Retrieve complaints within the date range
         $complaints = DB::table('complaints')
-        ->whereDate('complaints.created_at','>=',$this->startDate)
-        ->whereDate('complaints.created_at','<=',$this->endDate)
+            ->whereDate('complaints.created_at', '>=', $this->startDate)
+            ->whereDate('complaints.created_at', '<=', $this->endDate)
             ->get();
-         //dd($complaints);
+        //dd($complaints);
         // Retrieve pricing data (assuming pricing is related by complaint_id)
         $pricing = DB::table('pricing')->get();
-
         // Combine complaints with corresponding pricing data
         $combined = $complaints->map(function ($complaint) use ($pricing) {
-            // Find the corresponding pricing record for the complaint
+            // Find related pricing
             $pricingData = $pricing->firstWhere('complaint_id', $complaint->id);
+            // Retrieve complaint logs for the current complaint
+            $logsData = DB::table('complaint_logs')
+                ->where('complaint_id', $complaint->id)
+                ->get();
 
+            // Extract messages from logs
+            $messages = $logsData->pluck('message')->toArray(); // Extract message column
+            $messagesString = implode(', ', $messages); // Convert to a single string (optional)
             return (object)[
                 'complaint_uuid' => $complaint->complaint_uuid,
                 'customer_name' => $complaint->customer_name,
@@ -70,6 +76,7 @@ class ComplaintExport implements FromCollection, WithHeadings, WithMapping
                 'other_branch' => $pricingData ? $pricingData->other_branch : null,
                 'default_value' => $pricingData ? $pricingData->default_value : null,
                 'negotiable_price' => $pricingData ? $pricingData->negotiable_price : null,
+                'messages' => $messagesString, // Store all log messages as a string
                 'created_at' => $complaint->created_at,
             ];
         });
@@ -113,6 +120,7 @@ class ComplaintExport implements FromCollection, WithHeadings, WithMapping
             $row->other_branch,
             $row->default_value,
             $row->negotiable_price,
+            $row->messages,
             $row->created_at,
         ];
     }
@@ -152,6 +160,7 @@ class ComplaintExport implements FromCollection, WithHeadings, WithMapping
             'Other Branch',
             'Default Value',
             'Negotiable Price',
+            'Complaints Logs',
             'Date Created',
         ];
     }
