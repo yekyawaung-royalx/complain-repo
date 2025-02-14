@@ -357,6 +357,7 @@ class ComplaintController extends Controller
     {
         $end_date = date('Y-m-d'); // Today's date
         $start_date = date('Y-m-d', strtotime('-1 month')); // One month before today
+        // dd($start_date, $end_date);
         $complaints = DB::table('complaints')
             ->select(
                 'case_type_name',
@@ -420,24 +421,22 @@ class ComplaintController extends Controller
         //princing//
         $pricings = DB::table('pricing')
             ->select(
-                'ygn_branch',
-                'rop_branch',
-                'other_branch',
+                'ygn_refund',
+                'rop_refund',
+                'other_refund',
                 DB::raw('SUM(rop_refund) as total_rop_amount'),    // Total refund amount for the group
                 DB::raw('SUM(ygn_refund) as ygn_branch_total'),    // Total for ygn_branch
                 DB::raw('SUM(other_refund) as other_branch_total'), // Total for other_branch
                 DB::raw('COUNT(*) as count')                       // Count of records in the group
             )
-            ->whereDate('created_at', '>=', $start_date)
-            ->whereDate('created_at', '<=', $end_date)
-            ->groupBy('ygn_branch', 'rop_branch', 'other_branch')
+            ->join('complaints', 'pricing.complaint_id', '=', 'complaints.id')
+            ->whereDate('complaints.created_at', '>=', $start_date)
+            ->whereDate('complaints.created_at', '<=', $end_date)
+            ->groupBy('ygn_refund', 'rop_refund', 'other_refund')
             ->get();
-
-        // Calculate overall totals for total_rop_amount, ygn_branch_total, and other_branch_total
         $RopTotal = $pricings->sum('total_rop_amount');
         $ygnBranchTotal = $pricings->sum('ygn_branch_total');
         $otherBranchTotal = $pricings->sum('other_branch_total');
-
         // Chart result example
         $chartData = [
             'labels' => ['YGN Branch', 'Other Branch', 'Rop Branch'],  // Chart labels
@@ -561,19 +560,19 @@ class ComplaintController extends Controller
         //princing//
         $pricings = DB::table('pricing')
             ->select(
-                'ygn_branch',
-                'rop_branch',
-                'other_branch',
+                'ygn_refund',
+                'rop_refund',
+                'other_refund',
                 DB::raw('SUM(rop_refund) as total_rop_amount'),    // Total refund amount for the group
                 DB::raw('SUM(ygn_refund) as ygn_branch_total'),    // Total for ygn_branch
                 DB::raw('SUM(other_refund) as other_branch_total'), // Total for other_branch
                 DB::raw('COUNT(*) as count')                       // Count of records in the group
             )
-            ->whereDate('created_at', '>=', $start_date)
-            ->whereDate('created_at', '<=', $end_date)
-            ->groupBy('ygn_branch', 'rop_branch', 'other_branch')
+            ->join('complaints', 'pricing.complaint_id', '=', 'complaints.id')
+            ->whereDate('complaints.created_at', '>=', $start_date)
+            ->whereDate('complaints.created_at', '<=', $end_date)
+            ->groupBy('ygn_refund', 'rop_refund', 'other_refund')
             ->get();
-
         // Calculate overall totals for total_rop_amount, ygn_branch_total, and other_branch_total
         $RopTotal = $pricings->sum('total_rop_amount');
         $ygnBranchTotal = $pricings->sum('ygn_branch_total');
