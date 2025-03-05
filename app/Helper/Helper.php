@@ -358,6 +358,7 @@ function source_complaint()
         'Email' => 'email',
         'Messenger' => 'messenger',
         'Viber' => 'viber',
+        'Survey' => 'survey',
     );
     return $complaint_cource;
 }
