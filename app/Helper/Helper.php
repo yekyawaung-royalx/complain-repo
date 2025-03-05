@@ -33,241 +33,244 @@ function uuid()
 
 function groupStatus($status)
 {
-    if(Auth::user()->isAdmin()){
+    if (Auth::user()->isAdmin()) {
         if ($status == 'pending') {
             $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
-            ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-            ->where('deleted_at','0')
-            ->orderBy('id','desc')
-            ->paginate(50);
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
             // $status_array['status'] = $complaints;
         }
         if ($status == 'follow-up') {
             $complaints = DB::table('complaints')->whereIn('status_name', ['handled'])
-            ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-            ->where('deleted_at','0')
-            ->orderBy('id','desc')
-            ->paginate(50);
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
             // $status_array['status'] = $complaints;
             # code...
         }
         if ($status == 'assigned') {
             $complaints = DB::table('complaints')->whereIn('status_name', ['assigned'])
-            ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-            ->where('deleted_at','0')
-            ->orderBy('id','desc')
-            ->paginate(50);
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
             // $status_array['status'] = $complaints;
             # code...
         }
         if ($status == 'progress') {
             $complaints = DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
-            ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-            ->where('deleted_at','0')
-            ->orderBy('id','desc')
-            ->paginate(50);
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
             // $status_array['status'] = $complaints;
         }
         if ($status == 'completed') {
-            $complaints = DB::table('complaints')->whereIn('status_name', ['completed','review'])
-            ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-            ->where('deleted_at','0')
-            ->orderBy('id','desc')
-            ->paginate(50);
+            $complaints = DB::table('complaints')->whereIn('status_name', ['completed', 'review'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
             // $status_array['status'] = $complaints;
         }
         if ($status == 'rejected') {
             $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
-            ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-            ->where('deleted_at','0')
-            ->orderBy('id','desc')
-            ->paginate(50);
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
             // $status_array['status'] = $complaints;
         }
-    }if(Auth::user()->isUser()){ 
-    if ($status == 'pending') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->Where('handle_by',Auth::user()->name)
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
     }
-    if ($status == 'follow-up') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['handled'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->Where('handle_by',Auth::user()->name)
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-        # code...
+    if (Auth::user()->isUser()) {
+        if ($status == 'pending') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->Where('handle_by', Auth::user()->name)
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'follow-up') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['handled'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->Where('handle_by', Auth::user()->name)
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+            # code...
+        }
+        if ($status == 'assigned') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['assigned'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->Where('handle_by', Auth::user()->name)
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+            # code...
+        }
+        if ($status == 'progress') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->Where('handle_by', Auth::user()->name)
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'completed') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['completed', 'review'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->Where('handle_by', Auth::user()->name)
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'rejected') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->Where('handle_by', Auth::user()->name)
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
     }
-    if ($status == 'assigned') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['assigned'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->Where('handle_by',Auth::user()->name)
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-        # code...
+    if (Auth::user()->isDev()) {
+        if ($status == 'pending') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                // ->where('deleted_at','0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'follow-up') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['handled'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                //  ->where('deleted_at','0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+            # code...
+        }
+        if ($status == 'assigned') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['assigned'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                //->where('deleted_at','0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+            # code...
+        }
+        if ($status == 'progress') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                // ->where('deleted_at','0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'completed') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['completed', 'review'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                // ->where('deleted_at','0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'rejected') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                // ->where('deleted_at','0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
     }
-    if ($status == 'progress') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-       ->Where('handle_by',Auth::user()->name)
-       ->where('deleted_at','0')
-       ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
+    if (Auth::user()->isHod()) {
+        if ($status == 'pending') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'follow-up') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['handled'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+            # code...
+        }
+        if ($status == 'assigned') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['assigned'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+            # code...
+        }
+        if ($status == 'progress') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'completed') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['completed', 'review'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
+        if ($status == 'rejected') {
+            $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
+                ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
+                ->select('complaints.customer_name', 'complaints.id', 'complaints.complaint_uuid', 'complaints.customer_mobile', 'complaints.created_at', 'complaints.status_name', 'complaints.case_type_name', 'case_types.main_category')
+                ->where('deleted_at', '0')
+                ->orderBy('id', 'desc')
+                ->paginate(50);
+            // $status_array['status'] = $complaints;
+        }
     }
-    if ($status == 'completed') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['completed','review'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->Where('handle_by',Auth::user()->name)
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-    }
-    if ($status == 'rejected') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->Where('handle_by',Auth::user()->name)
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-    }
-}if(Auth::user()->isDev()){
-    if ($status == 'pending') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-       // ->where('deleted_at','0')
-       ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-    }
-    if ($status == 'follow-up') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['handled'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-      //  ->where('deleted_at','0')
-      ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-        # code...
-    }
-    if ($status == 'assigned') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['assigned'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        //->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-        # code...
-    }
-    if ($status == 'progress') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-       // ->where('deleted_at','0')
-       ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-    }
-    if ($status == 'completed') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['completed','review'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-       // ->where('deleted_at','0')
-       ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-    }
-    if ($status == 'rejected') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-            ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-       // ->where('deleted_at','0')
-       ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-    }
-}if(Auth::user()->isHod()){ 
-    if ($status == 'pending') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['pending'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-    }
-    if ($status == 'follow-up') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['handled'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-        # code...
-    }
-    if ($status == 'assigned') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['assigned'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-        # code...
-    }
-    if ($status == 'progress') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['operation-reply', 'cx-reply', 'refund', 'done'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-    }
-    if ($status == 'completed') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['completed','review'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-    }
-    if ($status == 'rejected') {
-        $complaints = DB::table('complaints')->whereIn('status_name', ['rejected'])
-        ->join('case_types', 'complaints.case_type_name', '=', 'case_types.case_name')
-        ->select('complaints.customer_name','complaints.id','complaints.complaint_uuid','complaints.customer_mobile','complaints.created_at','complaints.status_name','complaints.case_type_name','case_types.main_category')
-        ->where('deleted_at','0')
-        ->orderBy('id','desc')
-        ->paginate(50);
-        // $status_array['status'] = $complaints;
-    }
-}
     //return response()->json($status_array);
     return $complaints;
 }
@@ -299,47 +302,62 @@ function getDifferentData()
     return $different_count;
 }
 
-function permission() {
+function permission()
+{
     $user = Auth::user();
-    if($user->role=='2'){$rolestatus='Developer';}
-    elseif($user->role=='1'){$rolestatus='Admin';}
-    elseif($user->role=='3'){$rolestatus='Hod';}
-    else{$rolestatus='user';}
+    if ($user->role == '2') {
+        $rolestatus = 'Developer';
+    } elseif ($user->role == '1') {
+        $rolestatus = 'Admin';
+    } elseif ($user->role == '3') {
+        $rolestatus = 'Hod';
+    } else {
+        $rolestatus = 'user';
+    }
     return $rolestatus;
 }
 
-function chart(){
-    $pricing=DB::table('pricing')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-    ->whereYear('created_at',date('Y'))
-    ->groupBy('month')
-    ->orderBy('month')
-    ->get();
+function chart()
+{
+    $pricing = DB::table('pricing')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        ->whereYear('created_at', date('Y'))
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
 
-    $labels=[];
-    $data=[];
-    $colors=['#ff6384','#36A2EB','#FFCE56','#8BC34A','#FF5722','#009688','#795548','#9C27B0','#2196F3','#FF9800','#CDDC39','#607D8B'];
-    for($i=1;$i<12;$i++){
-        $month=date('F',mktime(0,0,0,$i,1));
-        $count=0;
-        foreach($pricing as $price){
-            if($price->month==$i){
-                $count=$price->count;
+    $labels = [];
+    $data = [];
+    $colors = ['#ff6384', '#36A2EB', '#FFCE56', '#8BC34A', '#FF5722', '#009688', '#795548', '#9C27B0', '#2196F3', '#FF9800', '#CDDC39', '#607D8B'];
+    for ($i = 1; $i < 12; $i++) {
+        $month = date('F', mktime(0, 0, 0, $i, 1));
+        $count = 0;
+        foreach ($pricing as $price) {
+            if ($price->month == $i) {
+                $count = $price->count;
                 break;
-                }
-                }
-                array_push($labels,$month);
-                array_push($data,$count);
+            }
+        }
+        array_push($labels, $month);
+        array_push($data, $count);
     }
-    $datasets=[
+    $datasets = [
         [
-            'label'=>'Pricings',
-            'data'=>$data,
-            'backgroundColor'=>$colors,
+            'label' => 'Pricings',
+            'data' => $data,
+            'backgroundColor' => $colors,
         ]
-        ];
-       // return view('dashboard',compact('labels','datasets'));
+    ];
+    // return view('dashboard',compact('labels','datasets'));
 }
 
-
-
-?>
+function source_complaint()
+{
+    $complaint_cource = array(
+        'Walk In' => 'web',
+        'Phone Call' => 'phone call',
+        'Email' => 'email',
+        'Messenger' => 'messenger',
+        'Viber' => 'viber',
+    );
+    return $complaint_cource;
+}

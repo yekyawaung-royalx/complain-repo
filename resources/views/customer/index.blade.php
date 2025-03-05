@@ -162,10 +162,9 @@
                                 </div>
                                 <select name="redir_message" id="redir_message" class="js-select2"
                                     style="width:100%">
-                                    <option value="web">Walk In</option>
-                                    <option value="messenger">Messenger</option>
-                                    <option value="viber">Viber</option>
-                                    <option value="phone Call">Phone Call</option>
+                                    @foreach (source_complaint() as $key => $value)
+                                    <option value="{{$value}}">{{$key}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-4 re-hide">

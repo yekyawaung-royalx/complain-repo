@@ -283,22 +283,12 @@
                                             <label class="col-form-label text-muted">လက်ခံရရှိသည့်နေရာ</label>
                                             <select class="js-example-basic-single col-sm-12 source">
                                                 @if (permission() == 'Developer' || permission() == 'Admin')
-                                                    <option value="Walk In"
-                                                        {{ $complaint->source_platform == 'Walk In' ? 'selected' : '' }}>
-                                                        Walk In
-                                                    </option>
-                                                    <option value="viber"
-                                                        {{ $complaint->source_platform == 'viber' ? 'selected' : '' }}>
-                                                        Viber
-                                                    </option>
-                                                    <option value="messenger"
-                                                        {{ $complaint->source_platform == 'messenger' ? 'selected' : '' }}>
-                                                        Messenger
-                                                    </option>
-                                                    <option value="phone call"
-                                                        {{ $complaint->source_platform == 'phone call' ? 'selected' : '' }}>
-                                                        Phone Call
-                                                    </option>
+                                                @foreach (source_complaint() as $key => $value)
+                                                <option value="{{$value}}"
+                                                {{ $complaint->source_platform == $value ? 'selected' : '' }}>
+                                                {{$key}}
+                                              </option>
+                                                @endforeach
                                                 @else
                                                     <option value="{{ $complaint->source_platform }}">
                                                         {{ $complaint->source_platform }}</option>
