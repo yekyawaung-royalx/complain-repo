@@ -153,7 +153,7 @@
                                 </svg><span>Users</span></a>
                             <ul class="sidebar-submenu">
                                 <li><a href="{{ url('/cx-team') }}">CX Team</a></li>
-                                <li><a href="#">Operations</a></li>
+                                <li><a href="{{url('/config')}}">Case Type</a></li>
                             </ul>
                         </li>
                     @endif

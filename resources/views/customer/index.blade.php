@@ -106,7 +106,10 @@
                                 <select name="main_category" id="main_category" class="js-select2">
                                     {{-- <option value="">Select Case Type</option> --}}
                                     @foreach ($case as $type)
+                                        @if ($type->main_category!=='Service Request Type')
                                         <option value="{{ $type->main_category }}">{{ $type->main_category }}</option>
+                                        @endif
+                                        
                                     @endforeach
                                 </select>
                             </div>
@@ -173,7 +176,7 @@
                                 </div>
                                 <select name="branches" id="branches" class="js-select2" style="width:100%">
                                     {{-- <option>Select Branches</option> --}}
-                                    @foreach ($branches as $branch)
+                                    @foreach ($branchs as $branch)
                                         <option value="{{ $branch->branch }}">{{ $branch->branch }}</option>
                                     @endforeach
                                 </select>

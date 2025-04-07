@@ -353,10 +353,13 @@ class ComplaintController extends Controller
         }
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
+        //branch//
+        $branchs = DB::table('branches')->get();
         $end_date = date('Y-m-d'); // Today's date
         $start_date = date('Y-m-d', strtotime('-1 month')); // One month before today
+        $branchFilter = $request->input('branchFilter');
         // dd($start_date, $end_date);
         $complaints = DB::table('complaints')
             ->select(
@@ -365,6 +368,7 @@ class ComplaintController extends Controller
                     CASE 
                         WHEN case_type_name IN ('Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain','COD Delay Refund') THEN 'Service Complaint Types'
                         WHEN case_type_name IN ('Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material') THEN 'Loss & Damage Types'
+                        WHEN case_type_name IN ('Break Parcel (သက်ဆိုင်ရာ ရုံးတွင် Hold ထားပေးပါရန်။)', 'Outbound Cancel', 'Inbound Return') THEN 'Service Request Type'
                         ELSE 'Other'
                     END as main_group
                 "),
@@ -491,14 +495,18 @@ class ComplaintController extends Controller
             ->whereDate('created_at', '>=', $start_date)
             ->whereDate('created_at', '<=', $end_date)
             ->count();
+
         // dd($result);
-        return view('dashboard', compact('complaints', 'datasetsIn', 'label', 'completed', 'pending', 'rejected', 'follow', 'assigned', 'progress', 'chartData', 'start_date', 'end_date', 'ygnBranchTotal', 'otherBranchTotal', 'RopTotal', 'serviceComplaintTotal', 'lossDamageTotal'));
+        return view('dashboard', compact('complaints', 'branchFilter', 'datasetsIn', 'label', 'completed', 'pending', 'rejected', 'follow', 'assigned', 'progress', 'chartData', 'start_date', 'end_date', 'ygnBranchTotal', 'otherBranchTotal', 'RopTotal', 'serviceComplaintTotal', 'lossDamageTotal', 'branchs'));
     }
 
     public function searchdashboard(Request $request)
     {
+        $branchs = DB::table('branches')->get();
         $start_date = $request->input('date_from');
         $end_date = $request->input('date_to');
+        $branchFilter = $request->branchFilter;
+        // dd($branchFilter);
         $complaints = DB::table('complaints')
             ->select(
                 'case_type_name',
@@ -506,12 +514,14 @@ class ComplaintController extends Controller
                     CASE 
                         WHEN case_type_name IN ('Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain','COD Delay Refund') THEN 'Service Complaint Types'
                         WHEN case_type_name IN ('Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material') THEN 'Loss & Damage Types'
+                        WHEN case_type_name IN ('Break Parcel (သက်ဆိုင်ရာ ရုံးတွင် Hold ထားပေးပါရန်။)', 'Outbound Cancel', 'Inbound Return') THEN 'Service Request Type'
                         ELSE 'Other'
                     END as main_group
                 "),
                 DB::raw('count(*) as num'),
                 DB::raw('GROUP_CONCAT(customer_message SEPARATOR "; ") as messages')
             )
+            ->where('branch_name', $branchFilter)
             ->whereDate('created_at', '>=', $start_date)
             ->whereDate('created_at', '<=', $end_date)
             ->groupBy('main_group', 'case_type_name')
@@ -569,6 +579,7 @@ class ComplaintController extends Controller
                 DB::raw('COUNT(*) as count')                       // Count of records in the group
             )
             ->join('complaints', 'pricing.complaint_id', '=', 'complaints.id')
+            ->where('branch_name', $branchFilter)
             ->whereDate('complaints.created_at', '>=', $start_date)
             ->whereDate('complaints.created_at', '<=', $end_date)
             ->groupBy('ygn_refund', 'rop_refund', 'other_refund')
@@ -632,7 +643,7 @@ class ComplaintController extends Controller
             ->whereDate('created_at', '>=', $start_date)
             ->whereDate('created_at', '<=', $end_date)
             ->count();
-        return view('dashboard', compact('complaints', 'datasetsIn', 'label', 'completed', 'pending', 'rejected', 'follow', 'assigned', 'progress', 'chartData', 'start_date', 'end_date', 'ygnBranchTotal', 'otherBranchTotal', 'RopTotal', 'serviceComplaintTotal', 'lossDamageTotal'));
+        return view('dashboard', compact('complaints', 'datasetsIn', 'label', 'completed', 'pending', 'rejected', 'follow', 'assigned', 'progress', 'chartData', 'start_date', 'end_date', 'ygnBranchTotal', 'otherBranchTotal', 'RopTotal', 'serviceComplaintTotal', 'lossDamageTotal', 'branchs', 'branchFilter'));
     }
 
     //export controller//
@@ -1371,5 +1382,60 @@ class ComplaintController extends Controller
             }
         }
         return response()->json($complaints);
+    }
+
+    //case type store//
+    public function case_store(Request $request)
+    {
+        DB::table('case_types')->insert([
+            'case_name' => $request->input('case_name'),
+            'main_category' => $request->input('main_category'),
+            'created_at' => Carbon::now()->setTimezone('Asia/Yangon'), // Myanmar Timezone
+            'updated_at' => Carbon::now()->setTimezone('Asia/Yangon'),
+        ]);
+        return response()->json(['message' => 'Case Type Inserted Successfully']);
+    }
+
+
+    public function branchFilterDashboard(Request $request)
+    {
+        $branchFilter = $request->branchFilter;
+        $complaints = DB::table('complaints')
+            ->select(
+                'case_type_name',
+                DB::raw("
+                    CASE 
+                        WHEN case_type_name IN ('Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain','COD Delay Refund') THEN 'Service Complaint Types'
+                        WHEN case_type_name IN ('Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material') THEN 'Loss & Damage Types'
+                        WHEN case_type_name IN ('Break Parcel (သက်ဆိုင်ရာ ရုံးတွင် Hold ထားပေးပါရန်။)', 'Outbound Cancel', 'Inbound Return') THEN 'Service Request Type'
+                        ELSE 'Other'
+                    END as main_group
+                "),
+                DB::raw('count(*) as num'),
+                DB::raw('GROUP_CONCAT(customer_message SEPARATOR "; ") as messages')
+            )
+            ->where('branch_name', $branchFilter)
+            ->groupBy('main_group', 'case_type_name')
+            ->get();
+        //princing//
+        $pricings = DB::table('pricing')
+            ->select(
+                'ygn_refund',
+                'rop_refund',
+                'other_refund',
+                DB::raw('SUM(rop_refund) as total_rop_amount'),    // Total refund amount for the group
+                DB::raw('SUM(ygn_refund) as ygn_branch_total'),    // Total for ygn_branch
+                DB::raw('SUM(other_refund) as other_branch_total'), // Total for other_branch
+                DB::raw('COUNT(*) as count')                       // Count of records in the group
+            )
+            ->join('complaints', 'pricing.complaint_id', '=', 'complaints.id')
+            ->where('branch_name', $branchFilter)
+            ->groupBy('ygn_refund', 'rop_refund', 'other_refund')
+            ->get();
+        // Calculate overall totals for total_rop_amount, ygn_branch_total, and other_branch_total
+        $RopTotal = $pricings->sum('total_rop_amount');
+        $ygnBranchTotal = $pricings->sum('ygn_branch_total');
+        $otherBranchTotal = $pricings->sum('other_branch_total');
+        return $ygnBranchTotal;
     }
 }

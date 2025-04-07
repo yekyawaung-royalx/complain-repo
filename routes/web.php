@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
+//config rout//
 
 
 //customer
@@ -156,6 +157,7 @@ Route::group(['middleware' => 'auth'], function () {
     //dashboard //
     Route::get('/dashboard', [App\Http\Controllers\ComplaintController::class, 'dashboard']);
     Route::post('/dashboard', [App\Http\Controllers\ComplaintController::class, 'searchdashboard']);
+    Route::get('/branch-filter', [App\Http\Controllers\ComplaintController::class, 'branchFilterDashboard']);
 
     //internal assigned route//
     Route::get('/complaints/{id}/edit', [App\Http\Controllers\ComplaintController::class, 'edit']);
@@ -168,6 +170,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/search-item', [ComplaintController::class, 'searchItem']);
     Route::get('filter/{status}', [ComplaintController::class, 'search_filter']);
     Route::get('/complaints/json/{status}/filters/{id}', [ComplaintController::class, 'search_status_filter']);
+
+    //config route//
+    Route::get('/config', function () {
+        return view('user.setting');
+    });
+    Route::post('/case-store', [ComplaintController::class, 'case_store'])->name('case-store');
 });
 // Route::get('/cx-team',[App\Http\Controllers\ComplaintController::class,'cx_team']);
 Route::post('/complaints/{id}/update-operation', [App\Http\Controllers\ComplaintController::class, 'update_operation']);

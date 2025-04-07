@@ -291,5 +291,25 @@ $(document).on('click', '.viewbtn', function () {
 })
 
 //maodal tracking //
+$("#submit-btn").on('click',function(){
+    var case_name = $('input[name="case_name"]').val();
+    var main_category = $('input[name="main_category"]').val();
+    $.ajax({
+        url: "case-store",
+        type: "POST",
+        data: {
+            case_name: case_name,
+            main_category: main_category,
+            _token: $("input[name=_token]").val()
+        },
+        dataType: 'json',
+        success: function(data) {
+            console.log(data)
+        },
+        error: function(data) {
+            console.log('Error:', data);
+        }
+    });
+});
 
 

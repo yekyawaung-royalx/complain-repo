@@ -11,13 +11,13 @@ class CustomerController extends Controller
 {
     public function customer()
     {
-        $branches = DB::table('branches')->get();
+        $branchs = DB::table('branches')->get();
         $case = DB::table('case_types')
             ->select('main_category', DB::raw('count(*) as total'))
             ->groupBy('main_category')
             ->get();
         // dd($branches);
-        return view('customer.index', compact('case', 'branches'));
+        return view('customer.index', compact('case', 'branchs'));
     }
 
 

@@ -102,28 +102,42 @@
         <div class="container-fluid">
             <div class="page-title">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
+                        
                         <div class="d-flex align-items-center justify-content-md-start">
                             <div class="mb-3 mb-xl-0 pr-1">
                                 <form action="{{ url('/dashboard') }}" method="POST" enctype="multipart/form-data"
-                                    id="form-submit">
-                                    @csrf
+                                id="form-submit">
+                                @csrf
                                     <div class="row">
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label class="form-label text-muted">Start Date</label>
                                             <input class="form-control year-filter" type="date" data-language="en"
                                                 min="2024" name="date_from" value="{{ $start_date }}" id="date_from">
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label class="form-label text-muted">End Date</label>
                                             <input class="form-control year-filter" type="date" data-language="en"
                                                 min="2024" name="date_to" value="{{ $end_date }}" id="date_to">
                                         </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label text-muted">Branch Filter</label>
+                                            <select class="js-example-basic-single col-sm-12 branch" name="branchFilter" id="branchFilter">
+                                                <option value="">No Branch</option>
+                                                @foreach ($branchs as $branch)
+                                                <option value="{{$branch->branch}}" {{ $branchFilter == $branch->branch ? 'selected' : '' }}>{{$branch->branch}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        
 
                                     </div>
+                                    
                                 </form>
                             </div>
+                           
                             <div class="pr-1 mb-3 mr-2 mb-xl-0">
+                               
                                 <form action="{{ url('/export-complaints') }}" method="GET" enctype="multipart/form-data">
                                     @csrf
                                     <div class="">
@@ -140,9 +154,11 @@
                                     </div>
                                 </form>
                             </div>
+                            
                         </div>
+                        
                     </div>
-                    <div class="col-12 col-sm-6">
+                    <div class="col-12 col-sm-4">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"> <a class="home-item"><i data-feather="home"></i></a>
                             </li>
@@ -233,6 +249,72 @@
                                 @if ($complaints->isNotEmpty())
                                     @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
                                         @if ($mainGroup == 'Service Complaint Types')
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Qty</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($groupComplaints as $index => $complaint)
+                                                        <tr>
+                                                            <td>{{ $complaint->case_type_name }}</td>
+                                                            <td>{{ $complaint->num }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        {{-- @else
+                                            @if ($mainGroup !== 'Loss & Damage Types')
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Other</th>
+                                                            <th scope="col">Qty</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>No data available</td>
+                                                            <td>0</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            @endif --}}
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Service Complaint Types</th>
+                                                <th scope="col">Qty</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>No data available</td>
+                                                <td>0</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card o-hidden dash-card">
+                        <div class="card-header pb-0">
+                            <h4 class="card-title mb-0">
+                                Service Request Type</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="media static-widget">
+                                @if ($complaints->isNotEmpty())
+                                    @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
+                                        @if ($mainGroup == 'Service Request Type')
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
@@ -478,5 +560,22 @@
             search_form.submit();
             //alert(year)
         })
+        $('.branch').on('change',function(){
+            var branchFilter=$("#branchFilter").val();
+            const search_form = $('#form-submit');
+            search_form.submit();
+            // $.ajax({
+            //     url: "branch-filter",
+            //     type: "GET",
+            //     data: {branchFilter:branchFilter},
+            //     dataType: 'json',
+            //     success: function(data) {
+            //         console.log(data)
+            //     },
+            //     error: function(data) {
+            //         console.log('Error:', data);
+            //     }
+            // });
+        });
     });
 </script>
