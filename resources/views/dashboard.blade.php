@@ -180,49 +180,32 @@
                         </div>
                         <div class="card-body">
                             <div class="media static-widget">
-                                @if ($complaints->isNotEmpty())
-                                    @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
-                                        @if ($mainGroup == 'Loss & Damage Types')
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Qty</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($groupComplaints as $index => $complaint)
-                                                        <tr>
-                                                            <td>{{ $complaint->case_type_name }}</td>
-                                                            <td>{{ $complaint->num }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        {{-- @else
-                                            @if ($mainGroup !== 'Service Complaint Types')
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Other</th>
-                                                            <th scope="col">Qty</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>No data available</td>
-                                                            <td>0</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            @endif --}}
-                                        @endif
-                                    @endforeach
+                                @php
+                                    $serviceComplaints = $complaints->where('main_group', 'Loss & Damage Types');
+                                @endphp
+                            
+                                @if ($serviceComplaints->isNotEmpty())
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Qty</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($serviceComplaints as $complaint)
+                                                <tr>
+                                                    <td>{{ $complaint->case_type_name }}</td>
+                                                    <td>{{ $complaint->num }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 @else
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Loss & Damage Types</th>
+                                                <th scope="col">Name</th>
                                                 <th scope="col">Qty</th>
                                             </tr>
                                         </thead>
@@ -234,7 +217,8 @@
                                         </tbody>
                                     </table>
                                 @endif
-                            </div>
+                                </div>                            
+                            
                         </div>
                     </div>
                 </div>
@@ -246,49 +230,32 @@
                         </div>
                         <div class="card-body">
                             <div class="media static-widget">
-                                @if ($complaints->isNotEmpty())
-                                    @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
-                                        @if ($mainGroup == 'Service Complaint Types')
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Qty</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($groupComplaints as $index => $complaint)
-                                                        <tr>
-                                                            <td>{{ $complaint->case_type_name }}</td>
-                                                            <td>{{ $complaint->num }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        {{-- @else
-                                            @if ($mainGroup !== 'Loss & Damage Types')
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Other</th>
-                                                            <th scope="col">Qty</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>No data available</td>
-                                                            <td>0</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            @endif --}}
-                                        @endif
-                                    @endforeach
+                                @php
+                                    $serviceComplaints = $complaints->where('main_group', 'Service Complaint Types');
+                                @endphp
+                            
+                                @if ($serviceComplaints->isNotEmpty())
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Qty</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($serviceComplaints as $complaint)
+                                                <tr>
+                                                    <td>{{ $complaint->case_type_name }}</td>
+                                                    <td>{{ $complaint->num }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 @else
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Service Complaint Types</th>
+                                                <th scope="col">Name</th>
                                                 <th scope="col">Qty</th>
                                             </tr>
                                         </thead>
@@ -300,7 +267,8 @@
                                         </tbody>
                                     </table>
                                 @endif
-                            </div>
+                                </div>                            
+                            
                         </div>
                     </div>
                 </div>
@@ -312,49 +280,32 @@
                         </div>
                         <div class="card-body">
                             <div class="media static-widget">
-                                @if ($complaints->isNotEmpty())
-                                    @foreach ($complaints->groupBy('main_group') as $mainGroup => $groupComplaints)
-                                        @if ($mainGroup == 'Service Request Type')
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Qty</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($groupComplaints as $index => $complaint)
-                                                        <tr>
-                                                            <td>{{ $complaint->case_type_name }}</td>
-                                                            <td>{{ $complaint->num }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        {{-- @else
-                                            @if ($mainGroup !== 'Loss & Damage Types')
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Other</th>
-                                                            <th scope="col">Qty</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>No data available</td>
-                                                            <td>0</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            @endif --}}
-                                        @endif
-                                    @endforeach
+                                @php
+                                    $serviceComplaints = $complaints->where('main_group', 'Service Request Type');
+                                @endphp
+                            
+                                @if ($serviceComplaints->isNotEmpty())
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Qty</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($serviceComplaints as $complaint)
+                                                <tr>
+                                                    <td>{{ $complaint->case_type_name }}</td>
+                                                    <td>{{ $complaint->num }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 @else
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Service Complaint Types</th>
+                                                <th scope="col">Name</th>
                                                 <th scope="col">Qty</th>
                                             </tr>
                                         </thead>
@@ -366,7 +317,8 @@
                                         </tbody>
                                     </table>
                                 @endif
-                            </div>
+                                </div>                            
+                            
                         </div>
                     </div>
                 </div>

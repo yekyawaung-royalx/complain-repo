@@ -176,6 +176,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view('user.setting');
     });
     Route::post('/case-store', [ComplaintController::class, 'case_store'])->name('case-store');
+    Route::post('/rex-store', [ComplaintController::class, 'rex_store'])->name('rex-store');
 });
 // Route::get('/cx-team',[App\Http\Controllers\ComplaintController::class,'cx_team']);
 Route::post('/complaints/{id}/update-operation', [App\Http\Controllers\ComplaintController::class, 'update_operation']);

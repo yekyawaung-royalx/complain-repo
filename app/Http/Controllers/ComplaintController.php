@@ -579,7 +579,7 @@ class ComplaintController extends Controller
                 DB::raw('COUNT(*) as count')                       // Count of records in the group
             )
             ->join('complaints', 'pricing.complaint_id', '=', 'complaints.id')
-            ->where('branch_name', $branchFilter)
+            ->where('complaints.branch_name', $branchFilter)
             ->whereDate('complaints.created_at', '>=', $start_date)
             ->whereDate('complaints.created_at', '<=', $end_date)
             ->groupBy('ygn_refund', 'rop_refund', 'other_refund')
@@ -1396,46 +1396,14 @@ class ComplaintController extends Controller
         return response()->json(['message' => 'Case Type Inserted Successfully']);
     }
 
-
-    public function branchFilterDashboard(Request $request)
+    public function rex_store(Request $request)
     {
-        $branchFilter = $request->branchFilter;
-        $complaints = DB::table('complaints')
-            ->select(
-                'case_type_name',
-                DB::raw("
-                    CASE 
-                        WHEN case_type_name IN ('Service Complain', 'Delivery Man Complain', 'Staff Complain', 'Double Charges', 'Extra Charges', 'Delay Time', 'Wrong Transfer City', 'Parcel Wrong', 'CX Complain', 'Not Collect Pick Up Complain','COD Delay Refund') THEN 'Service Complaint Types'
-                        WHEN case_type_name IN ('Damage', 'Loss', 'Reduce', 'Pest Control', 'Force Majeure', 'Illegal  Restricted Material') THEN 'Loss & Damage Types'
-                        WHEN case_type_name IN ('Break Parcel (သက်ဆိုင်ရာ ရုံးတွင် Hold ထားပေးပါရန်။)', 'Outbound Cancel', 'Inbound Return') THEN 'Service Request Type'
-                        ELSE 'Other'
-                    END as main_group
-                "),
-                DB::raw('count(*) as num'),
-                DB::raw('GROUP_CONCAT(customer_message SEPARATOR "; ") as messages')
-            )
-            ->where('branch_name', $branchFilter)
-            ->groupBy('main_group', 'case_type_name')
-            ->get();
-        //princing//
-        $pricings = DB::table('pricing')
-            ->select(
-                'ygn_refund',
-                'rop_refund',
-                'other_refund',
-                DB::raw('SUM(rop_refund) as total_rop_amount'),    // Total refund amount for the group
-                DB::raw('SUM(ygn_refund) as ygn_branch_total'),    // Total for ygn_branch
-                DB::raw('SUM(other_refund) as other_branch_total'), // Total for other_branch
-                DB::raw('COUNT(*) as count')                       // Count of records in the group
-            )
-            ->join('complaints', 'pricing.complaint_id', '=', 'complaints.id')
-            ->where('branch_name', $branchFilter)
-            ->groupBy('ygn_refund', 'rop_refund', 'other_refund')
-            ->get();
-        // Calculate overall totals for total_rop_amount, ygn_branch_total, and other_branch_total
-        $RopTotal = $pricings->sum('total_rop_amount');
-        $ygnBranchTotal = $pricings->sum('ygn_branch_total');
-        $otherBranchTotal = $pricings->sum('other_branch_total');
-        return $ygnBranchTotal;
+        DB::table('employees')->insert([
+            'employee_id' => $request->input('rex_no'),
+            'employee_name' => $request->input('employee_name'),
+            'created_at' => Carbon::now()->setTimezone('Asia/Yangon'), // Myanmar Timezone
+            'updated_at' => Carbon::now()->setTimezone('Asia/Yangon'),
+        ]);
+        return response()->json(['message' => 'Case Type Inserted Successfully']);
     }
 }

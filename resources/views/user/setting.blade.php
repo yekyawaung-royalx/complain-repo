@@ -56,7 +56,38 @@
 
 
             </div>
-           
+            <div class="col-xl-4 col-md-4 dash-35 dash-xl-50">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4 class="card-title mb-0">Add Employee
+                            {{-- <span class="badge badge-secondary inline-block pull-right" cursorshover="true">
+                                <span cursorshover="true"></span>
+                            </span> --}}
+                        </h4>
+                        <div class="card-options"><a class="card-options-collapse" href="#"
+                                data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
+                                class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
+                                    class="fe fe-x"></i></a></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <ul id="save_msgList"></ul>
+                            <div class="col-md-12">
+                                <label class="form-label text-muted">REX ID</label>
+                                <input class="form-control" type="text" name="rex_no">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label text-muted">Employee Name</label>
+                                <input class="form-control" type="text" name="employee_name">
+                            </div>
+                            
+                        </div>
+                        <div class="form-footer">
+                            <button class="btn btn-primary btn-block" id="submit-rex">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

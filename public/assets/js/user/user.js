@@ -304,7 +304,27 @@ $("#submit-btn").on('click',function(){
         },
         dataType: 'json',
         success: function(data) {
-            console.log(data)
+            alert('success')
+        },
+        error: function(data) {
+            console.log('Error:', data);
+        }
+    });
+});
+$("#submit-rex").on('click',function(){
+    var rex_no = $('input[name="rex_no"]').val();
+    var employee_name = $('input[name="employee_name"]').val();
+    $.ajax({
+        url: "rex-store",
+        type: "POST",
+        data: {
+            rex_no: rex_no,
+            employee_name: employee_name,
+            _token: $("input[name=_token]").val()
+        },
+        dataType: 'json',
+        success: function(data) {
+            alert('success')
         },
         error: function(data) {
             console.log('Error:', data);
