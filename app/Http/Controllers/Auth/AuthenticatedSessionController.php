@@ -27,16 +27,17 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
-        if(Auth::user()->isAdmin()){
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }if(Auth::user()->isUser()){
-            return redirect()->route('dashboard2');
-        }if(Auth::user()->isDev()){
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }else{
+        if (Auth::user()->isAdmin()) {
             return redirect()->intended(RouteServiceProvider::HOME);
         }
-        
+        if (Auth::user()->isUser()) {
+            return redirect()->route('dashboard2');
+        }
+        if (Auth::user()->isDev()) {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        } else {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
     }
 
     /**
