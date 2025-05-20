@@ -340,7 +340,8 @@ class ComplaintController extends Controller
     {
         $student = User::find($id);
         if ($student) {
-            $student->delete();
+            $student->active = '0';
+            $student->update();
             return response()->json([
                 'status' => 200,
                 'message' => 'Student Deleted Successfully.'
