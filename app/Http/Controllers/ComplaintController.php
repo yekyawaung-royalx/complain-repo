@@ -277,7 +277,9 @@ class ComplaintController extends Controller
 
     public function cx_list()
     {
+        $active = '1';
         $users = DB::table('users')
+            ->where('active', $active)
             ->orderBy('id', 'desc')
             ->paginate(5);
         return response()->json($users);
